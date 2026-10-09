@@ -1,0 +1,8 @@
+--- a/src/lib/storage.ts
++++ b/src/lib/storage.ts
+@@ -44,4 +44,5 @@
+   energy: 'flirter.energy.v1',
+   chats: 'flirter.chats.v1',
+   filters: 'flirter.filters.v1',
++  theme: 'flirter.theme.v1',
+ } as const;

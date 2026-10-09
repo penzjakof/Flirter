@@ -1,0 +1,211 @@
+{
+  "task1": {
+    "glassToken": "rgba(255, 255, 255, 0.88)",
+    "pureBlack": {
+      "bgLuminance": 0,
+      "compositeHex": "#E0E0E0",
+      "capsuleLuminance": 0.7454042095403874,
+      "contrastRatio": 15.908084190807749,
+      "wcag3Pass": true
+    },
+    "darkThemeBg": {
+      "bgLuminance": 0.005461975601397145,
+      "compositeHex": "#E3E2E3",
+      "capsuleLuminance": 0.7626965724798591,
+      "contrastRatio": 14.653220763729635,
+      "wcag3Pass": true
+    }
+  },
+  "task2": {
+    "inactiveColor": "#403644",
+    "lumInactive": 0.041456773836983395,
+    "onGlassOverBlack": {
+      "surfaceHex": "#E0E0E0",
+      "contrastRatio": 8.697050816139122,
+      "wcagAaPass": true,
+      "wcagAaaPass": true
+    },
+    "onGlassOverDarkBg": {
+      "surfaceHex": "#E3E2E3",
+      "contrastRatio": 8.886127712403736,
+      "wcagAaPass": true,
+      "wcagAaaPass": true
+    },
+    "onGlassOverLightBg": {
+      "surfaceHex": "#FEFEFE",
+      "contrastRatio": 11.38354277584224,
+      "wcagAaPass": true,
+      "wcagAaaPass": true
+    },
+    "onPureWhite": {
+      "contrastRatio": 11.480833577965111,
+      "wcagAaPass": true,
+      "wcagAaaPass": true
+    }
+  },
+  "task3": {
+    "darkMode": {
+      "brand": "#DC3B78",
+      "lens": "#FFFFFF",
+      "contrastRatio": 4.251074261475851,
+      "wcagGraphicUiPass": true,
+      "wcagNormalTextPass": false
+    },
+    "lightMode": {
+      "brand": "#B6245A",
+      "lens": "rgba(255, 255, 255, 0.96)",
+      "lensCompositeHex": "#FFFFFF",
+      "contrastRatioComposite": 6.196510320126386,
+      "contrastRatioPureWhite": 6.196510320126386,
+      "wcagGraphicUiPass": true,
+      "wcagNormalTextPass": true
+    }
+  },
+  "task4": [
+    {
+      "name": "Light: textPrimary on background",
+      "fg": "#211C24",
+      "bg": "#FAF8F7",
+      "contrastRatio": 15.78901312605338,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Light: textPrimary on surface",
+      "fg": "#211C24",
+      "bg": "#FFFFFF",
+      "contrastRatio": 16.716509185468702,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Light: textSecondary on background",
+      "fg": "#6C626C",
+      "bg": "#FAF8F7",
+      "contrastRatio": 5.507774439511181,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": false,
+      "status": "AA (Normal & Large) / AAA (Large)"
+    },
+    {
+      "name": "Light: textSecondary on surface",
+      "fg": "#6C626C",
+      "bg": "#FFFFFF",
+      "contrastRatio": 5.831318352484794,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": false,
+      "status": "AA (Normal & Large) / AAA (Large)"
+    },
+    {
+      "name": "Dark: textPrimary on background",
+      "fg": "#F6F3F7",
+      "bg": "#121013",
+      "contrastRatio": 17.20267152056695,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Dark: textPrimary on surface",
+      "fg": "#F6F3F7",
+      "bg": "#1C1820",
+      "contrastRatio": 15.889840416517746,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Dark: textSecondary on background",
+      "fg": "#A59BAA",
+      "bg": "#121013",
+      "contrastRatio": 7.093923620922708,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Dark: textSecondary on surface",
+      "fg": "#A59BAA",
+      "bg": "#1C1820",
+      "contrastRatio": 6.552547034840586,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": false,
+      "status": "AA (Normal & Large) / AAA (Large)"
+    },
+    {
+      "name": "Light: textOnBrand on brand",
+      "fg": "#FFFFFF",
+      "bg": "#B6245A",
+      "contrastRatio": 6.196510320126386,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": false,
+      "status": "AA (Normal & Large) / AAA (Large)"
+    },
+    {
+      "name": "Dark: textOnBrand on brand",
+      "fg": "#FFFFFF",
+      "bg": "#DC3B78",
+      "contrastRatio": 4.251074261475851,
+      "passAANormal": false,
+      "passAALarge": true,
+      "passAAANormal": false,
+      "status": "AA (Large only)"
+    },
+    {
+      "name": "Light: energyText on energySurface",
+      "fg": "#765000",
+      "bg": "#FFF1D1",
+      "contrastRatio": 6.42777826652815,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": false,
+      "status": "AA (Normal & Large) / AAA (Large)"
+    },
+    {
+      "name": "Dark: energyText on energySurface",
+      "fg": "#FFD666",
+      "bg": "#3A2E10",
+      "contrastRatio": 9.544164745950017,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Light: energyPlusCardText on energyPlusCardBg",
+      "fg": "#5A122D",
+      "bg": "#FDF2F6",
+      "contrastRatio": 12.319652828004102,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    },
+    {
+      "name": "Dark: energyPlusCardText on energyPlusCardBg",
+      "fg": "#FFB8D2",
+      "bg": "#281320",
+      "contrastRatio": 10.827528316065788,
+      "passAANormal": true,
+      "passAALarge": true,
+      "passAAANormal": true,
+      "status": "AAA (Normal & Large)"
+    }
+  ],
+  "task5": {
+    "totalChecks": 42,
+    "collisionCount": 0,
+    "collisions": []
+  }
+}

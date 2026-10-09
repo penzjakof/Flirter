@@ -217,10 +217,10 @@ export const shadows = {
     },
   }),
   glass: Platform.select({
-    // Більш нейтральна тінь і на 50% прозоріший внутрішній відблиск (inset border)
+    // Менша, акуратніша тінь для скла, щоб не обрізалась контейнерами
     web: {
       boxShadow:
-        '0 4px 16px rgba(0, 0, 0, 0.1), 0 0 0 0.5px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
+        '0 2px 8px rgba(0, 0, 0, 0.06), 0 0 0 0.5px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
     },
     default: {
       shadowColor: '#000000',

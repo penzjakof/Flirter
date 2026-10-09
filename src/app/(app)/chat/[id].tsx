@@ -24,9 +24,9 @@ import { useTheme } from '@/theme/use-theme';
 const EMPTY_MESSAGES: ChatMessage[] = [];
 
 // Хелпер для додавання прозорості до HEX кольорів
-function getGradientColors(hexColor: string) {
+function getGradientColors(hexColor: string): readonly [string, string, string] {
   const hex = hexColor.replace('#', '');
-  return [`#${hex}00`, `#${hex}66`, `#${hex}B3`]; // Максимальна непрозорість знижена до 70%
+  return [`#${hex}00`, `#${hex}66`, `#${hex}B3`] as const;
 }
 
 const WEB_TOP_BLUR = Platform.select<any>({

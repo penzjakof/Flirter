@@ -1,0 +1,775 @@
+# Frontend requirements — AI Dating Simulator
+
+## 1. Загальний принцип продукту
+
+Продукт позиціонується як **AI dating simulator / dating game**.
+
+Усі профілі всередині сервісу є вигаданими AI-персонажами. Реальних користувачів серед dating-профілів немає.
+
+При цьому сам інтерфейс може максимально нагадувати звичайний сучасний dating app: Tinder, Badoo та подібні продукти.
+
+Не потрібно постійно руйнувати immersion написами про AI на кожному екрані. Але користувач повинен однозначно зрозуміти природу продукту **до початку використання AI-персонажів**.
+
+---
+
+# 2. Landing / Welcome screen
+
+На першому екрані має бути зрозуміло, що це AI dating simulator.
+
+Формулювання можна обрати відповідно до дизайну.
+
+Приклади:
+
+- AI Dating Simulator
+- Meet and chat with fictional AI characters
+- Dating, flirting and conversations with AI characters
+- Meet virtual personalities powered by AI
+
+Не обов'язково використовувати великий юридичний дисклеймер.
+
+Достатньо короткого позиціонування продукту.
+
+Основні CTA:
+
+- Sign Up
+- Log In
+
+Розташування, дизайн і композиція залишаються на розсуд дизайнерів/frontend-команди.
+
+---
+
+# 3. Реєстрація
+
+Реєстрація має бути максимально короткою.
+
+Можливий набір полів:
+
+- Email / Google / Apple
+- Password, якщо використовується email
+- Name / nickname
+- Date of birth
+- Gender
+- Dating preferences / who you want to meet
+
+Не всі поля обов'язково повинні знаходитися на одному екрані.
+
+Їх можна розділити на декілька коротких onboarding screens.
+
+---
+
+# 4. Вікове обмеження
+
+Продукт планується як **18+**.
+
+Frontend повинен отримати від користувача інформацію про вік / дату народження до повного доступу до сервісу.
+
+Оптимально використовувати:
+
+**Date of birth**
+
+а не просто checkbox:
+
+> I am over 18.
+
+Як саме оформити age gate — дизайнерське рішення.
+
+---
+
+# 5. Обов'язковий AI disclosure під час onboarding
+
+Перед тим як користувач отримає доступ до Discover / профілів / чатів, необхідно окремо повідомити його про природу сервісу.
+
+Це важливий екран onboarding.
+
+Приблизний зміст:
+
+### This is an AI dating simulation
+
+Every profile you see and interact with is a fictional AI character.
+
+Names, photos, personalities, biographies and conversations may be AI-generated or fictional.
+
+You are not communicating with real dating partners.
+
+AI characters cannot meet you in real life.
+
+Повинен бути явний action користувача.
+
+Наприклад:
+
+☐ I understand that all profiles and conversations are fictional and AI-powered.
+
+Користувач не повинен пройти цей етап випадково.
+
+Можливі UI-рішення:
+
+- checkbox + Continue;
+- checkbox + Enter;
+- confirmation card;
+- окремий onboarding screen;
+- modal перед першим входом.
+
+Конкретне оформлення не принципове.
+
+Важливо, щоб acknowledgment був явним.
+
+---
+
+# 6. Terms & Privacy
+
+До завершення реєстрації користувач повинен мати доступ до:
+
+- Terms of Service
+- Privacy Policy
+
+Може бути:
+
+☐ I agree to the Terms of Service and acknowledge the Privacy Policy.
+
+Terms та Privacy мають відкриватися через клікабельні links.
+
+Не обов'язково виділяти для них окремий великий screen.
+
+---
+
+# 7. Consent для чутливих даних
+
+Якщо продукт збирає або використовує для персоналізації інформацію типу:
+
+- sexual preferences;
+- dating preferences;
+- sexual orientation;
+- intimate interests;
+- sensitive personal information;
+
+frontend повинен передбачати можливість окремої згоди там, де вона юридично необхідна.
+
+Наприклад:
+
+☐ I consent to the processing of sensitive information I choose to provide for personalization.
+
+Не обов'язково додавати це у першу версію UI, якщо відповідні дані ще не використовуються.
+
+Але структура frontend повинна дозволяти додати такий consent окремо від Terms.
+
+---
+
+# 8. Discover / Swipe
+
+Після onboarding основний UI може виглядати як звичайний dating app.
+
+Наприклад:
+
+- profile photo;
+- name;
+- age;
+- location;
+- short bio;
+- interests;
+- Like;
+- Pass;
+- Super Like / інші механіки.
+
+## Важливо
+
+Не обов'язково показувати:
+
+**AI Character**
+
+на кожній окремій картці.
+
+Оскільки всі профілі без винятку AI і користувача вже явно повідомили про це під час onboarding.
+
+За бажанням можна залишити ненав'язливий глобальний контекст.
+
+Наприклад:
+
+- AI Dating
+- AI Characters
+- Virtual Dating
+- Simulator
+
+Але це не повинно обов'язково бути badge на кожному персонажі.
+
+---
+
+# 9. Profile screen
+
+Профіль може виглядати практично як звичайний dating profile.
+
+Можливі елементи:
+
+- photos;
+- name;
+- age;
+- city;
+- bio;
+- interests;
+- personality traits;
+- lifestyle;
+- relationship preferences;
+- additional character information.
+
+Не потрібно дублювати великий AI disclaimer на кожній сторінці.
+
+Можна за бажанням мати невеликий informational element або About this character, де зазначається, що персонаж fictional.
+
+Це вже дизайнерське рішення.
+
+---
+
+# 10. Перша взаємодія з чатом
+
+Перед або під час першої AI conversation бажано ще раз коротко нагадати користувачу про природу взаємодії.
+
+Це не повинен бути великий screen.
+
+Наприклад невелике system message:
+
+### You're chatting with a fictional AI character.
+
+Responses are generated by artificial intelligence.
+
+`Got it`
+
+Його можна:
+
+- показувати лише один раз на весь account;
+- показувати під час першого відкриття першого чату;
+- інтегрувати у chat onboarding.
+
+Не потрібно повторювати це постійно.
+
+---
+
+# 11. Chat UI
+
+Після disclosure чат повинен виглядати максимально природно.
+
+Можуть бути:
+
+- text messages;
+- photos;
+- voice messages;
+- reactions;
+- typing indicator;
+- online status;
+- read status;
+- character animations;
+- suggested replies.
+
+Не потрібно ставити `AI` біля кожного повідомлення.
+
+Також необов'язково ставити `AI Character` біля імені співрозмовника у header, якщо глобальна природа сервісу вже була достатньо пояснена.
+
+---
+
+# 12. Важливе обмеження щодо UI-копірайтингу
+
+Frontend не повинен створювати враження, що AI-профілі є реальними людьми.
+
+Не використовувати формулювання типу:
+
+- Real singles near you
+- Real girls near you
+- People waiting to meet you
+- Meet real women
+- Find real people nearby
+
+Також потрібно обережно використовувати:
+
+- 2 km away
+- lives near you
+- wants to meet tonight
+- available to meet
+
+якщо з UI може здаватися, що мова йде про реальну фізичну людину.
+
+Саме dating-style оформлення допустиме.
+
+Проблема не в тому, що інтерфейс схожий на Tinder, а в тому, якщо продукт починає заявляти або сильно натякати, що персонажі реальні.
+
+---
+
+# 13. Match screen
+
+Можна використовувати класичну dating mechanics:
+
+### It's a match!
+
+або інший емоційний screen.
+
+Не потрібно щоразу додавати:
+
+> This is an AI match.
+
+Користувач уже знає правила симулятора.
+
+---
+
+# 14. Повідомлення від персонажів
+
+AI-персонажі можуть:
+
+- писати першими;
+- ставити Like;
+- Match;
+- проявляти інтерес;
+- фліртувати;
+- продовжувати діалог;
+- надсилати virtual content.
+
+Але frontend / notification copy не повинні представляти це як підтвердження інтересу реальної людини.
+
+Наприклад нормально:
+
+**Anna sent you a message**
+
+Небажано:
+
+**A real girl near you wants to meet you tonight.**
+
+---
+
+# 15. Push notifications
+
+Допускаються звичайні dating-style notifications:
+
+- Anna sent you a message
+- You have a new match
+- Sofia liked you
+- Someone is waiting for your reply
+
+Але вони повинні відповідати загальному контексту AI simulator.
+
+Не використовувати misleading copy про реальних людей.
+
+---
+
+# 16. Monetization / Paywall
+
+Якщо є Premium / subscription / credits, paywall повинен чітко показувати, що користувач купує доступ до AI-функціональності.
+
+Наприклад:
+
+### Premium
+
+- Unlimited AI conversations
+- More matches
+- Exclusive characters
+- Advanced character interactions
+- More photos
+- Voice messages
+
+Потрібно чітко показувати:
+
+- price;
+- billing period;
+- recurring subscription, якщо вона recurring;
+- основні умови;
+- спосіб скасування або посилання на нього.
+
+CTA може бути будь-яким:
+
+- Upgrade
+- Get Premium
+- Continue
+- Unlock
+- Subscribe
+
+---
+
+# 17. Заборонена або небажана monetization mechanics
+
+Не потрібно будувати paywall так, наче користувач платить, щоб отримати доступ до **реальної людини**.
+
+Наприклад небажано:
+
+> Anna wants to meet you. Pay €9.99 to reply.
+
+Краще:
+
+> Unlock unlimited conversations.
+
+або:
+
+> Continue your conversation with Anna with Premium.
+
+Також AI-персонажі не повинні через UI прямо просити користувача:
+
+- купити Premium;
+- купити coins;
+- витратити більше грошей;
+- продовжити підписку.
+
+Commercial CTA повинні залишатися частиною продуктового UI, а не емоційного тиску від персонажа.
+
+---
+
+# 18. Cancel subscription
+
+Якщо підписку можна керувати всередині сервісу, Settings повинні мати зрозумілий шлях до:
+
+- subscription status;
+- current plan;
+- next billing date;
+- Manage subscription;
+- Cancel subscription.
+
+Не обов'язково розміщувати Cancel безпосередньо на головному Settings screen.
+
+Але користувач не повинен шукати його через десятки прихованих screens.
+
+---
+
+# 19. Settings
+
+Можливі розділи:
+
+### Account
+- Profile
+- Email
+- Password
+- Date of birth
+
+### Preferences
+- Dating preferences
+- Character preferences
+- Notifications
+
+### Privacy
+- Privacy settings
+- Conversation history
+- Data export
+- Delete account
+
+### Subscription
+- Current plan
+- Billing
+- Manage subscription
+
+### About
+- About the app
+- About AI Characters
+- Terms
+- Privacy
+- Cookie Policy
+- Safety
+
+Структуру можна змінювати.
+
+---
+
+# 20. About AI
+
+У Settings або Help бажано мати сторінку, де користувач у будь-який момент може перевірити, як працює сервіс.
+
+Наприклад:
+
+### About AI Characters
+
+**Are these real people?**
+
+No. All dating profiles in the service are fictional AI characters.
+
+**Are the photos real?**
+
+Character images may be generated using AI or created using properly licensed visual material.
+
+**Are messages written by people?**
+
+Messages may be generated automatically using artificial intelligence.
+
+**Can I meet a character offline?**
+
+No. Characters are fictional and cannot meet users in real life.
+
+**Can AI make mistakes?**
+
+Yes. AI may produce inaccurate, inappropriate or unexpected responses.
+
+Точний текст можна змінити.
+
+---
+
+# 21. Privacy controls
+
+У frontend потрібно передбачити можливість:
+
+- delete account;
+- delete conversation history;
+- request/download personal data, якщо ця функція реалізується;
+- control optional data-processing settings;
+- control AI-training consent, якщо conversations використовуються для training.
+
+Якщо conversations використовуються для покращення моделей, бажано мати окремий toggle/consent.
+
+Наприклад:
+
+### Help improve AI
+
+Allow my conversations to be used to improve AI models.
+
+`OFF / ON`
+
+За замовчуванням рішення залежить від юридичної моделі продукту.
+
+---
+
+# 22. Delete Account
+
+Повинен існувати зрозумілий frontend flow.
+
+Наприклад:
+
+Settings  
+→ Account  
+→ Delete Account
+
+Після цього можна показати:
+
+- warning;
+- information about deleted data;
+- confirmation;
+- password confirmation;
+- final Delete Account button.
+
+Дизайн flow залишається вільним.
+
+---
+
+# 23. Cookies
+
+Для web-версії потрібно передбачити cookie consent UI там, де він юридично необхідний.
+
+Базовий варіант:
+
+### We use cookies
+
+`Accept all`
+
+`Reject non-essential`
+
+`Manage preferences`
+
+Necessary cookies можуть бути окремо позначені як required.
+
+Конкретний дизайн banner/modal не принциповий.
+
+---
+
+# 24. Report / Safety controls
+
+Навіть якщо співрозмовник AI, у чаті бажано мати menu:
+
+`•••`
+
+з можливостями типу:
+
+- Report response
+- Report character
+- Reset conversation
+- Restart character
+- Block / Hide character
+
+Назви можуть бути іншими.
+
+Головне — мати механізм повідомити про неправильну або небажану AI-відповідь.
+
+---
+
+# 25. Legal links
+
+Legal pages повинні бути доступні як мінімум з:
+
+- registration / onboarding;
+- Settings;
+- footer web-версії, якщо він є.
+
+Основні документи:
+
+- Terms of Service
+- Privacy Policy
+- Cookie Policy
+- AI / Fictional Characters information
+- Subscription / Refund information
+- Safety Guidelines
+
+Не обов'язково всі вони мають бути окремими сторінками.
+
+Частину можна логічно об'єднати.
+
+---
+
+# 26. Важлива технічна вимога для frontend
+
+Frontend повинен мати можливість відправляти на backend факт прийняття:
+
+- Terms;
+- Privacy acknowledgment;
+- AI disclosure;
+- age confirmation;
+- sensitive-data consent, якщо використовується;
+- marketing consent, якщо використовується;
+- AI-training consent, якщо використовується.
+
+Бажано передавати не просто:
+
+`true`
+
+а також version / identifier відповідного документа.
+
+Наприклад:
+
+`terms_version = 1.2`
+
+`ai_disclosure_version = 1.0`
+
+Це дозволить у майбутньому повторно запитати згоду, якщо юридичні документи суттєво зміняться.
+
+---
+
+# 27. Якщо Terms змінюються
+
+Frontend повинен підтримувати можливість показати користувачу повторний consent screen.
+
+Наприклад:
+
+### We've updated our Terms
+
+Please review the updated Terms before continuing.
+
+`Review`
+
+`Agree & Continue`
+
+Не обов'язково реалізовувати це на першому етапі, але архітектурно бажано не блокувати таку можливість.
+
+---
+
+# 28. Що НЕ потрібно робити
+
+Не потрібно:
+
+- писати `AI` біля кожного профілю;
+- писати `AI-generated` біля кожного повідомлення;
+- показувати disclaimer перед кожною розмовою;
+- постійно нагадувати користувачу, що це simulation;
+- перевантажувати UI юридичними повідомленнями;
+- робити кожну кнопку або screen максимально формальними.
+
+Завдання disclosure — один раз чітко пояснити правила продукту, а далі дати користувачу нормальний immersive dating experience.
+
+---
+
+# 29. Мінімальний обов'язковий frontend flow
+
+Приблизно:
+
+**Welcome**
+
+↓
+
+**Registration**
+
+↓
+
+**Age / Date of birth**
+
+↓
+
+**Profile / preferences**
+
+↓
+
+**AI disclosure**
+
+> All profiles are fictional AI characters.
+
+☐ I understand
+
+↓
+
+**Terms + Privacy consent**
+
+↓
+
+**Discover**
+
+↓
+
+**First AI chat notice**
+
+↓
+
+**Normal app experience**
+
+---
+
+# 30. Головне правило для дизайнерів і frontend-команди
+
+Дозволяється максимально реалістично відтворювати UX dating app.
+
+Профілі можуть виглядати реалістично.
+
+Персонажі можуть мати:
+
+- фотографії;
+- імена;
+- вік;
+- біографії;
+- інтереси;
+- міста;
+- характер;
+- історію;
+- lifestyle;
+- романтичну поведінку.
+
+Але користувач не повинен бути введений в оману щодо фундаментального факту:
+
+**це вигадані AI-персонажі, а не реальні dating users.**
+
+Якщо це чітко повідомлено під час onboarding, не потрібно повторювати disclosure на кожному екрані.
+
+---
+
+# 31. Пріоритети реалізації
+
+## Must have
+
+- 18+ / DOB flow
+- AI disclosure до використання персонажів
+- explicit acknowledgment
+- Terms + Privacy links
+- Terms acceptance
+- Discover
+- chat
+- first-chat AI reminder
+- Settings
+- Privacy section
+- Delete Account
+- subscription disclosure, якщо є Premium
+- доступ до legal documents
+- механізм report
+
+## Should have
+
+- About AI
+- cookie preferences
+- conversation deletion
+- data export
+- subscription management
+- consent versioning
+- повторний consent після оновлення Terms
+
+## Optional / product decision
+
+- глобальний AI indicator
+- AI badge у профілі
+- AI label у chat header
+- detailed About Character disclosure
+- additional safety reminders
+- training-data toggle
+- expanded privacy dashboard
+
+Для optional елементів дизайн-команда може вибирати рішення залежно від того, наскільки сильно вони впливають на immersion.

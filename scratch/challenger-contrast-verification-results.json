@@ -1,0 +1,261 @@
+{
+  "requirement1_glassCapsule": [
+    {
+      "background": "Pure Black",
+      "bgHex": "#000000",
+      "fallbackHex": "#E0E0E0",
+      "fallbackContrast": 15.908084190807749,
+      "fallbackPass": true,
+      "borderContrast": 20.119467064985724,
+      "iosRawTintHex": "#666666",
+      "iosRawTintContrast": 3.6573664310763587,
+      "iosRealisticContrast": 12.94403576727527
+    },
+    {
+      "background": "Dark Theme Background",
+      "bgHex": "#121013",
+      "fallbackHex": "#E3E2E3",
+      "fallbackContrast": 14.653220763729635,
+      "fallbackPass": true,
+      "borderContrast": 18.138072838933358,
+      "iosRawTintHex": "#717071",
+      "iosRawTintContrast": 3.838901448108595,
+      "iosRealisticContrast": 11.6692883970664
+    },
+    {
+      "background": "Deep Purple (Gradient Bottom)",
+      "bgHex": "#281320",
+      "fallbackHex": "#E5E3E4",
+      "fallbackContrast": 13.651492173408254,
+      "fallbackPass": true,
+      "borderContrast": 16.748553823887306,
+      "iosRawTintHex": "#7E7179",
+      "iosRawTintContrast": 3.757814981667862,
+      "iosRealisticContrast": 10.748815060064269
+    },
+    {
+      "background": "Dark Surface",
+      "bgHex": "#1C1820",
+      "fallbackHex": "#E4E3E4",
+      "fallbackContrast": 13.662180048253877,
+      "fallbackPass": true,
+      "borderContrast": 16.764332864914252,
+      "iosRawTintHex": "#777479",
+      "iosRawTintContrast": 3.7960641630767875,
+      "iosRealisticContrast": 10.778740394015049
+    }
+  ],
+  "requirement2_inactiveIconIOS": [
+    {
+      "surfaceDesc": "Capsule over Pure Black (#000000)",
+      "surfaceHex": "#E0E0E0",
+      "inactiveColor": "#403644",
+      "contrastRatio": 8.697050816139122,
+      "passGraphic": true,
+      "passTextAA": true,
+      "passTextAAA": true
+    },
+    {
+      "surfaceDesc": "Capsule over Dark BG (#121013)",
+      "surfaceHex": "#E3E2E3",
+      "inactiveColor": "#403644",
+      "contrastRatio": 8.886127712403736,
+      "passGraphic": true,
+      "passTextAA": true,
+      "passTextAAA": true
+    },
+    {
+      "surfaceDesc": "Capsule over Light BG (#FAF8F7)",
+      "surfaceHex": "#FEFEFE",
+      "inactiveColor": "#403644",
+      "contrastRatio": 11.38354277584224,
+      "passGraphic": true,
+      "passTextAA": true,
+      "passTextAAA": true
+    },
+    {
+      "surfaceDesc": "Pure White (#FFFFFF)",
+      "surfaceHex": "#FFFFFF",
+      "inactiveColor": "#403644",
+      "contrastRatio": 11.480833577965111,
+      "passGraphic": true,
+      "passTextAA": true,
+      "passTextAAA": true
+    },
+    {
+      "surfaceDesc": "iOS Glass (systemMaterialLight + 40% tint over black)",
+      "surfaceHex": "#DEDEDE",
+      "inactiveColor": "#403644",
+      "contrastRatio": 8.533657020107462,
+      "passGraphic": true,
+      "passTextAA": true,
+      "passTextAAA": true
+    },
+    {
+      "surfaceDesc": "iOS Glass (worst-case raw 40% tint on black)",
+      "surfaceHex": "#666666",
+      "inactiveColor": "#403644",
+      "contrastRatio": 1.9995054918487563,
+      "passGraphic": false,
+      "passTextAA": false,
+      "passTextAAA": false
+    }
+  ],
+  "requirement3_benefitText": [
+    {
+      "element": "benefitText (AppText default: textPrimary)",
+      "darkFg": "#F6F3F7",
+      "darkBg": "#281320",
+      "darkCR": 15.845724985260777,
+      "darkPassAA": true,
+      "darkPassAAA": true,
+      "lightFg": "#211C24",
+      "lightBg": "#FDF2F6",
+      "lightCR": 15.290149810167948,
+      "lightPassAA": true,
+      "lightPassAAA": true
+    },
+    {
+      "element": "benefitText nested bodyStrong (textPrimary)",
+      "darkFg": "#F6F3F7",
+      "darkBg": "#281320",
+      "darkCR": 15.845724985260777,
+      "darkPassAA": true,
+      "darkPassAAA": true,
+      "lightFg": "#211C24",
+      "lightBg": "#FDF2F6",
+      "lightCR": 15.290149810167948,
+      "lightPassAA": true,
+      "lightPassAAA": true
+    },
+    {
+      "element": "title \"Energy+\" (energyPlusCardText)",
+      "darkFg": "#FFB8D2",
+      "darkBg": "#281320",
+      "darkCR": 10.827528316065788,
+      "darkPassAA": true,
+      "darkPassAAA": true,
+      "lightFg": "#5A122D",
+      "lightBg": "#FDF2F6",
+      "lightCR": 12.319652828004102,
+      "lightPassAA": true,
+      "lightPassAAA": true
+    },
+    {
+      "element": "badgeText \"Найвигідніше\" (energyPlusBadgeText on energyPlusBadgeBg)",
+      "darkFg": "#FF80AC",
+      "darkBg": "#451932",
+      "darkCR": 6.213098785470988,
+      "darkPassAA": true,
+      "darkPassAAA": false,
+      "lightFg": "#9A1D4B",
+      "lightBg": "#F7DDE6",
+      "lightCR": 6.2006302434308775,
+      "lightPassAA": true,
+      "lightPassAAA": false
+    },
+    {
+      "element": "price \"149 ₴\" (brand on energyPlusCardBg)",
+      "darkFg": "#DC3B78",
+      "darkBg": "#281320",
+      "darkCR": 4.1021495520238895,
+      "darkPassAA": false,
+      "darkPassAAA": false,
+      "lightFg": "#B6245A",
+      "lightBg": "#FDF2F6",
+      "lightCR": 5.667784466468899,
+      "lightPassAA": true,
+      "lightPassAAA": false
+    },
+    {
+      "element": "period \"/ тиждень\" (textSecondary on energyPlusCardBg)",
+      "darkFg": "#A59BAA",
+      "darkBg": "#281320",
+      "darkCR": 6.534355005802139,
+      "darkPassAA": true,
+      "darkPassAAA": false,
+      "lightFg": "#6C626C",
+      "lightBg": "#FDF2F6",
+      "lightCR": 5.333753010932486,
+      "lightPassAA": true,
+      "lightPassAAA": false
+    },
+    {
+      "element": "iconBox flash/time icon (energyPlusCardText on energyPlusBadgeBg)",
+      "darkFg": "#FFB8D2",
+      "darkBg": "#451932",
+      "darkCR": 9.066374779891522,
+      "darkPassAA": true,
+      "darkPassAAA": true,
+      "lightFg": "#5A122D",
+      "lightBg": "#F7DDE6",
+      "lightCR": 10.544258830423363,
+      "lightPassAA": true,
+      "lightPassAAA": true
+    },
+    {
+      "element": "button label (textOnBrand on brand)",
+      "darkFg": "#FFFFFF",
+      "darkBg": "#DC3B78",
+      "darkCR": 4.251074261475851,
+      "darkPassAA": false,
+      "darkPassAAA": false,
+      "lightFg": "#FFFFFF",
+      "lightBg": "#B6245A",
+      "lightCR": 6.196510320126386,
+      "lightPassAA": true,
+      "lightPassAAA": false
+    },
+    {
+      "element": "footnote (textSecondary on energyPlusCardBg)",
+      "darkFg": "#A59BAA",
+      "darkBg": "#281320",
+      "darkCR": 6.534355005802139,
+      "darkPassAA": true,
+      "darkPassAAA": false,
+      "lightFg": "#6C626C",
+      "lightBg": "#FDF2F6",
+      "lightCR": 5.333753010932486,
+      "lightPassAA": true,
+      "lightPassAAA": false
+    }
+  ],
+  "requirement4_componentCollisions": {
+    "totalChecked": 84,
+    "collisionsFound": 4,
+    "details": [
+      {
+        "component": "Checkbox",
+        "element": "unchecked box on surface",
+        "theme": "Light",
+        "fgColor": "#E7E0E5",
+        "bgColor": "#FFFFFF",
+        "cr": "1.30"
+      },
+      {
+        "component": "Checkbox",
+        "element": "unchecked box on surface",
+        "theme": "Dark",
+        "fgColor": "#332C38",
+        "bgColor": "#1C1820",
+        "cr": "1.30"
+      },
+      {
+        "component": "BottomSheet",
+        "element": "overlay scrim on black",
+        "theme": "Light",
+        "fgColor": "rgba(33, 28, 36, 0.55)",
+        "bgColor": "#000000",
+        "cr": "1.10"
+      },
+      {
+        "component": "BottomSheet",
+        "element": "overlay scrim on black",
+        "theme": "Dark",
+        "fgColor": "rgba(0, 0, 0, 0.75)",
+        "bgColor": "#000000",
+        "cr": "1.00"
+      }
+    ]
+  }
+}

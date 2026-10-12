@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { AppText } from '@/components/ui/app-text';
 import { formatMessageTime } from '@/lib/format';
@@ -16,12 +17,23 @@ interface MessageBubbleProps {
 
 const LIKE_STICKER_SIZE = 72;
 const LIKE_ICON_SIZE = 36;
-const MESSAGE_ENTRY = FadeInDown.duration(220).withInitialValues({ opacity: 0, transform: [{ translateY: 12 }] });
 
 /** Бульбашка повідомлення. Стабільна макс. ширина — рядки не надто довгі. */
 export function MessageBubble({ message, animateEntry = false }: MessageBubbleProps) {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const opacity = useSharedValue(animateEntry ? 0 : 1);
+  const translateY = useSharedValue(animateEntry ? 12 : 0);
+  const entryStyle = useAnimatedStyle(() => ({
+    opacity: opacity.get(),
+    transform: [{ translateY: translateY.get() }],
+  }));
+
+  // Animate visual properties only: layout animations can detach a FlatList row on web.
+  useEffect(() => {
+    opacity.set(animateEntry ? withTiming(1, { duration: 220 }) : 1);
+    translateY.set(animateEntry ? withTiming(0, { duration: 220 }) : 0);
+  }, [animateEntry, opacity, translateY]);
   const kind = message.kind ?? 'text';
 
   if (kind === 'disclaimer') {
@@ -48,7 +60,7 @@ export function MessageBubble({ message, animateEntry = false }: MessageBubblePr
   const isOutgoing = message.author === 'user';
 
   return (
-    <Animated.View entering={animateEntry ? MESSAGE_ENTRY : undefined} testID="chat-message" style={[styles.row, isOutgoing ? styles.rowOutgoing : styles.rowIncoming]}>
+    <Animated.View testID="chat-message" style={[styles.row, isOutgoing ? styles.rowOutgoing : styles.rowIncoming, entryStyle]}>
       <View
         style={[
           styles.bubble,

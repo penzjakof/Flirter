@@ -1,27 +1,30 @@
 import { Link, router } from 'expo-router';
 import { useRef, useState } from 'react';
-import { StyleSheet, View, type TextInput } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Keyboard, StyleSheet, View, type TextInput } from 'react-native';
 
 import { OnboardingGate } from '@/components/onboarding/onboarding-gate';
 import { OnboardingLayout } from '@/components/onboarding/onboarding-layout';
 import { AppText } from '@/components/ui/app-text';
 import { Button } from '@/components/ui/button';
 import { TextField } from '@/components/ui/text-field';
-import { sanitizeDigits, validateBirthDate, type BirthDateValidation } from '@/lib/validation';
+import { sanitizeDigits, validateBirthDate } from '@/lib/validation';
 import { getNextOnboardingRoute, useSessionStore } from '@/store/session-store';
 import { colors, radius, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
-const ERROR_MESSAGES: Record<Exclude<BirthDateValidation, { ok: true }>['reason'], string | null> = {
-  incomplete: 'Введи повну дату: день, місяць і рік.',
-  invalid: 'Такої дати не існує. Перевір день і місяць.',
-  future: 'Дата не може бути в майбутньому.',
-  unrealistic: 'Перевір рік народження.',
-  underage: null,
-};
+const AGE_ERROR_KEYS = {
+  incomplete: 'onboarding.age.errors.incomplete',
+  invalid: 'onboarding.age.errors.invalid',
+  future: 'onboarding.age.errors.future',
+  unrealistic: 'onboarding.age.errors.unrealistic',
+} as const;
+
+type AgeErrorReason = keyof typeof AGE_ERROR_KEYS;
 
 /** S02. Віковий контроль: ручне введення без prefill і без нескінченного скролу років. */
 function AgeScreenContent() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const ageRestricted = useSessionStore((state) => state.ageRestricted);
   const confirmBirthDate = useSessionStore((state) => state.confirmBirthDate);
@@ -30,17 +33,19 @@ function AgeScreenContent() {
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<AgeErrorReason | null>(null);
 
   const monthRef = useRef<TextInput>(null);
   const yearRef = useRef<TextInput>(null);
 
   if (ageRestricted) return <UnderageState />;
 
-  const handleSubmit = () => {
-    const result = validateBirthDate(day, month, year);
+  const handleSubmit = async (dateParts = { day, month, year }) => {
+    const result = validateBirthDate(dateParts.day, dateParts.month, dateParts.year);
     if (result.ok) {
       confirmBirthDate(result.isoDate);
+      Keyboard.dismiss();
+      await new Promise((resolve) => setTimeout(resolve, 180));
       router.push(getNextOnboardingRoute(useSessionStore.getState()) ?? '/');
       return;
     }
@@ -48,7 +53,7 @@ function AgeScreenContent() {
       markUnderage();
       return;
     }
-    setError(ERROR_MESSAGES[result.reason]);
+    setErrorKey(result.reason);
   };
 
   const isComplete = day.length > 0 && month.length > 0 && year.length === 4;
@@ -56,15 +61,22 @@ function AgeScreenContent() {
   return (
     <OnboardingLayout
       stepNumber={1}
-      title="Сервіс для повнолітніх"
-      subtitle="Вкажи дату народження. Її не буде видно персонажам чи іншим людям."
-      footer={<Button label="Продовжити" onPress={handleSubmit} disabled={!isComplete} testID="age-submit" />}>
-      <View style={styles.dateRow} accessibilityRole="none" accessibilityLabel="Дата народження">
+      title={t('onboarding.age.title')}
+      subtitle={t('onboarding.age.subtitle')}
+      footer={
+        <Button
+          label={t('common.continue')}
+          onPress={handleSubmit}
+          disabled={!isComplete}
+          testID="age-submit"
+        />
+      }>
+      <View style={styles.dateRow} accessibilityRole="none" accessibilityLabel={t('onboarding.age.accessibility_label')}>
         <View style={styles.dayField}>
           <TextField
             testID="age-day"
-            label="День"
-            placeholder="ДД"
+            label={t('onboarding.age.day_label')}
+            placeholder={t('onboarding.age.day_placeholder')}
             value={day}
             center
             keyboardType="number-pad"
@@ -74,7 +86,7 @@ function AgeScreenContent() {
             onChangeText={(value) => {
               const digits = sanitizeDigits(value, 2);
               setDay(digits);
-              setError(null);
+              setErrorKey(null);
               if (digits.length === 2) monthRef.current?.focus();
             }}
           />
@@ -83,8 +95,8 @@ function AgeScreenContent() {
           <TextField
             testID="age-month"
             ref={monthRef}
-            label="Місяць"
-            placeholder="ММ"
+            label={t('onboarding.age.month_label')}
+            placeholder={t('onboarding.age.month_placeholder')}
             value={month}
             center
             keyboardType="number-pad"
@@ -94,7 +106,7 @@ function AgeScreenContent() {
             onChangeText={(value) => {
               const digits = sanitizeDigits(value, 2);
               setMonth(digits);
-              setError(null);
+              setErrorKey(null);
               if (digits.length === 2) yearRef.current?.focus();
             }}
           />
@@ -103,8 +115,8 @@ function AgeScreenContent() {
           <TextField
             testID="age-year"
             ref={yearRef}
-            label="Рік"
-            placeholder="РРРР"
+            label={t('onboarding.age.year_label')}
+            placeholder={t('onboarding.age.year_placeholder')}
             value={year}
             center
             keyboardType="number-pad"
@@ -112,30 +124,32 @@ function AgeScreenContent() {
             autoComplete="birthdate-year"
             maxLength={4}
             returnKeyType="done"
-            onSubmitEditing={handleSubmit}
+            onSubmitEditing={() => void handleSubmit()}
             onChangeText={(value) => {
-              setYear(sanitizeDigits(value, 4));
-              setError(null);
+              const digits = sanitizeDigits(value, 4);
+              setYear(digits);
+              setErrorKey(null);
+              if (digits.length === 4) void handleSubmit({ day, month, year: digits });
             }}
           />
         </View>
       </View>
 
-      {error && (
+      {errorKey && (
         <AppText variant="secondary" color="danger" accessibilityRole="alert" accessibilityLiveRegion="polite">
-          ⚠︎ {error}
+          ⚠︎ {t(AGE_ERROR_KEYS[errorKey])}
         </AppText>
       )}
 
       <View style={[styles.privacyNote, { backgroundColor: colors.surfaceMuted }]}>
         <AppText variant="secondary" color="textSecondary">
-          Дата потрібна, щоб підтвердити, що тобі вже є 18. Деталі — у{' '}
+          {t('onboarding.age.privacy_note_prefix')}
           <Link href="/legal/privacy">
             <AppText variant="secondary" color="brand">
-              Політиці приватності
+              {t('onboarding.age.privacy_policy_link')}
             </AppText>
           </Link>
-          .
+          {t('onboarding.age.privacy_note_suffix')}
         </AppText>
       </View>
     </OnboardingLayout>
@@ -144,13 +158,20 @@ function AgeScreenContent() {
 
 /** Нейтральний стан недоступності — без пропозиції змінити рік. */
 function UnderageState() {
+  const { t } = useTranslation();
   return (
     <OnboardingLayout
       stepNumber={1}
-      title="Сервіс недоступний"
-      subtitle="Flirter доступний лише для повнолітніх користувачів. Дякуємо за розуміння."
+      title={t('onboarding.age.underage.title')}
+      subtitle={t('onboarding.age.underage.subtitle')}
       onBack={() => router.replace('/welcome')}
-      footer={<Button label="Умови використання" variant="secondary" onPress={() => router.push('/legal/terms')} />}>
+      footer={
+        <Button
+          label={t('onboarding.age.underage.terms_button')}
+          variant="secondary"
+          onPress={() => router.push('/legal/terms')}
+        />
+      }>
       <View />
     </OnboardingLayout>
   );

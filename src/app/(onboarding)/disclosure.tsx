@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useState, type ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { OnboardingGate } from '@/components/onboarding/onboarding-gate';
@@ -12,16 +13,18 @@ import { useSessionStore } from '@/store/session-store';
 import { colors, radius, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
-interface DisclosureFact {
-  icon: ComponentProps<typeof Ionicons>['name'];
-  text: string;
+type IconName = ComponentProps<typeof Ionicons>['name'];
+
+interface FactDefinition {
+  icon: IconName;
+  key: 'profiles' | 'ai_content' | 'no_real_people' | 'no_offline';
 }
 
-const FACTS: readonly DisclosureFact[] = [
-  { icon: 'sparkles-outline', text: 'Усі профілі — вигадані персонажі.' },
-  { icon: 'image-outline', text: 'Фото, біографії та відповіді створені AI або сценаріями.' },
-  { icon: 'people-outline', text: 'Тут немає реальних людей для знайомств.' },
-  { icon: 'location-outline', text: 'Зустрітися офлайн неможливо.' },
+const FACT_DEFINITIONS: readonly FactDefinition[] = [
+  { icon: 'sparkles-outline', key: 'profiles' },
+  { icon: 'image-outline', key: 'ai_content' },
+  { icon: 'people-outline', key: 'no_real_people' },
+  { icon: 'location-outline', key: 'no_offline' },
 ];
 
 /** Мок запису згод з версіями. У продакшені — POST /consents; Discover відкривається лише після успіху. */
@@ -31,6 +34,7 @@ async function persistConsents(): Promise<void> {
 
 /** S06. AI disclosure та умови: два окремі незаповнені checkbox. */
 function DisclosureContent() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const acceptDisclosure = useSessionStore((state) => state.acceptDisclosure);
 
@@ -47,7 +51,7 @@ function DisclosureContent() {
       // Після запису згод guard у кореневому layout сам переведе в Discover.
       acceptDisclosure();
     } catch {
-      setError('Не вдалося зберегти вибір. Відмітки збережено — спробуй ще раз.');
+      setError(t('onboarding.disclosure.error_save'));
       setIsSubmitting(false);
     }
   };
@@ -55,10 +59,10 @@ function DisclosureContent() {
   return (
     <OnboardingLayout
       stepNumber={5}
-      title="Це симулятор знайомств із AI"
+      title={t('onboarding.disclosure.title')}
       footer={
         <Button
-          label="Перейти до знайомств"
+          label={t('onboarding.disclosure.submit_button')}
           onPress={handleSubmit}
           loading={isSubmitting}
           disabled={!isAiAcknowledged || !isTermsAccepted}
@@ -66,13 +70,13 @@ function DisclosureContent() {
         />
       }>
       <View style={[styles.facts, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-        {FACTS.map((fact) => (
-          <View key={fact.text} style={styles.factRow}>
+        {FACT_DEFINITIONS.map((fact) => (
+          <View key={fact.key} style={styles.factRow}>
             <View style={[styles.factIcon, { backgroundColor: colors.brandSubtle }]}>
               <Ionicons name={fact.icon} size={20} color={colors.brand} />
             </View>
             <AppText variant="body" style={styles.factText}>
-              {fact.text}
+              {t(`onboarding.disclosure.facts.${fact.key}`)}
             </AppText>
           </View>
         ))}
@@ -83,8 +87,8 @@ function DisclosureContent() {
           testID="consent-ai"
           checked={isAiAcknowledged}
           onChange={setIsAiAcknowledged}
-          accessibilityLabel="Розумію, що спілкуюся з вигаданими AI-персонажами">
-          <AppText variant="body">Розумію, що спілкуюся з вигаданими AI-персонажами, а не з реальними людьми.</AppText>
+          accessibilityLabel={t('onboarding.disclosure.consents.ai_label')}>
+          <AppText variant="body">{t('onboarding.disclosure.consents.ai_text')}</AppText>
         </Checkbox>
 
         <View style={[styles.divider, { backgroundColor: colors.border }]} />
@@ -93,21 +97,21 @@ function DisclosureContent() {
           testID="consent-terms"
           checked={isTermsAccepted}
           onChange={setIsTermsAccepted}
-          accessibilityLabel="Приймаю Умови використання та ознайомився з Політикою приватності">
+          accessibilityLabel={t('onboarding.disclosure.consents.terms_label')}>
           <AppText variant="body">
-            Приймаю{' '}
+            {t('onboarding.disclosure.consents.terms_prefix')}
             <Link href="/legal/terms">
               <AppText variant="bodyStrong" color="brand">
-                Умови використання
-              </AppText>
-            </Link>{' '}
-            та ознайомився з{' '}
-            <Link href="/legal/privacy">
-              <AppText variant="bodyStrong" color="brand">
-                Політикою приватності
+                {t('onboarding.disclosure.consents.terms_link')}
               </AppText>
             </Link>
-            .
+            {t('onboarding.disclosure.consents.and')}
+            <Link href="/legal/privacy">
+              <AppText variant="bodyStrong" color="brand">
+                {t('onboarding.disclosure.consents.privacy_link')}
+              </AppText>
+            </Link>
+            {t('onboarding.disclosure.consents.terms_suffix')}
           </AppText>
         </Checkbox>
       </View>

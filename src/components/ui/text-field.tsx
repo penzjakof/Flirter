@@ -31,6 +31,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
         ref={ref}
         placeholderTextColor={colors.textSecondary}
         accessibilityLabel={label ?? inputProps.placeholder}
+        aria-invalid={Boolean(error)}
         onFocus={(event) => {
           setIsFocused(true);
           onFocus?.(event);

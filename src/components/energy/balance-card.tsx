@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
@@ -14,6 +15,7 @@ interface BalanceCardProps {
 }
 
 export function BalanceCard({ total, isFull, msUntilNext }: BalanceCardProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const progress = isFull ? 1 : Math.min(1, Math.max(0, 1 - msUntilNext / ENERGY_CONFIG.regenIntervalMs));
   const progressPercent = Math.round(progress * 100);
@@ -30,7 +32,7 @@ export function BalanceCard({ total, isFull, msUntilNext }: BalanceCardProps) {
         {!isFull && (
           <View style={styles.timerContainer}>
             <AppText variant="secondary" color="textSecondary">
-              +1 через {formatCountdown(msUntilNext)}
+              {t('energy.insufficient_sheet.regen_countdown', { time: formatCountdown(msUntilNext) })}
             </AppText>
           </View>
         )}
@@ -39,8 +41,9 @@ export function BalanceCard({ total, isFull, msUntilNext }: BalanceCardProps) {
       <View
         style={[styles.track, { backgroundColor: colors.energyTrackBg }]}
         accessibilityRole="progressbar"
-        accessibilityLabel="Прогрес до наступної одиниці енергії"
-        accessibilityValue={{ min: 0, max: 100, now: progressPercent }}>
+        accessibilityLabel={t('energy.hero_card.progress_accessibility')}
+        accessibilityValue={{ min: 0, max: 100, now: progressPercent }}
+        aria-valuemin={0} aria-valuemax={100} aria-valuenow={progressPercent}>
         <View style={[styles.fill, { width: `${progressPercent}%`, backgroundColor: colors.brand }]} />
       </View>
     </View>
@@ -60,6 +63,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
   },
   amountContainer: {
     flexDirection: 'row',

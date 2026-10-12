@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link, router } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { BrandMark } from '@/components/brand-mark';
@@ -16,6 +17,7 @@ const COLLAGE = CHARACTERS.slice(0, 3);
 
 /** S01. Welcome: за кілька секунд пояснити продукт і дати почати. */
 export default function WelcomeScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const setAuthMode = useSessionStore((state) => state.setAuthMode);
 
@@ -32,6 +34,7 @@ export default function WelcomeScreen() {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'bottom']}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
       <View style={styles.collage} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
         <Image source={COLLAGE[0].photos[0]} style={[styles.photo, styles.photoMain, { backgroundColor: colors.surfaceMuted }]} contentFit="cover" priority="high" />
         <View style={styles.photoColumn}>
@@ -41,7 +44,7 @@ export default function WelcomeScreen() {
         <LinearGradient colors={[colors.fadeTransparent, colors.background]} style={styles.collageFade} pointerEvents="none" />
         <View style={styles.ageBadge}>
           <AppText variant="bodyStrong" color="textOnBrand">
-            18+
+            {t('common.age_badge')}
           </AppText>
         </View>
       </View>
@@ -50,22 +53,24 @@ export default function WelcomeScreen() {
         <BrandMark size={36} />
         <View style={styles.copy}>
           <AppText variant="hero" accessibilityRole="header">
-            Твоя історія починається з розмови
+            {t('onboarding.welcome.hero_title')}
           </AppText>
           <AppText variant="body" color="textSecondary">
-            Знайомся з вигаданими AI-персонажами. Спілкуйся у своєму темпі.
+            {t('onboarding.welcome.hero_subtitle')}
           </AppText>
         </View>
 
         <View style={styles.actions}>
-          <Button label="Почати" onPress={handleStart} testID="welcome-start" />
-          <Button label="Увійти" variant="secondary" onPress={handleLogin} testID="welcome-login" />
+          <Button label={t('onboarding.welcome.start_button')} onPress={handleStart} testID="welcome-start" />
+          <Button label={t('onboarding.welcome.login_button')} variant="secondary" onPress={handleLogin} testID="welcome-login" />
         </View>
+
+        <AppText variant="caption" color="textSecondary">{t('common.demo_notice')}</AppText>
 
         <View style={styles.legalRow}>
           <Link href="/legal/terms" style={styles.legalLink}>
             <AppText variant="secondary" color="textSecondary">
-              Умови
+              {t('common.terms')}
             </AppText>
           </Link>
           <AppText variant="secondary" color="textSecondary">
@@ -73,7 +78,7 @@ export default function WelcomeScreen() {
           </AppText>
           <Link href="/legal/privacy" style={styles.legalLink}>
             <AppText variant="secondary" color="textSecondary">
-              Приватність
+              {t('common.privacy')}
             </AppText>
           </Link>
           <AppText variant="secondary" color="textSecondary">
@@ -81,11 +86,12 @@ export default function WelcomeScreen() {
           </AppText>
           <Link href="/legal/ai" style={styles.legalLink}>
             <AppText variant="secondary" color="textSecondary">
-              Про AI
+              {t('common.about_ai')}
             </AppText>
           </Link>
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -95,6 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
+  scrollContent: { flexGrow: 1 },
   collage: {
     flex: 1,
     minHeight: 220,

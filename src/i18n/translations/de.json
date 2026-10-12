@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "Wird geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "back": "Zurück",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "continue": "Weiter",
+    "save": "Speichern",
+    "confirm": "Bestätigen",
+    "done": "Fertig",
+    "understood": "Verstanden",
+    "ok": "OK",
+    "start": "Loslegen",
+    "login": "Anmelden",
+    "install": "Installieren",
+    "not_now": "Nicht jetzt",
+    "reset": "Zurücksetzen",
+    "retry": "Erneut versuchen",
+    "back_to_home": "Zur Startseite",
+    "back_to_dating": "Zurück zu Dating",
+    "age_badge": "18+",
+    "coming_soon": "Demnächst",
+    "yesterday": "Gestern",
+    "session_restoring": "Sitzung wird wiederhergestellt",
+    "terms": "AGB",
+    "terms_full": "Nutzungsbedingungen",
+    "privacy": "Datenschutz",
+    "privacy_full": "Datenschutzerklärung",
+    "about_ai": "Über KI",
+    "about_ai_full": "Über die KI-Charaktere",
+    "seconds_short": "{{count}}s",
+    "minutes_short": "{{count}}m",
+    "hours_short": "{{count}}h",
+    "demo_notice": "Demomodus: Anmeldung und Antworten laufen lokal. Es werden keine E-Mails gesendet; Zahlungen, Fotos und Sprachnachrichten sind noch nicht verfügbar."
+  },
+  "tabs": {
+    "dating": "Dating",
+    "discover": "Entdecken",
+    "chats": "Chats",
+    "profile": "Profil",
+    "unread_badge_accessibility": "{{label}}, {{count}} neu"
+  },
+  "not_found": {
+    "title": "Seite nicht gefunden",
+    "description": "Dieser Link ist möglicherweise abgelaufen oder existiert nicht mehr.",
+    "button": "Zur Startseite"
+  },
+  "html_meta": {
+    "description": "Flirter — Dating-Simulator mit fiktiven KI-Charakteren. 18+.",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "Schritt {{step}} von {{total}}"
+    },
+    "welcome": {
+      "hero_title": "Deine Geschichte beginnt mit einem Gespräch",
+      "hero_subtitle": "Lerne fiktive KI-Charaktere kennen. Chatte in deinem eigenen Tempo.",
+      "start_button": "Loslegen",
+      "login_button": "Anmelden"
+    },
+    "age": {
+      "title": "Dienst nur für Erwachsene",
+      "subtitle": "Gib dein Geburtsdatum ein. Es wird niemals für Charaktere oder andere Personen sichtbar sein.",
+      "day_label": "Tag",
+      "day_placeholder": "TT",
+      "month_label": "Monat",
+      "month_placeholder": "MM",
+      "year_label": "Jahr",
+      "year_placeholder": "JJJJ",
+      "accessibility_label": "Geburtsdatum",
+      "privacy_note_prefix": "Wir benötigen dein Geburtsdatum zur Bestätigung deiner Volljährigkeit (18+). Details in unserer ",
+      "privacy_policy_link": "Datenschutzerklärung",
+      "privacy_note_suffix": ".",
+      "errors": {
+        "incomplete": "Gib ein vollständiges Datum ein: Tag, Monat und Jahr.",
+        "invalid": "Dieses Datum existiert nicht. Überprüfe Tag und Monat.",
+        "future": "Das Datum darf nicht in der Zukunft liegen.",
+        "unrealistic": "Überprüfe das Geburtsjahr."
+      },
+      "underage": {
+        "title": "Dienst nicht verfügbar",
+        "subtitle": "Flirter ist nur für volljährige Nutzer (ab 18 Jahren) verfügbar. Vielen Dank für dein Verständnis.",
+        "terms_button": "Nutzungsbedingungen"
+      }
+    },
+    "sign_in": {
+      "signup_title": "Konto erstellen",
+      "login_title": "Willkommen zurück!",
+      "signup_subtitle": "Ein Konto sichert deine Chats und Energie geräteübergreifend. Kein Passwort erforderlich — wir senden dir einen Code.",
+      "login_subtitle": "Gib deine registrierte E-Mail-Adresse ein. Wir senden dir einen Einmalcode.",
+      "get_code_button": "Code anfordern",
+      "email_label": "E-Mail",
+      "email_placeholder": "du@beispiel.de",
+      "legal_prefix": "Mit dem Fortfahren nimmst du die ",
+      "terms_link": "AGB",
+      "and": " und ",
+      "privacy_link": "Datenschutzerklärung",
+      "legal_suffix": " zur Kenntnis. Du stimmst ihnen im nächsten Schritt ausdrücklich zu.",
+      "errors": {
+        "invalid_email": "Überprüfe deine E-Mail-Adresse — sie scheint ungültig zu sein.",
+        "network_error": "Code konnte nicht gesendet werden. Überprüfe deine Internetverbindung und versuche es erneut."
+      }
+    },
+    "verify": {
+      "title": "Code aus der E-Mail eingeben",
+      "subtitle": "Wir haben einen {{count}}-stelligen Code an {{email}} gesendet.",
+      "fallback_email": "deine E-Mail",
+      "confirm_button": "Bestätigen",
+      "resend_code": "Code erneut senden",
+      "resend_code_cooldown": "Erneut senden in {{seconds}}s",
+      "code_label": "Bestätigungscode",
+      "change_email": "E-Mail ändern",
+      "demo_note": "Demo-Modus: Jeder {{count}}-stellige Code funktioniert.",
+      "errors": {
+        "invalid_code": "Ungültiger oder abgelaufener Code. Versuche es erneut oder fordere einen neuen an.",
+        "network_error": "Keine Verbindung. Code gespeichert — bitte erneut versuchen."
+      }
+    },
+    "profile_setup": {
+      "title": "Wie dürfen wir dich nennen?",
+      "subtitle": "Die Charaktere sprechen dich mit diesem Namen an. Ein echter Name ist nicht erforderlich.",
+      "continue_button": "Weiter",
+      "skip_button": "Optionales überspringen",
+      "nickname_label": "Spitzname",
+      "nickname_helper": "Kann jederzeit im Profil geändert werden.",
+      "nickname_error": "Zwischen {{min}} und {{max}} Zeichen.",
+      "gender_label": "Dein Geschlecht (optional)",
+      "preference_label": "Wen möchtest du sehen (optional)",
+      "genders": {
+        "male": "Mann",
+        "female": "Frau",
+        "other": "Divers"
+      },
+      "preferences": {
+        "women": "Frauen",
+        "men": "Männer",
+        "everyone": "Alle"
+      }
+    },
+    "disclosure": {
+      "title": "Dies ist ein KI-Dating-Simulator",
+      "submit_button": "Zum Dating",
+      "facts": {
+        "profiles": "Alle Profile sind fiktive Charaktere.",
+        "ai_content": "Fotos, Biografien und Antworten werden von KI oder Skripten erstellt.",
+        "no_real_people": "Hier gibt es keine echten Personen zum Daten.",
+        "no_offline": "Reale Treffen sind nicht möglich."
+      },
+      "consents": {
+        "ai_label": "Ich verstehe, dass ich mit fiktiven KI-Charakteren chatte",
+        "ai_text": "Ich verstehe, dass ich mit fiktiven KI-Charakteren chatte und nicht mit echten Menschen.",
+        "terms_label": "Ich akzeptiere die AGB und habe die Datenschutzerklärung gelesen",
+        "terms_prefix": "Ich akzeptiere die ",
+        "terms_link": "AGB",
+        "and": " und habe die ",
+        "privacy_link": "Datenschutzerklärung",
+        "terms_suffix": " gelesen."
+      },
+      "error_save": "Auswahl konnte nicht gespeichert werden. Bitte erneut versuchen."
+    }
+  },
+  "discover": {
+    "filter_accessibility": "Filter",
+    "filter_active_accessibility": "Filter, {{count}} aktiv",
+    "empty_title": "Keine Charaktere für diese Filter gefunden",
+    "empty_subtitle": "Versuche einige Filter zu entfernen — bald erscheinen neue Charaktere.",
+    "reset_filters": "Filter zurücksetzen",
+    "card_accessibility": "{{name}}, {{age}}. {{tagline}}. Profil öffnen",
+    "action_open_chat": "Chat mit {{name}} öffnen",
+    "action_like": "{{name}} liken",
+    "sheet": {
+      "title": "Filter",
+      "who_to_show": "Wen anzeigen",
+      "age": "Alter",
+      "ethnicity": "Herkunft",
+      "interests": "Interessen",
+      "communication_style": "Kommunikationsstil",
+      "only_new_title": "Nur neue",
+      "only_new_subtitle": "Charaktere ausblenden, mit denen bereits ein Chat besteht",
+      "reset": "Zurücksetzen",
+      "no_matches": "Keine Treffer",
+      "show_results_one": "{{count}} Charakter anzeigen",
+      "show_results_few": "{{count}} Charaktere anzeigen",
+      "show_results_many": "{{count}} Charaktere anzeigen",
+      "show_results_other": "{{count}} Charaktere anzeigen"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "Alle",
+        "women": "Frauen",
+        "men": "Männer",
+        "nonbinary": "Nicht-binär"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "Sport",
+        "travel": "Reisen",
+        "music": "Musik",
+        "art": "Kunst",
+        "food": "Essen & Kaffee",
+        "books": "Bücher & Kino",
+        "nature": "Natur"
+      },
+      "styles": {
+        "romantic": "Romantisch",
+        "playful": "Verspielt",
+        "intellectual": "Intellektuell",
+        "caring": "Fürsorglich"
+      },
+      "ethnicities": {
+        "european": "Europäisch",
+        "asian": "Asiatisch",
+        "african": "Afrikanisch",
+        "latin": "Lateinamerikanisch",
+        "middle_eastern": "Nahöstlich",
+        "mixed": "Gemischt"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "Chats",
+    "typing": "tippt…",
+    "you_prefix": "Du: ",
+    "row_accessibility": "{{name}}. {{preview}}",
+    "unread_suffix": ". Ungelesen: {{count}}",
+    "dismiss_request_accessibility": "Anfrage von {{name}} ablehnen",
+    "section_requests": "Gesprächsanfragen",
+    "show_all_requests": "Alle anzeigen",
+    "show_less_requests": "Weniger anzeigen",
+    "section_dialogs": "Nachrichten",
+    "empty_title": "Hier ist es noch ruhig",
+    "empty_subtitle": "Wähle einen Charakter für dein erstes Gespräch.",
+    "to_dating_button": "Dating entdecken",
+    "system_messages": {
+      "ai_disclaimer": "Dies ist ein Gespräch mit einem fiktiven KI-Charakter. Antworten können Fehler enthalten.",
+      "liked_profile": "Dir gefällt dieses Profil",
+      "reply_error_refunded": "Antwort konnte nicht vorbereitet werden. Energie erstattet."
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1 Chat wartet auf Antwort",
+      "other": "{{count}} Chats warten auf Antwort",
+      "row_accessibility": "{{label}}. Chats öffnen"
+    },
+    "back_accessibility": "Zurück zu den Chats",
+    "profile_accessibility": "Profil: {{name}}",
+    "typing": "tippt…",
+    "send_suggestion_accessibility": "Antwort senden: {{reply}}",
+    "insufficient_energy_action": "Nachricht senden",
+    "coming_soon_modal": {
+      "title": "Demnächst verfügbar",
+      "description": "Das Senden von Fotos und Sprachnachrichten wird in kommenden Versionen unterstützt.",
+      "button": "Verstanden"
+    },
+    "composer": {
+      "attach_photo_accessibility": "Foto anhängen",
+      "placeholder": "Nachricht",
+      "input_accessibility": "Nachrichtentext",
+      "send_accessibility": "Senden",
+      "record_voice_accessibility": "Sprachnachricht aufnehmen"
+    },
+    "typing_indicator_accessibility": "Charakter tippt"
+  },
+  "character": {
+    "missing_title": "Charakter ist nicht mehr verfügbar",
+    "back_to_dating": "Zurück zum Dating",
+    "close_accessibility": "Profil schließen",
+    "in_story": "In der Story: {{city}}",
+    "section_interests": "Interessen",
+    "section_traits": "Persönlichkeit",
+    "section_lifestyle": "Lebensstil",
+    "about_ai_notice": "{{name}} ist ein fiktiver KI-Charakter. Fotos, Biografie und Antworten werden durch künstliche Intelligenz generiert.",
+    "continue_chat": "Gespräch fortsetzen",
+    "start_chat": "Chat starten"
+  },
+  "energy": {
+    "title": "Energie",
+    "chip_accessibility": "Energie: {{total}}. Energie-Shop öffnen",
+    "subscription": "Mehr Energie mit Abo",
+    "one_time": "Einmaliges Aufladen",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "Bester Wert",
+      "price": "149 ₴",
+      "period": " / Woche",
+      "feature_limit": "Limit 60 statt {{cap}}",
+      "feature_speed": "Doppelt so schnelle Regeneration · 1 alle 6 Min.",
+      "subscribe_button": "Abonnieren",
+      "footnote": "Automatische Verlängerung · jederzeit kündbar"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} Energie",
+      "badge_recommended": "Empfohlen",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "oder {{photos}} Fotos",
+      "buy": "Kaufen",
+      "buy_accessibility": "{{amount}} Energie kaufen. {{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "Energie aufgebraucht",
+      "close_accessibility": "Schließen",
+      "subtitle": "Lade deine Energie auf, um weiter zu chatten",
+      "regen_countdown": "+1 in {{time}}",
+      "balance_status": "{{current}} von {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "Bester Wert",
+      "sub_price": "149 ₴",
+      "sub_period": " / Woche",
+      "sub_feature_limit": "60 Energie Limit",
+      "sub_feature_speed": "Doppelt so schnelle Regeneration",
+      "sub_button": "Abonnieren",
+      "divider_or": "oder einmalig",
+      "word_energy": "Energie",
+      "badge_recommended": "Empfohlen",
+      "not_now": "Nicht jetzt"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "Bald",
+      "benefit_cap": "Vorrat 60 ⚡ statt {{cap}}",
+      "benefit_speed": "Doppelt so schnelle Regeneration: 1 ⚡ alle 6 Min.",
+      "benefit_prices": "Nachrichten und Fotos zu gleichen Energiekosten",
+      "footnote": "Preis, Zeitraum und Kündigungsbedingungen werden vor der Zahlung angezeigt."
+    },
+    "hero_card": {
+      "your_balance": "Dein Guthaben",
+      "messages_equivalent_one": "≈ {{count}} Nachricht",
+      "messages_equivalent_few": "≈ {{count}} Nachrichten",
+      "messages_equivalent_many": "≈ {{count}} Nachrichten",
+      "messages_equivalent_other": "≈ {{count}} Nachrichten",
+      "full_reserve": "Kostenloser Vorrat voll · {{cap}} ⚡",
+      "free_plus_one": "Kostenlos +1 ⚡",
+      "in_time": "in {{time}}",
+      "progress_accessibility": "Fortschritt zur nächsten Energieeinheit"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — Zahlung in Kürze",
+      "title": "Zahlung in Kürze verfügbar",
+      "description": "Zahlungen sind noch nicht verknüpft — dies ist ein Prototyp. Preise werden nach Einbindung des Zahlungsanbieters vor dem Kaufabschluss angezeigt.",
+      "button": "Verstanden"
+    }
+  },
+  "profile": {
+    "header_title": "Profil",
+    "privacy_note": "Dies sind private Einstellungen. Dein Profil ist für echte Personen nicht sichtbar.",
+    "groups": {
+      "theme": "Erscheinungsbild",
+      "app": "Anwendung",
+      "energy_and_purchases": "Energie & Einkäufe",
+      "help_and_rules": "Hilfe & Regeln",
+      "general": "Allgemein"
+    },
+    "theme_options": {
+      "system": "System",
+      "light": "Hell",
+      "dark": "Dunkel"
+    },
+    "rows": {
+      "install_pwa": "Zum Startbildschirm hinzufügen",
+      "balance_and_topup": "Guthaben & Aufladen",
+      "about_ai": "Über KI-Charaktere",
+      "terms": "Nutzungsbedingungen",
+      "privacy_policy": "Datenschutzerklärung",
+      "language": "Sprache"
+    },
+    "buttons": {
+      "logout": "Abmelden",
+      "reset_demo": "Demo-Daten zurücksetzen"
+    },
+    "logout_modal": {
+      "title": "Vom Konto abmelden?",
+      "description": "Dies ist eine lokale Demo. Beim Abmelden werden die Gespräche gelöscht und das Guthaben auf diesem Gerät zurückgesetzt.",
+      "confirm": "Abmelden",
+      "cancel": "Abbrechen"
+    },
+    "language_modal": {
+      "title": "Sprache auswählen",
+      "restart_notice": "Die App erfordert einen schnellen Neustart, um die Ausrichtung der Benutzeroberfläche zu ändern.",
+      "restart_button": "Jetzt neu starten",
+      "cancel_button": "Später"
+    }
+  },
+  "pwa_install": {
+    "title": "Zum Startbildschirm hinzufügen",
+    "benefits": {
+      "quick_launch": "Schneller Start direkt vom Startbildschirm",
+      "standalone": "Eigenes App-Fenster ohne Browserleisten",
+      "notifications": "Benachrichtigungen auf unterstützten Geräten"
+    },
+    "install_button": "Installieren",
+    "not_now_button": "Nicht jetzt",
+    "ios_steps": {
+      "step_1": "Tippe im Safari-Menü auf „Teilen“.",
+      "step_2": "Wähle „Zum Home-Bildschirm“.",
+      "step_3": "Aktiviere „Als Web-App öffnen“ und tippe auf „Hinzufügen“."
+    },
+    "in_app_steps": {
+      "step_1": "Öffne das Menü dieser App (⋯).",
+      "step_2": "Wähle „Im Browser öffnen“ — Safari oder Chrome.",
+      "step_3": "Füge Flirter dort zum Startbildschirm hinzu."
+    },
+    "default_steps": {
+      "step_1": "Öffne das Browser-Menü (⋮).",
+      "step_2": "Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“."
+    }
+  },
+  "legal": {
+    "back_accessibility": "Zurück",
+    "version_label": "Version vom {{version}}",
+    "not_found": "Dokument nicht gefunden.",
+    "documents": {
+      "terms": {
+        "title": "Nutzungsbedingungen",
+        "sections": {
+          "draft": {
+            "heading": "Entwurf",
+            "body": "Der endgültige Wortlaut der Bedingungen wird nach rechtlicher Prüfung bereitgestellt. Dieser Bildschirm dient als Platzhalter."
+          },
+          "nature": {
+            "heading": "Art des Dienstes",
+            "body": "Flirter ist ein Dating-Simulator zur Unterhaltung. Alle Profile sind fiktive KI-Charaktere."
+          },
+          "age": {
+            "heading": "Altersvoraussetzung",
+            "body": "Der Dienst ist ausschließlich Personen ab 18 Jahren vorbehalten."
+          }
+        }
+      },
+      "privacy": {
+        "title": "Datenschutzerklärung",
+        "sections": {
+          "draft": {
+            "heading": "Entwurf",
+            "body": "Die endgültige Fassung der Datenschutzerklärung wird nach rechtlicher Prüfung bereitgestellt."
+          },
+          "data": {
+            "heading": "Erfasste Daten",
+            "body": "E-Mail, Geburtsdatum, Spitzname, optionale Vorlieben, Chat-Verlauf und Käufe."
+          },
+          "rights": {
+            "heading": "Deine Rechte",
+            "body": "Du kannst eine Kopie deiner Daten anfordern, Chat-Verläufe löschen oder dein Konto in den Einstellungen entfernen."
+          }
+        }
+      },
+      "ai": {
+        "title": "Über KI-Charaktere",
+        "sections": {
+          "real_people": {
+            "heading": "Sind das echte Menschen?",
+            "body": "Nein. Alle Charaktere sind fiktiv. Fotos, Biografien und Antworten stammen von KI oder Skripten."
+          },
+          "offline_meet": {
+            "heading": "Kann man sich im echten Leben treffen?",
+            "body": "Nein. Die Charaktere existieren nicht in der realen Welt; Treffen im echten Leben sind unmöglich."
+          },
+          "ai_mistakes": {
+            "heading": "Kann die KI Fehler machen?",
+            "body": "Ja. Antworten können Ungenauigkeiten enthalten. Bitte nicht als fachlichen Rat verstehen."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "लोड हो रहा है...",
+    "error": "एक त्रुटि हुई",
+    "back": "वापस",
+    "close": "बंद करें",
+    "cancel": "रद्द करें",
+    "continue": "जारी रखें",
+    "save": "सहेजें",
+    "confirm": "पुष्टि करें",
+    "done": "पूर्ण",
+    "understood": "समझ गया",
+    "ok": "ठीक है",
+    "start": "शुरू करें",
+    "login": "लॉग इन",
+    "install": "इंस्टॉल करें",
+    "not_now": "अभी नहीं",
+    "reset": "रीसेट करें",
+    "retry": "पुनः प्रयास करें",
+    "back_to_home": "होम पर वापस",
+    "back_to_dating": "डेटिंग पर वापस",
+    "age_badge": "18+",
+    "coming_soon": "जल्द आ रहा है",
+    "yesterday": "कल",
+    "session_restoring": "सत्र पुनः स्थापित हो रहा है",
+    "terms": "शर्तें",
+    "terms_full": "सेवा की शर्तें",
+    "privacy": "गोपनीयता",
+    "privacy_full": "गोपनीयता नीति",
+    "about_ai": "AI के बारे में",
+    "about_ai_full": "AI किरदारों के बारे में",
+    "seconds_short": "{{count}}से",
+    "minutes_short": "{{count}}मि",
+    "hours_short": "{{count}}घं",
+    "demo_notice": "डेमो मोड: साइन-इन और जवाब स्थानीय रूप से चलते हैं। ईमेल नहीं भेजे जाते; भुगतान, फ़ोटो और आवाज़ अभी उपलब्ध नहीं हैं।"
+  },
+  "tabs": {
+    "dating": "डेटिंग",
+    "discover": "खोजें",
+    "chats": "चैट्स",
+    "profile": "प्रोफ़ाइल",
+    "unread_badge_accessibility": "{{label}}, {{count}} नए"
+  },
+  "not_found": {
+    "title": "पेज नहीं मिला",
+    "description": "यह लिंक पुराना हो सकता है या अब मौजूद नहीं है।",
+    "button": "होम पर वापस जाएं"
+  },
+  "html_meta": {
+    "description": "Flirter — काल्पनिक AI किरदारों के साथ डेटिंग सिम्युलेटर। 18+।",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "चरण {{step}} / {{total}}"
+    },
+    "welcome": {
+      "hero_title": "आपकी कहानी एक बातचीत से शुरू होती है",
+      "hero_subtitle": "काल्पनिक AI किरदारों से मिलें। अपनी गति से चैट करें।",
+      "start_button": "शुरू करें",
+      "login_button": "लॉग इन करें"
+    },
+    "age": {
+      "title": "केवल वयस्कों के लिए सेवा",
+      "subtitle": "अपनी जन्मतिथि दर्ज करें। यह कभी भी किरदारों या अन्य लोगों को दिखाई नहीं देगी।",
+      "day_label": "दिन",
+      "day_placeholder": "दिन",
+      "month_label": "महीना",
+      "month_placeholder": "माह",
+      "year_label": "वर्ष",
+      "year_placeholder": "वर्ष",
+      "accessibility_label": "जन्मतिथि",
+      "privacy_note_prefix": "यह पुष्टि करने के लिए जन्मतिथि आवश्यक है कि आपकी आयु 18+ है। विवरण हमारी ",
+      "privacy_policy_link": "गोपनीयता नीति",
+      "privacy_note_suffix": " में है।",
+      "errors": {
+        "incomplete": "पूरी तारीख दर्ज करें: दिन, महीना और वर्ष।",
+        "invalid": "यह तारीख मौजूद नहीं है। दिन और महीना जांचें।",
+        "future": "तारीख भविष्य की नहीं हो सकती।",
+        "unrealistic": "जन्म वर्ष की जांच करें।"
+      },
+      "underage": {
+        "title": "सेवा उपलब्ध नहीं है",
+        "subtitle": "Flirter केवल 18 वर्ष और उससे अधिक आयु के उपयोगकर्ताओं के लिए उपलब्ध है। समझने के लिए धन्यवाद।",
+        "terms_button": "सेवा की शर्तें"
+      }
+    },
+    "sign_in": {
+      "signup_title": "खाता बनाएं",
+      "login_title": "वापसी पर स्वागत है!",
+      "signup_subtitle": "एक खाता सभी उपकरणों पर आपकी बातचीत और ऊर्जा को सुरक्षित रखता है। पासवर्ड की आवश्यकता नहीं — हम कोड भेजेंगे।",
+      "login_subtitle": "पंजीकृत ईमेल दर्ज करें। हम एक बार का कोड भेजेंगे।",
+      "get_code_button": "कोड प्राप्त करें",
+      "email_label": "ईमेल",
+      "email_placeholder": "you@example.com",
+      "legal_prefix": "आगे बढ़कर, आप समीक्षा करते हैं ",
+      "terms_link": "शर्तें",
+      "and": " और ",
+      "privacy_link": "गोपनीयता नीति",
+      "legal_suffix": "। आपको अगले चरण में स्पष्ट रूप से सहमति देनी होगी।",
+      "errors": {
+        "invalid_email": "ईमेल पता जांचें — यह गलत प्रतीत होता है।",
+        "network_error": "कोड भेजने में विफल। अपना कनेक्शन जांचें और पुनः प्रयास करें।"
+      }
+    },
+    "verify": {
+      "title": "ईमेल से कोड दर्ज करें",
+      "subtitle": "हमने {{email}} पर {{count}}-अंकों का कोड भेजा है।",
+      "fallback_email": "आपका ईमेल",
+      "confirm_button": "पुष्टि करें",
+      "resend_code": "कोड फिर से भेजें",
+      "resend_code_cooldown": "{{seconds}}से में पुनः भेजें",
+      "code_label": "सत्यापन कोड",
+      "change_email": "ईमेल बदलें",
+      "demo_note": "डेमो मोड: कोई भी {{count}}-अंकों का कोड काम करेगा।",
+      "errors": {
+        "invalid_code": "गलत या समाप्त हो चुका कोड। पुनः प्रयास करें या नया कोड मांगें।",
+        "network_error": "कोई कनेक्शन नहीं है। कोड सहेजा गया — पुनः प्रयास करें।"
+      }
+    },
+    "profile_setup": {
+      "title": "हम आपको क्या कहकर बुलाएं?",
+      "subtitle": "किरदार आपको इसी नाम से पुकारेंगे। असली नाम अनिवार्य नहीं है।",
+      "continue_button": "जारी रखें",
+      "skip_button": "वैकल्पिक छोड़ें",
+      "nickname_label": "उपनाम (निकनेम)",
+      "nickname_helper": "प्रोफ़ाइल में कभी भी बदला जा सकता है।",
+      "nickname_error": "{{min}} से {{max}} अक्षरों के बीच।",
+      "gender_label": "आपका लिंग (वैकल्पिक)",
+      "preference_label": "किन्हें देखना चाहते हैं (वैकल्पिक)",
+      "genders": {
+        "male": "पुरुष",
+        "female": "महिला",
+        "other": "अन्य"
+      },
+      "preferences": {
+        "women": "महिलाएं",
+        "men": "पुरुष",
+        "everyone": "सभी"
+      }
+    },
+    "disclosure": {
+      "title": "यह एक AI डेटिंग सिम्युलेटर है",
+      "submit_button": "डेटिंग शुरू करें",
+      "facts": {
+        "profiles": "सभी प्रोफ़ाइल काल्पनिक किरदार हैं।",
+        "ai_content": "फ़ोटो, जीवनियां और उत्तर AI या स्क्रिप्ट द्वारा बनाए गए हैं।",
+        "no_real_people": "यहाँ मिलने के लिए कोई वास्तविक इंसान नहीं हैं।",
+        "no_offline": "ऑफ़लाइन मिलना संभव नहीं है।"
+      },
+      "consents": {
+        "ai_label": "मैं समझता हूँ कि मैं काल्पनिक AI किरदारों से चैट कर रहा हूँ",
+        "ai_text": "मैं समझता हूँ कि मैं काल्पनिक AI किरदारों से चैट कर रहा हूँ, वास्तविक लोगों से नहीं।",
+        "terms_label": "मैं सेवा की शर्तें स्वीकार करता हूँ और गोपनीयता नीति पढ़ ली है",
+        "terms_prefix": "मैं स्वीकार करता हूँ ",
+        "terms_link": "सेवा की शर्तें",
+        "and": " और पढ़ ली है ",
+        "privacy_link": "गोपनीयता नीति",
+        "terms_suffix": "।"
+      },
+      "error_save": "पसंद सहेजने में विफल। चयन सहेजे गए — पुनः प्रयास करें।"
+    }
+  },
+  "discover": {
+    "filter_accessibility": "फ़िल्टर",
+    "filter_active_accessibility": "फ़िल्टर, {{count}} सक्रिय",
+    "empty_title": "इन फ़िल्टर से कोई किरदार नहीं मिला",
+    "empty_subtitle": "कुछ फ़िल्टर हटाने का प्रयास करें — जल्द ही नए किरदार भी दिखाई देंगे।",
+    "reset_filters": "फ़िल्टर रीसेट करें",
+    "card_accessibility": "{{name}}, {{age}} वर्ष। {{tagline}}। प्रोफ़ाइल खोलें",
+    "action_open_chat": "{{name}} के साथ चैट शुरू करें",
+    "action_like": "{{name}} को लाइक करें",
+    "sheet": {
+      "title": "फ़िल्टर",
+      "who_to_show": "किन्हें देखना है",
+      "age": "उम्र",
+      "ethnicity": "मूल / नस्ल",
+      "interests": "रुचियां",
+      "communication_style": "बातचीत की शैली",
+      "only_new_title": "केवल नए",
+      "only_new_subtitle": "उन किरदारों को छिपाएं जिनसे बातचीत पहले से जारी है",
+      "reset": "रीसेट करें",
+      "no_matches": "कोई मेल नहीं",
+      "show_results_one": "{{count}} किरदार दिखाएं",
+      "show_results_few": "{{count}} किरदार दिखाएं",
+      "show_results_many": "{{count}} किरदार दिखाएं",
+      "show_results_other": "{{count}} किरदार दिखाएं"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "सभी",
+        "women": "महिलाएं",
+        "men": "पुरुष",
+        "nonbinary": "नॉन-बाइनरी"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "खेलकूद",
+        "travel": "यात्रा",
+        "music": "संगीत",
+        "art": "कला",
+        "food": "खाना और कॉफ़ी",
+        "books": "किताबें और सिनेमा",
+        "nature": "प्रकृति"
+      },
+      "styles": {
+        "romantic": "रोमांटिक",
+        "playful": "मजाकिया",
+        "intellectual": "बुद्धिमान",
+        "caring": "देखभाल करने वाला"
+      },
+      "ethnicities": {
+        "european": "यूरोपीय",
+        "asian": "एशियाई",
+        "african": "अफ्रीकी",
+        "latin": "लैटिन अमेरिकी",
+        "middle_eastern": "मध्य पूर्वी",
+        "mixed": "मिश्रित"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "चैट्स",
+    "typing": "टाइप कर रहे हैं…",
+    "you_prefix": "आप: ",
+    "row_accessibility": "{{name}}। {{preview}}",
+    "unread_suffix": "। बिना पढ़े: {{count}}",
+    "dismiss_request_accessibility": "{{name}} का अनुरोध हटाएं",
+    "section_requests": "बातचीत के अनुरोध",
+    "show_all_requests": "सभी दिखाएँ",
+    "show_less_requests": "कम दिखाएँ",
+    "section_dialogs": "संदेश",
+    "empty_title": "यहाँ अभी शांति है",
+    "empty_subtitle": "अपनी पहली बातचीत के लिए एक किरदार चुनें।",
+    "to_dating_button": "डेटिंग एक्सप्लोर करें",
+    "system_messages": {
+      "ai_disclaimer": "यह एक काल्पनिक AI किरदार के साथ बातचीत है। उत्तरों में त्रुटियां हो सकती हैं।",
+      "liked_profile": "आपको प्रोफ़ाइल पसंद आई",
+      "reply_error_refunded": "उत्तर तैयार नहीं हो सका। ऊर्जा वापस कर दी गई।"
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1 चैट उत्तर की प्रतीक्षा में",
+      "other": "{{count}} चैट उत्तर की प्रतीक्षा में",
+      "row_accessibility": "{{label}}। चैट खोलें"
+    },
+    "back_accessibility": "चैट्स पर वापस",
+    "profile_accessibility": "प्रोफ़ाइल: {{name}}",
+    "typing": "टाइप कर रहे हैं…",
+    "send_suggestion_accessibility": "जवाब भेजें: {{reply}}",
+    "insufficient_energy_action": "संदेश भेजें",
+    "coming_soon_modal": {
+      "title": "जल्द आ रहा है",
+      "description": "फ़ोटो और वॉइस मैसेज भेजना आगामी संस्करणों में उपलब्ध होगा।",
+      "button": "ठीक है"
+    },
+    "composer": {
+      "attach_photo_accessibility": "फ़ोटो संलग्न करें",
+      "placeholder": "संदेश लिखें...",
+      "input_accessibility": "संदेश टेक्स्ट",
+      "send_accessibility": "भेजें",
+      "record_voice_accessibility": "वॉइस संदेश रिकॉर्ड करें"
+    },
+    "typing_indicator_accessibility": "किरदार टाइप कर रहा है"
+  },
+  "character": {
+    "missing_title": "किरदार अब उपलब्ध नहीं है",
+    "back_to_dating": "डेटिंग पर वापस जाएं",
+    "close_accessibility": "प्रोफ़ाइल बंद करें",
+    "in_story": "कहानी में: {{city}}",
+    "section_interests": "रुचियां",
+    "section_traits": "व्यक्तित्व",
+    "section_lifestyle": "जीवनशैली",
+    "about_ai_notice": "{{name}} एक काल्पनिक AI किरदार है। फ़ोटो, जीवनी और उत्तर कृत्रिम बुद्धिमत्ता द्वारा बनाए गए हैं।",
+    "continue_chat": "बातचीत जारी रखें",
+    "start_chat": "चैट शुरू करें"
+  },
+  "energy": {
+    "title": "ऊर्जा",
+    "chip_accessibility": "ऊर्जा: {{total}}। ऊर्जा स्टोर खोलें",
+    "subscription": "सब्सक्रिप्शन के साथ अधिक ऊर्जा",
+    "one_time": "एकमुश्त रीफ़िल",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "सर्वश्रेष्ठ मूल्य",
+      "price": "149 ₴",
+      "period": " / सप्ताह",
+      "feature_limit": "{{cap}} के बजाय 60 की सीमा",
+      "feature_speed": "दोगुनी तेजी से रीजेनरेशन · हर 6 मिनट में 1",
+      "subscribe_button": "सब्सक्राइब करें",
+      "footnote": "ऑटो-रिन्यू · कभी भी रद्द करें"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} ऊर्जा",
+      "badge_recommended": "अनुशंसित",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "या {{photos}} फ़ोटो",
+      "buy": "खरीदें",
+      "buy_accessibility": "{{amount}} ऊर्जा खरीदें। {{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "ऊर्जा समाप्त",
+      "close_accessibility": "बंद करें",
+      "subtitle": "चैट जारी रखने के लिए ऊर्जा रीफ़िल करें",
+      "regen_countdown": "{{time}} में +1",
+      "balance_status": "{{current}} / {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "सर्वश्रेष्ठ मूल्य",
+      "sub_price": "149 ₴",
+      "sub_period": " / सप्ताह",
+      "sub_feature_limit": "60 ऊर्जा सीमा",
+      "sub_feature_speed": "दोगुनी तेजी से रीजेनरेशन",
+      "sub_button": "सब्सक्राइब करें",
+      "divider_or": "या एकमुश्त रीफ़िल",
+      "word_energy": "ऊर्जा",
+      "badge_recommended": "अनुशंसित",
+      "not_now": "अभी नहीं"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "जल्द",
+      "benefit_cap": "{{cap}} के बजाय 60 ⚡ क्षमता",
+      "benefit_speed": "दोगुनी तेजी से रीजेनरेशन: हर 6 मिनट में 1 ⚡",
+      "benefit_prices": "संदेश और फ़ोटो उसी ऊर्जा लागत पर",
+      "footnote": "मूल्य, अवधि और रद्दीकरण शर्तें भुगतान से पहले दिखाई जाएंगी।"
+    },
+    "hero_card": {
+      "your_balance": "आपका बैलेंस",
+      "messages_equivalent_one": "≈ {{count}} संदेश",
+      "messages_equivalent_few": "≈ {{count}} संदेश",
+      "messages_equivalent_many": "≈ {{count}} संदेश",
+      "messages_equivalent_other": "≈ {{count}} संदेश",
+      "full_reserve": "मुफ्त रिज़र्व भरा हुआ है · {{cap}} ⚡",
+      "free_plus_one": "मुफ्त +1 ⚡",
+      "in_time": "{{time}} में",
+      "progress_accessibility": "अगली ऊर्जा इकाई की प्रगति"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — भुगतान जल्द आ रहा है",
+      "title": "भुगतान जल्द आ रहा है",
+      "description": "भुगतान अभी कनेक्ट नहीं है — यह एक प्रोटोटाइप है। भुगतान प्रदाता जुड़ने के बाद कीमतें दिखेंगी और आप खरीदारी से पहले उन्हें देख सकेंगे।",
+      "button": "समझ गया"
+    }
+  },
+  "profile": {
+    "header_title": "प्रोफ़ाइल",
+    "privacy_note": "यह निजी सेटिंग्स हैं। आपकी प्रोफ़ाइल वास्तविक लोगों को नहीं दिखाई जाती।",
+    "groups": {
+      "theme": "दिखावट थीम",
+      "app": "एप्लिकेशन",
+      "energy_and_purchases": "ऊर्जा और खरीदारी",
+      "help_and_rules": "सहायता और नियम",
+      "general": "सामान्य"
+    },
+    "theme_options": {
+      "system": "सिस्टम के अनुसार",
+      "light": "लाइट",
+      "dark": "डार्क"
+    },
+    "rows": {
+      "install_pwa": "होम स्क्रीन पर जोड़ें",
+      "balance_and_topup": "बैलेंस और रीफ़िल",
+      "about_ai": "AI किरदारों के बारे में",
+      "terms": "सेवा की शर्तें",
+      "privacy_policy": "गोपनीयता नीति",
+      "language": "भाषा"
+    },
+    "buttons": {
+      "logout": "लॉग आउट",
+      "reset_demo": "डेमो डेटा रीसेट करें"
+    },
+    "logout_modal": {
+      "title": "खाते से लॉग आउट करें?",
+      "description": "यह स्थानीय डेमो है। साइन आउट करने पर इस डिवाइस की बातचीत मिट जाएगी और बैलेंस रीसेट होगा।",
+      "confirm": "लॉग आउट",
+      "cancel": "रद्द करें"
+    },
+    "language_modal": {
+      "title": "भाषा चुनें",
+      "restart_notice": "इंटरफ़ेस की दिशा बदलने के लिए ऐप को तुरंत पुनः लोड करने की आवश्यकता है।",
+      "restart_button": "अभी पुनः लोड करें",
+      "cancel_button": "बाद में"
+    }
+  },
+  "pwa_install": {
+    "title": "होम स्क्रीन पर जोड़ें",
+    "benefits": {
+      "quick_launch": "होम स्क्रीन से त्वरित शुरुआत",
+      "standalone": "ब्राउज़र बार के बिना समर्पित विंडो",
+      "notifications": "समर्थित उपकरणों पर सूचनाएं"
+    },
+    "install_button": "इंस्टॉल करें",
+    "not_now_button": "अभी नहीं",
+    "ios_steps": {
+      "step_1": "Safari मेनू में «शेयर» पर टैप करें।",
+      "step_2": "«होम स्क्रीन पर जोड़ें» चुनें।",
+      "step_3": "«वेब ऐप के रूप में खोलें» सक्षम रखें और «जोड़ें» पर टैप करें।"
+    },
+    "in_app_steps": {
+      "step_1": "इस ऐप का मेनू (⋯) खोलें।",
+      "step_2": "«ब्राउज़र में खोलें» चुनें — Safari या Chrome।",
+      "step_3": "वहां Flirter को अपनी होम स्क्रीन पर जोड़ें।"
+    },
+    "default_steps": {
+      "step_1": "ब्राउज़र मेनू (⋮) खोलें।",
+      "step_2": "«ऐप इंस्टॉल करें» या «होम स्क्रीन पर जोड़ें» चुनें।"
+    }
+  },
+  "legal": {
+    "back_accessibility": "वापस",
+    "version_label": "संस्करण: {{version}}",
+    "not_found": "दस्तावेज़ नहीं मिला।",
+    "documents": {
+      "terms": {
+        "title": "सेवा की शर्तें",
+        "sections": {
+          "draft": {
+            "heading": "प्रारूप",
+            "body": "शर्तों का अंतिम पाठ कानूनी समीक्षा के बाद उपलब्ध कराया जाएगा। यह स्क्रीन दस्तावेज़ के लिए स्थान है।"
+          },
+          "nature": {
+            "heading": "सेवा की प्रकृति",
+            "body": "Flirter एक मनोरंजक डेटिंग सिम्युलेटर है। सभी प्रोफ़ाइल काल्पनिक AI किरदार हैं।"
+          },
+          "age": {
+            "heading": "आयु आवश्यकता",
+            "body": "यह सेवा केवल 18 वर्ष और उससे अधिक आयु के व्यक्तियों के लिए सख्ती से उपलब्ध है।"
+          }
+        }
+      },
+      "privacy": {
+        "title": "गोपनीयता नीति",
+        "sections": {
+          "draft": {
+            "heading": "प्रारूप",
+            "body": "गोपनीयता नीति का अंतिम पाठ कानूनी समीक्षा के बाद उपलब्ध कराया जाएगा।"
+          },
+          "data": {
+            "heading": "एकत्र किया गया डेटा",
+            "body": "ईमेल, जन्मतिथि, उपनाम, वैकल्पिक प्राथमिकताएं, बातचीत का इतिहास और खरीदारी।"
+          },
+          "rights": {
+            "heading": "आपके अधिकार",
+            "body": "आप अपने डेटा की प्रतिलिपि मांग सकते हैं, चैट इतिहास हटा सकते हैं या सेटिंग्स में खाता हटा सकते हैं।"
+          }
+        }
+      },
+      "ai": {
+        "title": "AI किरदारों के बारे में",
+        "sections": {
+          "real_people": {
+            "heading": "क्या ये असली लोग हैं?",
+            "body": "नहीं। सभी किरदार काल्पनिक हैं, और उनकी तस्वीरें, जीवनियां और संदेश AI या स्क्रिप्ट द्वारा बनाए गए हैं।"
+          },
+          "offline_meet": {
+            "heading": "क्या हम ऑफ़लाइन मिल सकते हैं?",
+            "body": "नहीं। किरदार वास्तविक दुनिया में मौजूद नहीं हैं; ऑफ़लाइन मुलाकातें असंभव हैं।"
+          },
+          "ai_mistakes": {
+            "heading": "क्या AI गलतियां कर सकता है?",
+            "body": "हाँ। उत्तर गलत या भ्रामक हो सकते हैं। इन्हें पेशेवर सलाह न समझें।"
+          }
+        }
+      }
+    }
+  }
+}

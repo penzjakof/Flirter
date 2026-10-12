@@ -1,3 +1,5 @@
+import i18n from '@/i18n';
+
 /** Генерує стабільний клієнтський ID (client_message_id з F04). */
 export function createClientId(prefix: string): string {
   const randomPart =
@@ -28,7 +30,7 @@ export function formatListTime(timestamp: number, now: number = Date.now()): str
 
   const yesterday = new Date(now);
   yesterday.setDate(today.getDate() - 1);
-  if (date.toDateString() === yesterday.toDateString()) return 'Вчора';
+  if (date.toDateString() === yesterday.toDateString()) return i18n.t('common.yesterday');
 
   return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`;
 }

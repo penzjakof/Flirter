@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router/js-tabs';
+import { useTranslation } from 'react-i18next';
 import type { ComponentProps } from 'react';
 import type { ColorValue } from 'react-native';
 
@@ -18,6 +19,7 @@ function tabIcon(active: IconName, inactive: IconName) {
 
 /** Нижня навігація: Знайомства / Чати / Профіль (03 §2) — плаваюча glass-«пігулка». Енергія — через chip у header. */
 export default function TabsLayout() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const unreadCount = useChatsStore(selectTotalUnread);
 
@@ -29,16 +31,16 @@ export default function TabsLayout() {
         headerShown: false,
         sceneStyle: { backgroundColor: colors.background },
       }}>
-      <Tabs.Screen name="index" options={{ title: 'Знайомства', tabBarIcon: tabIcon('flame', 'flame-outline') }} />
+      <Tabs.Screen name="index" options={{ title: t('tabs.dating'), tabBarIcon: tabIcon('flame', 'flame-outline') }} />
       <Tabs.Screen
         name="chats"
         options={{
-          title: 'Чати',
+          title: t('tabs.chats'),
           tabBarIcon: tabIcon('chatbubbles', 'chatbubbles-outline'),
           tabBarBadge: unreadCount > 0 ? unreadCount : undefined,
         }}
       />
-      <Tabs.Screen name="profile" options={{ title: 'Профіль', tabBarIcon: tabIcon('person', 'person-outline') }} />
+      <Tabs.Screen name="profile" options={{ title: t('tabs.profile'), tabBarIcon: tabIcon('person', 'person-outline') }} />
     </Tabs>
   );
 }

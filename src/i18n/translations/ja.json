@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "back": "戻る",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "continue": "続ける",
+    "save": "保存",
+    "confirm": "確認",
+    "done": "完了",
+    "understood": "了解",
+    "ok": "OK",
+    "start": "はじめる",
+    "login": "ログイン",
+    "install": "インストール",
+    "not_now": "後で",
+    "reset": "リセット",
+    "retry": "再試行",
+    "back_to_home": "ホームに戻る",
+    "back_to_dating": "マッチングに戻る",
+    "age_badge": "18+",
+    "coming_soon": "近日公開",
+    "yesterday": "昨日",
+    "session_restoring": "セッションを復元中",
+    "terms": "利用規約",
+    "terms_full": "利用規約",
+    "privacy": "プライバシー",
+    "privacy_full": "プライバシーポリシー",
+    "about_ai": "AIについて",
+    "about_ai_full": "AIキャラクターについて",
+    "seconds_short": "{{count}}秒",
+    "minutes_short": "{{count}}分",
+    "hours_short": "{{count}}時間",
+    "demo_notice": "デモモード：ログインと返信は端末内で動作します。メールは送信されません。決済・写真・音声はまだ利用できません。"
+  },
+  "tabs": {
+    "dating": "マッチング",
+    "discover": "探す",
+    "chats": "チャット",
+    "profile": "マイページ",
+    "unread_badge_accessibility": "{{label}}、新着{{count}}件"
+  },
+  "not_found": {
+    "title": "ページが見つかりません",
+    "description": "このリンクは期限切れか、存在しない可能性があります。",
+    "button": "ホームに戻る"
+  },
+  "html_meta": {
+    "description": "Flirter — 架空のAIキャラクターとのマッチングシミュレーター。18歳以上対象。",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "ステップ {{step}} / {{total}}"
+    },
+    "welcome": {
+      "hero_title": "会話から始まるあなたのストーリー",
+      "hero_subtitle": "架空のAIキャラクターと出会い、自分のペースで会話を楽しみましょう。",
+      "start_button": "はじめる",
+      "login_button": "ログイン"
+    },
+    "age": {
+      "title": "年齢確認（18歳以上限定）",
+      "subtitle": "生年月日を入力してください。キャラクターや他の人には公開されません。",
+      "day_label": "日",
+      "day_placeholder": "DD",
+      "month_label": "月",
+      "month_placeholder": "MM",
+      "year_label": "年",
+      "year_placeholder": "YYYY",
+      "accessibility_label": "生年月日",
+      "privacy_note_prefix": "18歳以上であることを確認するために生年月日が必要です。詳細は",
+      "privacy_policy_link": "プライバシーポリシー",
+      "privacy_note_suffix": "をご確認ください。",
+      "errors": {
+        "incomplete": "生年月日（日・月・年）をすべて入力してください。",
+        "invalid": "存在しない日付です。日と月を確認してください。",
+        "future": "未来の日付は指定できません。",
+        "unrealistic": "生年を確認してください。"
+      },
+      "underage": {
+        "title": "ご利用いただけません",
+        "subtitle": "Flirterは18歳以上の方のみご利用いただけます。ご理解のほどよろしくお願いいたします。",
+        "terms_button": "利用規約"
+      }
+    },
+    "sign_in": {
+      "signup_title": "アカウント作成",
+      "login_title": "おかえりなさい！",
+      "signup_subtitle": "アカウントを作成すると、チャット履歴とエネルギーが別端末でも保持されます。パスワード不要 — 認証コードを送信します。",
+      "login_subtitle": "登録済みのメールアドレスを入力してください。ワンタイムコードを送信します。",
+      "get_code_button": "コードを取得",
+      "email_label": "メールアドレス",
+      "email_placeholder": "you@example.com",
+      "legal_prefix": "続行することで、",
+      "terms_link": "利用規約",
+      "and": "および",
+      "privacy_link": "プライバシーポリシー",
+      "legal_suffix": "をご確認いただけます。次の画面で明示的な同意が必要です。",
+      "errors": {
+        "invalid_email": "メールアドレスをご確認ください。形式が正しくありません。",
+        "network_error": "コードの送信に失敗しました。接続を確認して再試行してください。"
+      }
+    },
+    "verify": {
+      "title": "メールの認証コードを入力",
+      "subtitle": "{{email}} に {{count}} 桁のコードを送信しました。",
+      "fallback_email": "ご登録のメールアドレス",
+      "confirm_button": "確認",
+      "resend_code": "コードを再送信",
+      "resend_code_cooldown": "{{seconds}}秒後に再送信できます",
+      "code_label": "認証コード",
+      "change_email": "メールアドレスを変更",
+      "demo_note": "デモモード：任意の {{count}} 桁のコードでログインできます。",
+      "errors": {
+        "invalid_code": "コードが無効または期限切れです。再入力するか、新しく取得してください。",
+        "network_error": "接続がありません。コードは保持されています — 再試行してください。"
+      }
+    },
+    "profile_setup": {
+      "title": "お名前を教えてください",
+      "subtitle": "キャラクターはこの名前であなたを呼びます。本名でなくても構いません。",
+      "continue_button": "続ける",
+      "skip_button": "スキップ",
+      "nickname_label": "ニックネーム",
+      "nickname_helper": "マイページでいつでも変更できます。",
+      "nickname_error": "{{min}}〜{{max}}文字で入力してください。",
+      "gender_label": "あなたの性別（任意）",
+      "preference_label": "表示したい相手（任意）",
+      "genders": {
+        "male": "男性",
+        "female": "女性",
+        "other": "その他"
+      },
+      "preferences": {
+        "women": "女性",
+        "men": "男性",
+        "everyone": "全員"
+      }
+    },
+    "disclosure": {
+      "title": "本サービスはAIマッチングシミュレーターです",
+      "submit_button": "マッチングをはじめる",
+      "facts": {
+        "profiles": "すべてのプロフィールは架空のキャラクターです。",
+        "ai_content": "写真、プロフィール文、返信内容はAIまたはスクリプトにより生成されています。",
+        "no_real_people": "実際の人間との出会いを提供するものではありません。",
+        "no_offline": "現実での対面やオフラインでの出会いはできません。"
+      },
+      "consents": {
+        "ai_label": "架空のAIキャラクターと会話することを理解しました",
+        "ai_text": "実際の人間ではなく、架空のAIキャラクターと会話することを理解しました。",
+        "terms_label": "利用規約に同意し、プライバシーポリシーを確認しました",
+        "terms_prefix": "私は",
+        "terms_link": "利用規約",
+        "and": "に同意し、",
+        "privacy_link": "プライバシーポリシー",
+        "terms_suffix": "を確認しました。"
+      },
+      "error_save": "設定の保存に失敗しました。選択状態は保持されています — 再試行してください。"
+    }
+  },
+  "discover": {
+    "filter_accessibility": "フィルター",
+    "filter_active_accessibility": "フィルター、適用中 {{count}} 件",
+    "empty_title": "条件に一致するキャラクターがいません",
+    "empty_subtitle": "フィルター条件を緩和してみてください — 新しいキャラクターも随時登場します。",
+    "reset_filters": "フィルターをリセット",
+    "card_accessibility": "{{name}}、{{age}}歳。{{tagline}}。プロフィールを開く",
+    "action_open_chat": "{{name}} とチャットを開始",
+    "action_like": "{{name}} にいいね",
+    "sheet": {
+      "title": "フィルター",
+      "who_to_show": "表示したい相手",
+      "age": "年齢",
+      "ethnicity": "ルーツ",
+      "interests": "興味・関心",
+      "communication_style": "会話のタイプ",
+      "only_new_title": "新着のみ",
+      "only_new_subtitle": "すでにチャットしたキャラクターを非表示にする",
+      "reset": "リセット",
+      "no_matches": "該当なし",
+      "show_results_one": "{{count}}人のキャラクターを表示",
+      "show_results_few": "{{count}}人のキャラクターを表示",
+      "show_results_many": "{{count}}人のキャラクターを表示",
+      "show_results_other": "{{count}}人のキャラクターを表示"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "全員",
+        "women": "女性",
+        "men": "男性",
+        "nonbinary": "ノンバイナリー"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "スポーツ",
+        "travel": "旅行",
+        "music": "音楽",
+        "art": "アート",
+        "food": "グルメ・カフェ",
+        "books": "読書・映画",
+        "nature": "自然・アウトドア"
+      },
+      "styles": {
+        "romantic": "ロマンチック",
+        "playful": "遊び心",
+        "intellectual": "知的",
+        "caring": "優しい・思いやり"
+      },
+      "ethnicities": {
+        "european": "ヨーロッパ",
+        "asian": "アジア",
+        "african": "アフリカ",
+        "latin": "ラテンアメリカ",
+        "middle_eastern": "中東",
+        "mixed": "ミックス"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "チャット",
+    "typing": "入力中…",
+    "you_prefix": "あなた: ",
+    "row_accessibility": "{{name}}。{{preview}}",
+    "unread_suffix": "。未読: {{count}}",
+    "dismiss_request_accessibility": "{{name}} からのリクエストを非表示",
+    "section_requests": "メッセージリクエスト",
+    "show_all_requests": "すべて表示",
+    "show_less_requests": "折りたたむ",
+    "section_dialogs": "メッセージ",
+    "empty_title": "メッセージはまだありません",
+    "empty_subtitle": "気になるキャラクターを選んで最初の会話を始めましょう。",
+    "to_dating_button": "キャラクターを探す",
+    "system_messages": {
+      "ai_disclaimer": "架空のAIキャラクターとの会話です。回答に不正確な情報が含まれる場合があります。",
+      "liked_profile": "プロフィールにいいねしました",
+      "reply_error_refunded": "返信の作成に失敗しました。エネルギーが返金されました。"
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1件のチャットが返信待ちです",
+      "other": "{{count}}件のチャットが返信待ちです",
+      "row_accessibility": "{{label}}。チャットを開く"
+    },
+    "back_accessibility": "チャット一覧に戻る",
+    "profile_accessibility": "プロフィール: {{name}}",
+    "typing": "入力中…",
+    "send_suggestion_accessibility": "返信を送信：{{reply}}",
+    "insufficient_energy_action": "メッセージを送信",
+    "coming_soon_modal": {
+      "title": "近日公開",
+      "description": "写真や音声メッセージの送信は今後のアップデートで利用可能になります。",
+      "button": "OK"
+    },
+    "composer": {
+      "attach_photo_accessibility": "写真を添付",
+      "placeholder": "メッセージ",
+      "input_accessibility": "メッセージ入力欄",
+      "send_accessibility": "送信",
+      "record_voice_accessibility": "音声メッセージを録音"
+    },
+    "typing_indicator_accessibility": "キャラクターが入力中"
+  },
+  "character": {
+    "missing_title": "このキャラクターは現在利用できません",
+    "back_to_dating": "マッチングに戻る",
+    "close_accessibility": "プロフィールを閉じる",
+    "in_story": "ストーリー設定: {{city}}",
+    "section_interests": "興味・関心",
+    "section_traits": "性格・特徴",
+    "section_lifestyle": "ライフスタイル",
+    "about_ai_notice": "{{name}} は架空のAIキャラクターです。写真、プロフィール、返信内容は人工知能によって生成されています。",
+    "continue_chat": "会話を続ける",
+    "start_chat": "チャットをはじめる"
+  },
+  "energy": {
+    "title": "エネルギー",
+    "chip_accessibility": "エネルギー: {{total}}。ショップを開く",
+    "subscription": "サブスクリプションでもっとお得に",
+    "one_time": "都度チャージ",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "一番人気",
+      "price": "149 ₴",
+      "period": " / 週",
+      "feature_limit": "上限が {{cap}} から 60 に増加",
+      "feature_speed": "回復スピード2倍 · 6分ごとに1回復",
+      "subscribe_button": "登録する",
+      "footnote": "自動更新 · いつでもキャンセル可能"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} エネルギー",
+      "badge_recommended": "おすすめ",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "または写真{{photos}}枚",
+      "buy": "購入",
+      "buy_accessibility": "{{amount}} エネルギーを購入。{{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "エネルギー不足",
+      "close_accessibility": "閉じる",
+      "subtitle": "チャットを続けるにはエネルギーをチャージしてください",
+      "regen_countdown": "+1 まで {{time}}",
+      "balance_status": "{{current}} / {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "一番人気",
+      "sub_price": "149 ₴",
+      "sub_period": " / 週",
+      "sub_feature_limit": "エネルギー上限 60",
+      "sub_feature_speed": "回復スピード2倍",
+      "sub_button": "登録する",
+      "divider_or": "または都度購入",
+      "word_energy": "エネルギー",
+      "badge_recommended": "おすすめ",
+      "not_now": "後で"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "近日登場",
+      "benefit_cap": "最大容量 60 ⚡（通常 {{cap}} ⚡）",
+      "benefit_speed": "回復速度2倍：6分ごとに 1 ⚡",
+      "benefit_prices": "メッセージと写真の消費エネルギーは同じ",
+      "footnote": "価格、期間、解約条件はお支払い前に表示されます。"
+    },
+    "hero_card": {
+      "your_balance": "現在の残高",
+      "messages_equivalent_one": "≈ {{count}} 通のメッセージ",
+      "messages_equivalent_few": "≈ {{count}} 通のメッセージ",
+      "messages_equivalent_many": "≈ {{count}} 通のメッセージ",
+      "messages_equivalent_other": "≈ {{count}} 通のメッセージ",
+      "full_reserve": "無料分は満タンです · {{cap}} ⚡",
+      "free_plus_one": "無料回復 +1 ⚡",
+      "in_time": "残り {{time}}",
+      "progress_accessibility": "次のエネルギー回復までの進行状況"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — 決済機能は近日公開",
+      "title": "決済機能は近日公開",
+      "description": "決済システムはまだ接続されていません（プロトタイプ）。決済機能の統合後に価格が表示され、購入確認前に確認できます。",
+      "button": "了解"
+    }
+  },
+  "profile": {
+    "header_title": "マイページ",
+    "privacy_note": "個人設定です。プロフィールが実際の他人に公開されることはありません。",
+    "groups": {
+      "theme": "外観テーマ",
+      "app": "アプリ",
+      "energy_and_purchases": "エネルギー・購入",
+      "help_and_rules": "ヘルプ・規約",
+      "general": "一般"
+    },
+    "theme_options": {
+      "system": "端末の設定",
+      "light": "ライト",
+      "dark": "ダーク"
+    },
+    "rows": {
+      "install_pwa": "ホーム画面に追加",
+      "balance_and_topup": "残高・チャージ",
+      "about_ai": "AIキャラクターについて",
+      "terms": "利用規約",
+      "privacy_policy": "プライバシーポリシー",
+      "language": "言語"
+    },
+    "buttons": {
+      "logout": "ログアウト",
+      "reset_demo": "デモデータをリセット"
+    },
+    "logout_modal": {
+      "title": "ログアウトしますか？",
+      "description": "ローカルデモです。ログアウトすると、この端末の会話と残高がリセットされます。",
+      "confirm": "ログアウト",
+      "cancel": "キャンセル"
+    },
+    "language_modal": {
+      "title": "言語を選択",
+      "restart_notice": "画面のレイアウト方向を切り替えるため、アプリの再読み込みが必要です。",
+      "restart_button": "今すぐ再読み込み",
+      "cancel_button": "後で"
+    }
+  },
+  "pwa_install": {
+    "title": "ホーム画面に追加",
+    "benefits": {
+      "quick_launch": "ホーム画面からすばやく起動",
+      "standalone": "ブラウザのバーがない専用ウィンドウ",
+      "notifications": "対応デバイスでの通知機能"
+    },
+    "install_button": "インストール",
+    "not_now_button": "後で",
+    "ios_steps": {
+      "step_1": "Safariのメニューで「共有」をタップします。",
+      "step_2": "「ホーム画面に追加」を選択します。",
+      "step_3": "「Webアプリとして開く」を有効にしたまま「追加」をタップします。"
+    },
+    "in_app_steps": {
+      "step_1": "アプリ内のメニュー（⋯）を開きます。",
+      "step_2": "「ブラウザで開く」（SafariまたはChrome）を選択します。",
+      "step_3": "ブラウザでFlirterをホーム画面に追加します。"
+    },
+    "default_steps": {
+      "step_1": "ブラウザメニュー（⋮）を開きます。",
+      "step_2": "「アプリをインストール」または「ホーム画面に追加」を選択します。"
+    }
+  },
+  "legal": {
+    "back_accessibility": "戻る",
+    "version_label": "バージョン: {{version}}",
+    "not_found": "ドキュメントが見つかりません。",
+    "documents": {
+      "terms": {
+        "title": "利用規約",
+        "sections": {
+          "draft": {
+            "heading": "ドラフト版",
+            "body": "利用規約の最終文面は法的確認後に提供されます。この画面はプレースホルダーとして機能します。"
+          },
+          "nature": {
+            "heading": "サービスの性質",
+            "body": "Flirterはエンターテインメント用のマッチングシミュレーターです。すべてのプロフィールは架空のAIキャラクターです。"
+          },
+          "age": {
+            "heading": "年齢制限",
+            "body": "本サービスは18歳以上の方のみが厳格にご利用いただけます。"
+          }
+        }
+      },
+      "privacy": {
+        "title": "プライバシーポリシー",
+        "sections": {
+          "draft": {
+            "heading": "ドラフト版",
+            "body": "プライバシーポリシーの最終文面は法的確認後に提供されます。"
+          },
+          "data": {
+            "heading": "取得する情報",
+            "body": "メールアドレス、生年月日、ニックネーム、任意の希望条件、チャット履歴、購入履歴。"
+          },
+          "rights": {
+            "heading": "お客様の権利",
+            "body": "データの開示請求、チャット履歴の削除、または設定画面でのアカウント削除が可能です。"
+          }
+        }
+      },
+      "ai": {
+        "title": "AIキャラクターについて",
+        "sections": {
+          "real_people": {
+            "heading": "実際の人間ですか？",
+            "body": "いいえ。すべてのキャラクターは架空の存在であり、写真、プロフィール、メッセージはAIまたはスクリプトによって生成されています。"
+          },
+          "offline_meet": {
+            "heading": "実際に会うことはできますか？",
+            "body": "いいえ。キャラクターは現実世界には存在せず、オフラインで会うことはできません。"
+          },
+          "ai_mistakes": {
+            "heading": "AIが間違えることはありますか？",
+            "body": "はい。回答に誤りが含まれる場合があります。専門的な助言として扱わないでください。"
+          }
+        }
+      }
+    }
+  }
+}

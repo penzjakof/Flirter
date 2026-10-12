@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Platform,
   Pressable,
@@ -10,14 +11,15 @@ import {
   type TextInputContentSizeChangeEventData,
   type TextInputKeyPressEventData,
 } from 'react-native';
-import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { GlassSurface } from '@/components/ui/glass-surface';
+import { useKeyboardVisible } from '@/hooks/use-web-viewport';
 import { MESSAGE_MAX_LENGTH } from '@/store/chats-store';
 import { colors, radius, sizes, spacing, typography } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
-/** Висота всіх трьох елементів в одному рядку — як у Telegram. */
+/** Shared touch target for the input and send control. */
 const CONTROL_SIZE = sizes.tapTarget;
 const LINE_HEIGHT = typography.body.lineHeight;
 const MAX_VISIBLE_LINES = 4;
@@ -41,56 +43,19 @@ interface ComposerProps {
   value: string;
   onChangeText: (value: string) => void;
   onSend: () => void;
-  onAttachPhoto: () => void;
-  onRecordVoice: () => void;
   isBusy: boolean;
 }
 
-interface GlassRoundButtonProps {
-  icon: keyof typeof Ionicons.glyphMap;
-  onPress: () => void;
-  accessibilityLabel: string;
-  testID: string;
-}
-
-const SPRING_CONFIG = { damping: 15, stiffness: 300, mass: 0.8 };
-
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-/** Кругла скляна кнопка composer’а (прикріплення / голосове). */
-function GlassRoundButton({ icon, onPress, accessibilityLabel, testID }: GlassRoundButtonProps) {
-  const { colors } = useTheme();
-  const scale = useSharedValue(1);
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.get() }],
-  }));
-
-  return (
-    <Animated.View style={[styles.roundSurface, animatedStyle]}>
-      <GlassSurface style={[StyleSheet.absoluteFill, { borderRadius: radius.pill }]}>
-        <Pressable
-          testID={testID}
-          onPress={onPress}
-          onPressIn={() => scale.set(withSpring(1.15, SPRING_CONFIG))}
-          onPressOut={() => scale.set(withSpring(1, SPRING_CONFIG))}
-          accessibilityRole="button"
-          accessibilityLabel={accessibilityLabel}
-          style={({ pressed }) => [styles.roundPressable, pressed && styles.pressed]}>
-          <Ionicons name={icon} size={sizes.icon + 2} color={colors.textSecondary} />
-        </Pressable>
-      </GlassSurface>
-    </Animated.View>
-  );
-}
-
 /**
- * Composer (S13) у стилі Liquid Glass: три окремі плаваючі елементи однієї висоти —
- * кнопка фото, поле-«пігулка», кнопка голосового (з текстом замінюється на стрілку надсилання).
+ * Composer (S13) у стилі Liquid Glass:
+ * поле-«пігулка» та кнопка надсилання. Медіа-дії з’являться після інтеграції сервера.
  * Поле росте до 4 рядків, кнопки лишаються притиснутими донизу.
  */
-export function Composer({ value, onChangeText, onSend, onAttachPhoto, onRecordVoice, isBusy }: ComposerProps) {
+export function Composer({ value, onChangeText, onSend, isBusy }: ComposerProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+  const keyboardVisible = useKeyboardVisible();
   const [textHeight, setTextHeight] = useState<number>(LINE_HEIGHT);
   const hasText = value.trim().length > 0;
   const canSend = hasText && !isBusy;
@@ -113,42 +78,36 @@ export function Composer({ value, onChangeText, onSend, onAttachPhoto, onRecordV
   const effectiveTextHeight = value.length === 0 ? LINE_HEIGHT : textHeight;
 
   return (
-    <View style={[styles.container, { paddingBottom: Math.max(insets.bottom, spacing.sm) }]}>
-      <GlassRoundButton icon="attach" onPress={onAttachPhoto} accessibilityLabel="Прикріпити фото" testID="chat-attach" />
-
-      <GlassSurface style={styles.inputSurface}>
+    <View testID="chat-composer" style={[styles.container, { paddingBottom: Math.max(keyboardVisible ? 0 : insets.bottom, spacing.sm) }]}>
+      <GlassSurface testID="chat-input-surface" style={styles.inputSurface}>
         <TextInput
           testID="chat-input"
           value={value}
           onChangeText={onChangeText}
           onContentSizeChange={handleContentSizeChange}
-          placeholder="Повідомлення"
+          placeholder={t('chat.composer.placeholder')}
           placeholderTextColor={colors.textSecondary}
           multiline
           // Web: textarea за замовчуванням має 2 рядки — фіксуємо один (висоту далі веде onContentSizeChange).
           {...WEB_SINGLE_ROW_PROPS}
           maxLength={MESSAGE_MAX_LENGTH}
           onKeyPress={handleKeyPress}
-          accessibilityLabel="Текст повідомлення"
+          accessibilityLabel={t('chat.composer.input_accessibility')}
           style={[styles.input, { height: effectiveTextHeight, color: colors.textPrimary }]}
           submitBehavior="newline"
         />
       </GlassSurface>
 
-      {hasText ? (
-        <Pressable
+      <Pressable
           testID="chat-send"
           onPress={onSend}
           disabled={!canSend}
           accessibilityRole="button"
-          accessibilityLabel="Надіслати"
+          accessibilityLabel={t('chat.composer.send_accessibility')}
           accessibilityState={{ disabled: !canSend }}
           style={({ pressed }) => [styles.sendButton, { backgroundColor: pressed ? colors.brandPressed : colors.brand }, !canSend && styles.sendDisabled]}>
           <Ionicons name="arrow-up" size={sizes.icon} color={colors.textOnBrand} />
-        </Pressable>
-      ) : (
-        <GlassRoundButton icon="mic-outline" onPress={onRecordVoice} accessibilityLabel="Записати голосове повідомлення" testID="chat-voice" />
-      )}
+      </Pressable>
     </View>
   );
 }
@@ -161,19 +120,6 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
     paddingHorizontal: spacing.md,
     paddingTop: spacing.xs,
-  },
-  roundSurface: {
-    width: CONTROL_SIZE,
-    height: CONTROL_SIZE,
-    borderRadius: radius.pill,
-  },
-  roundPressable: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  pressed: {
-    opacity: 0.6,
   },
   inputSurface: {
     flex: 1,
@@ -201,8 +147,5 @@ const styles = StyleSheet.create({
   },
   sendDisabled: {
     opacity: 0.4,
-  },
-  sendPressed: {
-    backgroundColor: colors.brandPressed,
   },
 });

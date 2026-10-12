@@ -1,11 +1,14 @@
 import type { BottomTabBarProps } from 'expo-router/js-tabs';
 import { useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View, type LayoutChangeEvent } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withSequence, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppText } from '@/components/ui/app-text';
 import { GlassSurface } from '@/components/ui/glass-surface';
+import { useLanguageStore } from '@/store/language-store';
+import { useMotionPreferences } from '@/hooks/use-motion-preferences';
 import { radius, shadows, sizes, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
@@ -34,7 +37,10 @@ export function useFloatingTabBarInset(): number {
  * активна вкладка підсвічена «лінзою», що плавно переїжджає між пунктами.
  */
 export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
+  const { reduceMotion } = useMotionPreferences();
+  const isRTL = useLanguageStore((s) => s.isRTL);
   const bottomOffset = useBottomOffset();
   const [rowWidth, setRowWidth] = useState(0);
   const itemWidth = state.routes.length > 0 ? rowWidth / state.routes.length : 0;
@@ -46,15 +52,17 @@ export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProp
   const prevIndex = useRef(state.index);
 
   useEffect(() => {
-    translateX.set(withSpring(state.index * itemWidth, HIGHLIGHT_SPRING));
+    const targetIndex = isRTL ? state.routes.length - 1 - state.index : state.index;
+    translateX.set(reduceMotion ? targetIndex * itemWidth : withSpring(targetIndex * itemWidth, HIGHLIGHT_SPRING));
     
     // Анімація стиснення (squish) без деформації закруглень (border-radius)
-    if (prevIndex.current !== state.index && itemWidth > 0) {
+    if (!reduceMotion && prevIndex.current !== state.index && itemWidth > 0) {
       squishX.set(withSequence(withTiming(16, { duration: 150 }), withSpring(0, HIGHLIGHT_SPRING)));
       stretchY.set(withSequence(withTiming(-8, { duration: 150 }), withSpring(0, HIGHLIGHT_SPRING)));
     }
     prevIndex.current = state.index;
-  }, [state.index, itemWidth, translateX, squishX, stretchY]);
+    if (reduceMotion) { squishX.set(0); stretchY.set(0); }
+  }, [state.index, state.routes.length, itemWidth, translateX, squishX, stretchY, isRTL, reduceMotion]);
 
   const highlightStyle = useAnimatedStyle(() => ({ 
     transform: [{ translateX: translateX.get() }],
@@ -68,7 +76,7 @@ export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProp
 
   return (
     <View style={[styles.wrapper, styles.pill, { bottom: bottomOffset }]}>
-      <GlassSurface style={[StyleSheet.absoluteFill, { borderRadius: radius.pill }]} />
+      <GlassSurface testID="tab-glass" style={[StyleSheet.absoluteFill, { borderRadius: radius.pill }]} />
       <View style={styles.row} onLayout={handleRowLayout} accessibilityRole="tablist">
         {itemWidth > 0 && (
           <Animated.View
@@ -83,7 +91,7 @@ export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProp
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const isFocused = state.index === index;
-          const color = isFocused ? colors.brand : colors.tabBarInactive;
+          const color = isFocused ? colors.brandText : colors.tabBarInactive;
           const label = options.title ?? route.name;
           const badge = options.tabBarBadge;
 
@@ -100,14 +108,19 @@ export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProp
                 onLongPress={() => navigation.emit({ type: 'tabLongPress', target: route.key })}
                 accessibilityRole="tab"
                 accessibilityState={{ selected: isFocused }}
-                accessibilityLabel={badge !== undefined ? `${label}, нових: ${badge}` : label}
+                aria-selected={isFocused}
+                accessibilityLabel={
+                  badge !== undefined
+                    ? t('tabs.unread_badge_accessibility', { label, count: badge })
+                    : label
+                }
                 style={styles.item}>
                 <View>
                   {options.tabBarIcon?.({ focused: isFocused, color, size: ICON_SIZE })}
                   {badge !== undefined && (
                     <View style={[styles.badge, { backgroundColor: colors.brand, borderColor: colors.surface }]}>
                       <AppText variant="caption" color="textOnBrand" style={styles.badgeText}>
-                        {badge}
+                  {typeof badge === 'number' && badge > 99 ? '99+' : badge}
                       </AppText>
                     </View>
                   )}

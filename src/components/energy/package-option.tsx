@@ -1,15 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
+import type { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
 import type { EnergyPackage } from '@/data/energy-packages';
-import { pluralizeUk } from '@/lib/format';
 import { ENERGY_CONFIG } from '@/store/energy-store';
 import { radius, sizes, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 const ICON_BOX = 44;
-const MESSAGE_FORMS = ['повідомлення', 'повідомлення', 'повідомлень'] as const;
 
 interface PackageOptionProps {
   pack: EnergyPackage;
@@ -17,10 +17,13 @@ interface PackageOptionProps {
 }
 
 /** Пояснює цінність пакета в «живих» одиницях замість абстрактних ⚡. */
-function describeValue(amount: number): string {
+function describeValue(amount: number, t: TFunction): string {
   const messages = Math.floor(amount / ENERGY_CONFIG.costs.textMessage);
   const photos = Math.floor(amount / ENERGY_CONFIG.costs.aiPhoto);
-  return `≈ ${messages} ${pluralizeUk(messages, MESSAGE_FORMS)} або ${photos} фото`;
+  const messagesCountKey = messages === 1 ? 'messages_equivalent_one' : 'messages_equivalent_other';
+  const messagesText = t(`energy.hero_card.${messagesCountKey}` as any, { count: messages });
+  const orPhotosText = t('energy.packages.or_photos', { photos });
+  return `${messagesText} ${orPhotosText}`;
 }
 
 /**
@@ -28,15 +31,20 @@ function describeValue(amount: number): string {
  * (без проміжного вибору й окремої CTA). Рекомендований пакет підсвічений брендом.
  */
 export function PackageOption({ pack, onPurchase }: PackageOptionProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const isRecommended = Boolean(pack.isRecommended);
+  const valueDescription = describeValue(pack.amount, t);
 
   return (
     <Pressable
       testID={`energy-package-${pack.id}`}
       onPress={() => onPurchase(pack)}
       accessibilityRole="button"
-      accessibilityLabel={`Купити ${pack.amount} енергії. ${describeValue(pack.amount)}${isRecommended ? '. Рекомендуємо' : ''}`}
+      accessibilityLabel={t('energy.packages.buy_accessibility', {
+        amount: pack.amount,
+        description: `${valueDescription}${isRecommended ? `. ${t('energy.packages.badge_recommended')}` : ''}`,
+      })}
       style={({ pressed }) => [
         styles.card,
         {
@@ -59,13 +67,13 @@ export function PackageOption({ pack, onPurchase }: PackageOptionProps) {
           {isRecommended && (
             <View style={[styles.badge, { backgroundColor: colors.brand }]}>
               <AppText variant="caption" color="textOnBrand">
-                Рекомендуємо
+                {t('energy.packages.badge_recommended')}
               </AppText>
             </View>
           )}
         </View>
         <AppText variant="secondary" color="textSecondary">
-          {describeValue(pack.amount)}
+          {valueDescription}
         </AppText>
       </View>
 
@@ -75,7 +83,7 @@ export function PackageOption({ pack, onPurchase }: PackageOptionProps) {
           { backgroundColor: isRecommended ? colors.brand : colors.brandSubtle },
         ]}>
         <AppText variant="secondary" color={isRecommended ? 'textOnBrand' : 'brand'} style={styles.buyText}>
-          Купити
+          {t('energy.packages.buy')}
         </AppText>
       </View>
     </Pressable>

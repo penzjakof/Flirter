@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -7,6 +8,7 @@ import { AppText } from '@/components/ui/app-text';
 import { IconButton } from '@/components/ui/icon-button';
 import { colors, radius, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
+import { useScrollKeyboardDismiss } from '@/hooks/use-scroll-keyboard-dismiss';
 
 const TOTAL_STEPS = 5;
 
@@ -22,7 +24,9 @@ interface OnboardingLayoutProps {
 }
 
 export function OnboardingLayout({ stepNumber, title, subtitle, children, footer, onBack }: OnboardingLayoutProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
+  const scrollKeyboardDismiss = useScrollKeyboardDismiss();
   const handleBack = onBack ?? (() => (router.canGoBack() ? router.back() : router.replace('/welcome')));
   const progress = Math.min(1, stepNumber / TOTAL_STEPS);
 
@@ -30,18 +34,24 @@ export function OnboardingLayout({ stepNumber, title, subtitle, children, footer
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'bottom']}>
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.topBar}>
-          <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel="Назад" />
+          <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel={t('common.back')} />
           <View
             style={[styles.progressTrack, { backgroundColor: colors.border }]}
             accessibilityRole="progressbar"
-            accessibilityLabel={`Крок ${stepNumber} з ${TOTAL_STEPS}`}
-            accessibilityValue={{ min: 0, max: TOTAL_STEPS, now: stepNumber }}>
+            accessibilityLabel={t('onboarding.layout.step_progress', { step: stepNumber, total: TOTAL_STEPS })}
+            accessibilityValue={{ min: 0, max: TOTAL_STEPS, now: stepNumber }}
+            aria-valuemin={0} aria-valuemax={TOTAL_STEPS} aria-valuenow={stepNumber}>
             <View style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: colors.brand }]} />
           </View>
           <View style={styles.topBarSpacer} />
         </View>
 
-        <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+        <ScrollView
+          {...scrollKeyboardDismiss}
+          style={styles.scrollView}
+          contentContainerStyle={styles.content}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode={Platform.OS === 'web' ? 'none' : Platform.OS === 'ios' ? 'interactive' : 'on-drag'}>
           <View style={styles.heading}>
             <AppText variant="title" accessibilityRole="header">
               {title}
@@ -53,9 +63,8 @@ export function OnboardingLayout({ stepNumber, title, subtitle, children, footer
             )}
           </View>
           {children}
+          <View style={styles.footer}>{footer}</View>
         </ScrollView>
-
-        <View style={styles.footer}>{footer}</View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -67,6 +76,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   flex: {
+    flex: 1,
+  },
+  scrollView: {
     flex: 1,
   },
   topBar: {

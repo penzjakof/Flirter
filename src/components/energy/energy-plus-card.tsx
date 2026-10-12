@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
@@ -8,30 +9,35 @@ import { radius, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 interface EnergyPlusCardProps {
-  onSubscribe: () => void;
+  onSubscribe?: () => void;
 }
 
 export function EnergyPlusCard({ onSubscribe }: EnergyPlusCardProps) {
+  const available = Boolean(onSubscribe);
+  const { t } = useTranslation();
   const { colors } = useTheme();
 
   return (
     <View style={[styles.card, { backgroundColor: colors.energyPlusCardBg, borderColor: colors.energyPlusCardBorder, borderWidth: 1 }]}>
       <View style={styles.header}>
-        <AppText style={[styles.title, { color: colors.energyPlusCardText }]}>Energy+</AppText>
+        <AppText style={[styles.title, { color: colors.energyPlusCardText }]}>
+          {t('energy.subscription_card.title')}
+        </AppText>
         <View style={[styles.badge, { backgroundColor: colors.energyPlusBadgeBg }]}>
           <AppText variant="caption" style={[styles.badgeText, { color: colors.energyPlusBadgeText }]}>
-            Найвигідніше
+          {available ? t('energy.subscription_card.badge_best_value') : t('common.coming_soon')}
           </AppText>
         </View>
       </View>
 
-      <View style={styles.priceRow}>
-        <AppText style={[styles.price, { color: colors.brand }]}>149 ₴</AppText>
-        <AppText variant="body" color="textSecondary" style={styles.period}>
-          {' '}
-          / тиждень
+      {available && <View style={styles.priceRow}>
+        <AppText style={[styles.price, { color: colors.brand }]}>
+          {t('energy.subscription_card.price')}
         </AppText>
-      </View>
+        <AppText variant="body" color="textSecondary" style={styles.period}>
+          {t('energy.subscription_card.period')}
+        </AppText>
+      </View>}
 
       <View style={[styles.divider, { backgroundColor: colors.energyPlusCardBorder }]} />
 
@@ -41,7 +47,7 @@ export function EnergyPlusCard({ onSubscribe }: EnergyPlusCardProps) {
             <Ionicons name="flash" size={16} color={colors.energyPlusCardText} />
           </View>
           <AppText variant="body" style={styles.benefitText}>
-            <AppText variant="bodyStrong">Ліміт 60</AppText> замість {ENERGY_CONFIG.renewableCap}
+            {t('energy.subscription_card.feature_limit', { cap: ENERGY_CONFIG.renewableCap })}
           </AppText>
         </View>
         <View style={styles.benefitRow}>
@@ -49,15 +55,20 @@ export function EnergyPlusCard({ onSubscribe }: EnergyPlusCardProps) {
             <Ionicons name="time-outline" size={16} color={colors.energyPlusCardText} />
           </View>
           <AppText variant="body" style={styles.benefitText}>
-            Відновлення вдвічі швидше · 1 кожні 6 хв
+            {t('energy.subscription_card.feature_speed')}
           </AppText>
         </View>
       </View>
 
-      <Button label="Оформити підписку" onPress={onSubscribe} style={[styles.button, { backgroundColor: colors.brand }]} />
+      <Button
+        label={available ? t('energy.subscription_card.subscribe_button') : t('common.coming_soon')}
+        disabled={!available}
+        onPress={onSubscribe}
+        style={[styles.button, { backgroundColor: colors.brand }]}
+      />
       
       <AppText variant="caption" color="textSecondary" align="center" style={styles.footnote}>
-        Автоподовження · скасувати можна будь-коли
+        {available ? t('energy.subscription_card.footnote') : t('energy.payment_prototype_modal.description')}
       </AppText>
     </View>
   );
@@ -74,6 +85,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
   },
   title: {
     fontSize: 28,

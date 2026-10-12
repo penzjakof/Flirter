@@ -10,7 +10,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 interface ButtonProps {
   label: string;
-  onPress: () => void;
+  onPress?: () => void;
   variant?: ButtonVariant;
   disabled?: boolean;
   loading?: boolean;
@@ -28,7 +28,7 @@ function getVariantStyles(colors: ThemeColors): Record<
   return {
     primary: { background: colors.brand, pressed: colors.brandPressed, text: 'textOnBrand' },
     secondary: { background: colors.surface, pressed: colors.surfaceMuted, text: 'textPrimary', border: colors.border },
-    ghost: { background: colors.transparent, pressed: colors.brandSubtle, text: 'brand' },
+    ghost: { background: colors.transparent, pressed: colors.brandSubtle, text: 'brandText' },
     danger: { background: colors.surface, pressed: colors.surfaceMuted, text: 'danger', border: colors.border },
   };
 }
@@ -49,7 +49,7 @@ export function Button({
   const variantStyles = getVariantStyles(colors);
   const variantStyle = variantStyles[variant];
   const textColor = colors[variantStyle.text];
-  const isInactive = disabled || loading;
+  const isInactive = disabled || loading || !onPress;
 
   return (
     <Pressable
@@ -60,6 +60,7 @@ export function Button({
       accessibilityLabel={label}
       accessibilityHint={accessibilityHint}
       accessibilityState={{ disabled: isInactive, busy: loading }}
+      aria-busy={loading}
       style={({ pressed }) => [
         styles.base,
         {
@@ -74,7 +75,7 @@ export function Button({
       ) : (
         <View style={styles.content}>
           {icon && <Ionicons name={icon} size={sizes.icon} color={textColor} />}
-          <AppText variant="button" color={variantStyle.text}>
+          <AppText variant="button" color={variantStyle.text} style={styles.label}>
             {label}
           </AppText>
           {trailing}
@@ -90,10 +91,12 @@ const styles = StyleSheet.create({
     borderRadius: radius.lg,
     borderWidth: 1,
     paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
     alignItems: 'center',
     justifyContent: 'center',
   },
   content: {
+    maxWidth: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
@@ -101,4 +104,5 @@ const styles = StyleSheet.create({
   inactive: {
     opacity: 0.45,
   },
+  label: { flexShrink: 1, textAlign: 'center' },
 });

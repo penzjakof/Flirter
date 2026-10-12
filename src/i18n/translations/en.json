@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "back": "Back",
+    "close": "Close",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "save": "Save",
+    "confirm": "Confirm",
+    "done": "Done",
+    "understood": "Understood",
+    "ok": "OK",
+    "start": "Get Started",
+    "login": "Log In",
+    "install": "Install",
+    "not_now": "Not Now",
+    "reset": "Reset",
+    "retry": "Try Again",
+    "back_to_home": "Back to Home",
+    "back_to_dating": "Back to Dating",
+    "age_badge": "18+",
+    "coming_soon": "Coming Soon",
+    "yesterday": "Yesterday",
+    "session_restoring": "Restoring session",
+    "terms": "Terms",
+    "terms_full": "Terms of Service",
+    "privacy": "Privacy",
+    "privacy_full": "Privacy Policy",
+    "about_ai": "About AI",
+    "about_ai_full": "About AI Characters",
+    "seconds_short": "{{count}}s",
+    "minutes_short": "{{count}}m",
+    "hours_short": "{{count}}h",
+    "demo_notice": "Demo mode: sign-in and replies run locally. No emails are sent; payments, photos and voice are not available yet."
+  },
+  "tabs": {
+    "dating": "Dating",
+    "discover": "Discover",
+    "chats": "Chats",
+    "profile": "Profile",
+    "unread_badge_accessibility": "{{label}}, {{count}} new"
+  },
+  "not_found": {
+    "title": "Page Not Found",
+    "description": "This link might be outdated or no longer exists.",
+    "button": "Back to Home"
+  },
+  "html_meta": {
+    "description": "Flirter — dating simulator with fictional AI characters. 18+.",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "Step {{step}} of {{total}}"
+    },
+    "welcome": {
+      "hero_title": "Your story starts with a conversation",
+      "hero_subtitle": "Meet fictional AI characters. Chat at your own pace.",
+      "start_button": "Get Started",
+      "login_button": "Log In"
+    },
+    "age": {
+      "title": "Adults Only Service",
+      "subtitle": "Enter your date of birth. It will never be visible to characters or other people.",
+      "day_label": "Day",
+      "day_placeholder": "DD",
+      "month_label": "Month",
+      "month_placeholder": "MM",
+      "year_label": "Year",
+      "year_placeholder": "YYYY",
+      "accessibility_label": "Date of birth",
+      "privacy_note_prefix": "We need your date of birth to confirm you are 18+. Details in our ",
+      "privacy_policy_link": "Privacy Policy",
+      "privacy_note_suffix": ".",
+      "errors": {
+        "incomplete": "Enter a complete date: day, month, and year.",
+        "invalid": "This date does not exist. Check the day and month.",
+        "future": "Date cannot be in the future.",
+        "unrealistic": "Check the birth year."
+      },
+      "underage": {
+        "title": "Service Unavailable",
+        "subtitle": "Flirter is available only for users 18 years and older. Thank you for understanding.",
+        "terms_button": "Terms of Service"
+      }
+    },
+    "sign_in": {
+      "signup_title": "Create an Account",
+      "login_title": "Welcome Back!",
+      "signup_subtitle": "An account preserves your chats and energy across devices. No password needed — we will send a code.",
+      "login_subtitle": "Enter the email you registered with. We will send a one-time code.",
+      "get_code_button": "Get Code",
+      "email_label": "Email",
+      "email_placeholder": "you@example.com",
+      "legal_prefix": "By continuing, you review the ",
+      "terms_link": "Terms",
+      "and": " and ",
+      "privacy_link": "Privacy Policy",
+      "legal_suffix": ". You will need to explicitly accept them next.",
+      "errors": {
+        "invalid_email": "Check the email address — it looks incorrect.",
+        "network_error": "Failed to send code. Check your connection and try again."
+      }
+    },
+    "verify": {
+      "title": "Enter the Code from Email",
+      "subtitle": "We sent a {{count}}-digit code to {{email}}.",
+      "fallback_email": "your email",
+      "confirm_button": "Confirm",
+      "resend_code": "Send Code Again",
+      "resend_code_cooldown": "Send again in {{seconds}}s",
+      "code_label": "Verification Code",
+      "change_email": "Change Email",
+      "demo_note": "Demo mode: any {{count}}-digit code will work.",
+      "errors": {
+        "invalid_code": "Invalid or expired code. Try again or request a new one.",
+        "network_error": "No connection. Code saved — please try again."
+      }
+    },
+    "profile_setup": {
+      "title": "How should we call you?",
+      "subtitle": "Characters will address you by this name. Real name is not required.",
+      "continue_button": "Continue",
+      "skip_button": "Skip Optional",
+      "nickname_label": "Nickname",
+      "nickname_helper": "Can be changed anytime in your profile.",
+      "nickname_error": "Between {{min}} and {{max}} characters.",
+      "gender_label": "Your gender (optional)",
+      "preference_label": "Who to show (optional)",
+      "genders": {
+        "male": "Man",
+        "female": "Woman",
+        "other": "Other"
+      },
+      "preferences": {
+        "women": "Women",
+        "men": "Men",
+        "everyone": "Everyone"
+      }
+    },
+    "disclosure": {
+      "title": "This is an AI Dating Simulator",
+      "submit_button": "Go to Dating",
+      "facts": {
+        "profiles": "All profiles are fictional characters.",
+        "ai_content": "Photos, biographies, and replies are created by AI or scripts.",
+        "no_real_people": "There are no real people to date here.",
+        "no_offline": "Meeting offline is not possible."
+      },
+      "consents": {
+        "ai_label": "I understand that I am chatting with fictional AI characters",
+        "ai_text": "I understand that I am chatting with fictional AI characters, not real people.",
+        "terms_label": "I accept the Terms of Service and have read the Privacy Policy",
+        "terms_prefix": "I accept the ",
+        "terms_link": "Terms of Service",
+        "and": " and have read the ",
+        "privacy_link": "Privacy Policy",
+        "terms_suffix": "."
+      },
+      "error_save": "Failed to save choices. Selections saved — try again."
+    }
+  },
+  "discover": {
+    "filter_accessibility": "Filters",
+    "filter_active_accessibility": "Filters, {{count}} active",
+    "empty_title": "No characters match these filters",
+    "empty_subtitle": "Try clearing some filters — new characters will also appear soon.",
+    "reset_filters": "Reset Filters",
+    "card_accessibility": "{{name}}, {{age}}. {{tagline}}. Open profile",
+    "action_open_chat": "Open chat with {{name}}",
+    "action_like": "Like {{name}}",
+    "sheet": {
+      "title": "Filters",
+      "who_to_show": "Who to show",
+      "age": "Age",
+      "ethnicity": "Ethnicity",
+      "interests": "Interests",
+      "communication_style": "Communication style",
+      "only_new_title": "Only new",
+      "only_new_subtitle": "Hide characters you already have a chat with",
+      "reset": "Reset",
+      "no_matches": "No matches",
+      "show_results_one": "Show {{count}} character",
+      "show_results_few": "Show {{count}} characters",
+      "show_results_many": "Show {{count}} characters",
+      "show_results_other": "Show {{count}} characters"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "Everyone",
+        "women": "Women",
+        "men": "Men",
+        "nonbinary": "Non-binary"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "Sports",
+        "travel": "Travel",
+        "music": "Music",
+        "art": "Art",
+        "food": "Food & Coffee",
+        "books": "Books & Cinema",
+        "nature": "Nature"
+      },
+      "styles": {
+        "romantic": "Romantic",
+        "playful": "Playful",
+        "intellectual": "Intellectual",
+        "caring": "Caring"
+      },
+      "ethnicities": {
+        "european": "European",
+        "asian": "Asian",
+        "african": "African",
+        "latin": "Latin American",
+        "middle_eastern": "Middle Eastern",
+        "mixed": "Mixed"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "Chats",
+    "typing": "typing…",
+    "you_prefix": "You: ",
+    "row_accessibility": "{{name}}. {{preview}}",
+    "unread_suffix": ". Unread: {{count}}",
+    "dismiss_request_accessibility": "Dismiss request from {{name}}",
+    "section_requests": "Conversation Requests",
+    "show_all_requests": "Show All",
+    "show_less_requests": "Show Less",
+    "section_dialogs": "Messages",
+    "empty_title": "Quiet here for now",
+    "empty_subtitle": "Pick a character for your first conversation.",
+    "to_dating_button": "Explore Dating",
+    "system_messages": {
+      "ai_disclaimer": "This is a conversation with a fictional AI character. Replies may contain errors.",
+      "liked_profile": "You liked the profile",
+      "reply_error_refunded": "Could not prepare reply. Energy refunded."
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1 chat waiting for reply",
+      "other": "{{count}} chats waiting for reply",
+      "row_accessibility": "{{label}}. Open chats"
+    },
+    "back_accessibility": "Back to chats",
+    "profile_accessibility": "Profile: {{name}}",
+    "typing": "typing…",
+    "send_suggestion_accessibility": "Send reply: {{reply}}",
+    "insufficient_energy_action": "Send message",
+    "coming_soon_modal": {
+      "title": "Coming Soon",
+      "description": "Sending photos and voice messages will be available in upcoming versions.",
+      "button": "OK"
+    },
+    "composer": {
+      "attach_photo_accessibility": "Attach photo",
+      "placeholder": "Message",
+      "input_accessibility": "Message text",
+      "send_accessibility": "Send",
+      "record_voice_accessibility": "Record voice message"
+    },
+    "typing_indicator_accessibility": "Character is typing"
+  },
+  "character": {
+    "missing_title": "Character is no longer available",
+    "back_to_dating": "Return to Dating",
+    "close_accessibility": "Close profile",
+    "in_story": "In story: {{city}}",
+    "section_interests": "Interests",
+    "section_traits": "Personality",
+    "section_lifestyle": "Lifestyle",
+    "about_ai_notice": "{{name}} is a fictional AI character. Photos, biography, and replies are created by artificial intelligence.",
+    "continue_chat": "Continue Conversation",
+    "start_chat": "Start Chat"
+  },
+  "energy": {
+    "title": "Energy",
+    "chip_accessibility": "Energy: {{total}}. Open energy store",
+    "subscription": "More energy with subscription",
+    "one_time": "One-time refill",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "Best Value",
+      "price": "149 ₴",
+      "period": " / week",
+      "feature_limit": "Limit 60 instead of {{cap}}",
+      "feature_speed": "Regenerates twice as fast · 1 every 6 min",
+      "subscribe_button": "Subscribe",
+      "footnote": "Auto-renew · cancel anytime"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} energy",
+      "badge_recommended": "Recommended",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "or {{photos}} photos",
+      "buy": "Buy",
+      "buy_accessibility": "Buy {{amount}} energy. {{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "Out of Energy",
+      "close_accessibility": "Close",
+      "subtitle": "Refill your energy to continue chatting",
+      "regen_countdown": "+1 in {{time}}",
+      "balance_status": "{{current}} of {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "Best Value",
+      "sub_price": "149 ₴",
+      "sub_period": " / week",
+      "sub_feature_limit": "60 energy limit",
+      "sub_feature_speed": "Twice as fast regeneration",
+      "sub_button": "Subscribe",
+      "divider_or": "or one-time",
+      "word_energy": "energy",
+      "badge_recommended": "Recommended",
+      "not_now": "Not Now"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "Soon",
+      "benefit_cap": "Capacity 60 ⚡ instead of {{cap}}",
+      "benefit_speed": "Twice as fast regeneration: 1 ⚡ every 6 min",
+      "benefit_prices": "Messages and photos at same energy costs",
+      "footnote": "Price, period, and cancellation terms will be displayed before payment."
+    },
+    "hero_card": {
+      "your_balance": "Your Balance",
+      "messages_equivalent_one": "≈ {{count}} message",
+      "messages_equivalent_few": "≈ {{count}} messages",
+      "messages_equivalent_many": "≈ {{count}} messages",
+      "messages_equivalent_other": "≈ {{count}} messages",
+      "full_reserve": "Free reserve full · {{cap}} ⚡",
+      "free_plus_one": "Free +1 ⚡",
+      "in_time": "in {{time}}",
+      "progress_accessibility": "Progress toward next energy unit"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — payment coming soon",
+      "title": "Payment Coming Soon",
+      "description": "Payments are not connected yet — this is a prototype. Prices will appear once payment provider is integrated, and you will see them before confirming purchase.",
+      "button": "Understood"
+    }
+  },
+  "profile": {
+    "header_title": "Profile",
+    "privacy_note": "These are private settings. Your profile is not shown to real people.",
+    "groups": {
+      "theme": "Appearance Theme",
+      "app": "Application",
+      "energy_and_purchases": "Energy & Purchases",
+      "help_and_rules": "Help & Rules",
+      "general": "General"
+    },
+    "theme_options": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "rows": {
+      "install_pwa": "Add to Home Screen",
+      "balance_and_topup": "Balance & Top-up",
+      "about_ai": "About AI Characters",
+      "terms": "Terms of Service",
+      "privacy_policy": "Privacy Policy",
+      "language": "Language"
+    },
+    "buttons": {
+      "logout": "Log Out",
+      "reset_demo": "Reset Demo Data"
+    },
+    "logout_modal": {
+      "title": "Log out of account?",
+      "description": "This is a local demo. Signing out clears conversations and resets the balance on this device.",
+      "confirm": "Log Out",
+      "cancel": "Cancel"
+    },
+    "language_modal": {
+      "title": "Select Language",
+      "restart_notice": "The app requires a quick reload to change interface direction.",
+      "restart_button": "Reload Now",
+      "cancel_button": "Later"
+    }
+  },
+  "pwa_install": {
+    "title": "Add to Home Screen",
+    "benefits": {
+      "quick_launch": "Fast launch from home screen",
+      "standalone": "Standalone window without browser bars",
+      "notifications": "Notifications on supported devices"
+    },
+    "install_button": "Install",
+    "not_now_button": "Not Now",
+    "ios_steps": {
+      "step_1": "Tap \"Share\" in the Safari menu.",
+      "step_2": "Select \"Add to Home Screen\".",
+      "step_3": "Keep \"Open as Web App\" enabled and tap \"Add\"."
+    },
+    "in_app_steps": {
+      "step_1": "Open this app's menu (⋯).",
+      "step_2": "Choose \"Open in Browser\" — Safari or Chrome.",
+      "step_3": "There, add Flirter to your Home Screen."
+    },
+    "default_steps": {
+      "step_1": "Open browser menu (⋮).",
+      "step_2": "Select \"Install app\" or \"Add to Home Screen\"."
+    }
+  },
+  "legal": {
+    "back_accessibility": "Back",
+    "version_label": "Version as of {{version}}",
+    "not_found": "Document not found.",
+    "documents": {
+      "terms": {
+        "title": "Terms of Service",
+        "sections": {
+          "draft": {
+            "heading": "Draft",
+            "body": "Final text of the Terms will be provided after legal review. This screen serves as placeholder for the document."
+          },
+          "nature": {
+            "heading": "Nature of Service",
+            "body": "Flirter is an entertainment dating simulator. All profiles are fictional AI characters."
+          },
+          "age": {
+            "heading": "Age Requirement",
+            "body": "The service is strictly available only to individuals aged 18 and older."
+          }
+        }
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "sections": {
+          "draft": {
+            "heading": "Draft",
+            "body": "Final text of the Privacy Policy will be provided after legal review."
+          },
+          "data": {
+            "heading": "Data Collected",
+            "body": "Email, date of birth, nickname, optional preferences, conversation history, and purchases."
+          },
+          "rights": {
+            "heading": "Your Rights",
+            "body": "You can request a copy of your data, delete chat history, or delete your account in settings."
+          }
+        }
+      },
+      "ai": {
+        "title": "About AI Characters",
+        "sections": {
+          "real_people": {
+            "heading": "Are these real people?",
+            "body": "No. All characters are fictional, and their photos, bios, and messages are generated by AI or scripts."
+          },
+          "offline_meet": {
+            "heading": "Can we meet offline?",
+            "body": "No. Characters do not exist in the real world; offline meetings are impossible."
+          },
+          "ai_mistakes": {
+            "heading": "Can AI make mistakes?",
+            "body": "Yes. Replies might be inaccurate. Do not treat them as professional advice."
+          }
+        }
+      }
+    }
+  }
+}

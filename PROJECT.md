@@ -1,107 +1,99 @@
-# Project: Flirter Theme Architecture & Glass Tab Bar Contrast
+# Project: Flirter Localization (10 Languages & RTL Architecture)
 
 ## Architecture
-- **Платформа:** Expo SDK ~57 (React Native 0.86, React 19, Expo Router ~57).
-- **Стилізація:** React Native `StyleSheet` на основі дизайн-токенів у `src/theme/tokens.ts`.
-- **Архітектура тем:**
-  - `lightColors` та `darkColors` у `src/theme/tokens.ts` (із збереженням зворотного експорту `colors = lightColors`).
-  - Реактивний Zustand стор `src/store/theme-store.ts` з персистенцією через `persistStorage` (`STORAGE_KEYS.theme` = `'flirter.theme.v1'`).
-  - Хуки `useTheme()`, `useThemeColor()`, `useThemedStyles()` у `src/theme/use-theme.ts`.
-  - Динамічний `StatusBar` (`dark` / `light`) та фони навігаційних контейнерів у `_layout.tsx`.
-  - Модифікація `GlassSurface` та `GlassTabBar` для контрастного білого скла (White Frosted Glass) на темному/чорному фоні.
+- **Платформа:** Expo SDK ~57 (React Native 0.86.3, React 19.2.3, Expo Router ~57.0.23).
+- **Бібліотека локалізації:** `i18next` (^26.4.2) + `react-i18next` (^17.0.16) + `expo-localization` (~57.0.2).
+- **Керування станом мови:** Zustand store `src/store/language-store.ts` з персистенцією через `persistStorage` (`STORAGE_KEYS.language = 'flirter.language.v1'`).
+- **Підтримка RTL (Right-to-Left):**
+  - `I18nManager.allowRTL(true)` та `I18nManager.forceRTL(isRtl)` для Арабської мови (`ar`).
+  - Огортання навігації в `LocaleProvider` (`expo-router`) у `src/app/_layout.tsx`.
+  - Підтримка Web через `dir="rtl"` / `dir="ltr"` на DOM/контейнерах.
+  - Адаптація анімації лінзи підсвітки у `GlassTabBar` для RTL.
+- **Типізація:** TypeScript module augmentation для `i18next` (`CustomTypeOptions` з `typeof en`) для 100% type-safety ключів перекладу при `npx tsc --noEmit`.
+- **10 підтримуваних мов:**
+  1. `en` — English (Базова / Fallback)
+  2. `uk` — Українська
+  3. `es` — Español
+  4. `fr` — Français
+  5. `de` — Deutsch
+  6. `zh` — 简体中文
+  7. `hi` — हिन्दी
+  8. `ar` — العربية (RTL)
+  9. `pt` — Português
+  10. `ja` — 日本語
 
 ## Feature Inventory
 | # | Feature | Description | Milestone | Source |
 |---|---------|-------------|-----------|--------|
-| 1 | Glass Tab Bar Contrast | Підвищення непрозорості білого (0.85–0.88), підтримка iOS GlassView `colorScheme="light"` / `tintColor`, контрастні неактивні елементи `tabBarInactive`, чіткий контур | M1 | ORIGINAL_REQUEST §R1 |
-| 2 | Theme Store & System Tokens | Створення `lightColors` та `darkColors`, Zustand store з персистенцією, хуки `useTheme`, `useThemeColor`, оновлення `app.json` | M1 | ORIGINAL_REQUEST §R2 |
-| 3 | Base UI Primitives Adaptation | Адаптація базових UI-компонентів (`AppText`, `Button`, `SelectableChip`, `TextField`, `BottomSheet`, `Checkbox`, `OptionGroup`, `IconButton`, `Avatar`, `Chip`) | M2 | ORIGINAL_REQUEST §R2 |
-| 4 | Profile Theme Switcher | Додавання вибору теми ("Системна", "Світла", "Темна") у налаштування профілю | M2 | ORIGINAL_REQUEST §R2 |
-| 5 | Navigation & Onboarding Screens Adaptation | Адаптація кореневих layout, стеку онбордингу, динамічних градієнтів `welcome.tsx` та екранів Discover, Chats | M3 | ORIGINAL_REQUEST §R2 |
-| 6 | Chat & Energy Components Theming | Рефакторинг hardcoded кольорів у компонентах Energy (`EnergyPlusCard`, `InsufficientEnergySheet`, `BalanceCard`), адаптація чату (`Composer`, `MessageBubble`) | M3 | ORIGINAL_REQUEST §R2 |
-| 7 | Code Quality, TypeCheck & Linter | Усунення наявних TypeScript помилок, чисте проходження `npx tsc --noEmit` та `npx expo lint` | M4 | ORIGINAL_REQUEST Acceptance Criteria |
-| 8 | Forensic Audit & Independent Challenge | Незалежна перевірка автентичності, коректності UI та відсутності регресій світлої теми | M4 | ORIGINAL_REQUEST Acceptance Criteria |
+| 1 | Dependency Installation & Config | Встановлення `expo-localization`, `i18next`, `react-i18next` через `npx expo install`. Конфігурація `app.json` (`supportedLocales`, `supportsRTL`, `CFBundleAllowMixedLocalizations`). | M1 | ORIGINAL_REQUEST §R1 |
+| 2 | i18n Core Module & Fallback | Створення `src/i18n/index.ts`, `types.ts`, `resources.ts` з ініціалізацією `compatibilityJSON: 'v4'`, fallbackLng: 'en', типізацією `CustomTypeOptions`. | M1 | ORIGINAL_REQUEST §R1 |
+| 3 | Language Store & Persistence | Реалізація `useLanguageStore` (Zustand + persist) з авто-визначенням мови пристрою через `getLocales()` та збереженням у `STORAGE_KEYS.language`. | M1 | ORIGINAL_REQUEST §R1 |
+| 4 | RTL Support & Layout Integration | Інтеграція `LocaleProvider` в `src/app/_layout.tsx`, синхронізація `I18nManager`, дзеркалення `GlassTabBar` та адаптація для вебу. | M1 | ORIGINAL_REQUEST §R2 |
+| 5 | Translation Dictionaries (10 Languages) | Створення повних JSON-файлів перекладів для 10 мов (en, uk, es, fr, de, zh, hi, ar, pt, ja) з усіма секціями (common, tabs, onboarding, discover, chats, chat, character, energy, profile, pwa, legal, not_found). | M2 | ORIGINAL_REQUEST §R3 |
+| 6 | Key Parity Enforcement Script | Створення автоматичного скрипта `scripts/check-i18n-parity.ts` для перевірки 100% паритету ключів у всіх 10 мовних словниках. | M2 | ORIGINAL_REQUEST Acceptance Criteria |
+| 7 | Onboarding Screens String Migration | Заміна хардкодних рядків на `t(...)` у всіх екранах онбордингу (`welcome.tsx`, `age.tsx`, `sign-in.tsx`, `verify.tsx`, `profile-setup.tsx`, `disclosure.tsx`). | M3 | ORIGINAL_REQUEST §R2 |
+| 8 | Tabs & App Screens Migration | Заміна хардкодних рядків на `t(...)` у табах (`index.tsx`, `chats.tsx`, `profile.tsx`), екранах чату (`chat/[id].tsx`), профілю персонажа (`character/[id].tsx`), балансу (`energy.tsx`), юридичних екранах (`legal/[doc].tsx`) та 404 (`+not-found.tsx`). | M3 | ORIGINAL_REQUEST §R2 |
+| 9 | Reusable Components & Modals Migration | Заміна рядків у `src/components/` (`chat/`, `discover/`, `energy/`, `layout/`, `pwa/`, `onboarding/`, `ui/`). Перехід на нативну плюралізацію i18next замість `pluralizeUk`. | M3 | ORIGINAL_REQUEST §R2 |
+| 10 | Profile Language Selector UI | Реалізація модального вибору 10 мов `LanguageSelectionSheet` у налаштуваннях профілю (`profile.tsx`) з рідними назвами (Endonyms), прапорцями та індикацією. | M3 | ORIGINAL_REQUEST §R2 |
+| 11 | TypeCheck & Linting Verification | Перевірка відсутності нових помилок через `npx tsc --noEmit` та `npx expo lint`. | M4 | ORIGINAL_REQUEST Acceptance Criteria |
+| 12 | Independent Adversarial Review & Forensic Audit | Повний цикл верифікації рецензентами, тестувальниками (Challengers) та Forensic Auditor для підтвердження автентичності та відсутності регресій. | M4 | ORIGINAL_REQUEST Acceptance Criteria |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| 1 | M1: Foundation & Glass Tab Bar | `app.json`, `src/theme/tokens.ts`, `src/store/theme-store.ts`, `src/theme/use-theme.ts`, `src/components/ui/glass-surface.tsx`, `src/components/layout/glass-tab-bar.tsx`, `src/app/_layout.tsx`, TS fix в `energy-plus-card.tsx` та `insufficient-energy-sheet.tsx` | none | DONE |
-| 2 | M2: UI Primitives & Profile Switcher | `AppText`, `Button`, `SelectableChip` (fix white-on-white bug), `TextField`, `BottomSheet`, `Checkbox`, `OptionGroup`, `IconButton`, `Avatar`, `Chip`, `profile.tsx` | M1 | DONE |
-| 3 | M3: Screens, Chat & Energy Migration | Onboarding layouts & screens (`welcome.tsx` etc.), Discover, Chats, Character profile, Chat screens (`composer.tsx`, `message-bubble.tsx`), Energy store & sheets | M2 | DONE |
-| 4 | M4: Final Verification & Audit | `npx tsc --noEmit`, `npx expo lint`, Reviewer, Challenger, Forensic Auditor | M3 | DONE |
+| 1 | M1: Localization Infrastructure & RTL Setup | Встановлення залежностей, оновлення `app.json`, `src/lib/storage.ts`, створення `src/i18n/`, `src/store/language-store.ts`, `LocaleProvider` у `src/app/_layout.tsx`. | none | DONE |
+| 2 | M2: Complete Dictionaries for 10 Languages & Parity | Генерація 10 JSON-файлів локалізації у `src/i18n/translations/`, скрипт `scripts/check-i18n-parity.ts` з перевіркою 100% паритету. | M1 | DONE |
+| 3 | M3: UI Integration & Profile Language Switcher | Міграція всіх екранів `src/app/` та компонентів `src/components/` на `t(...)`, селектор мов у `profile.tsx`, RTL дзеркалення в `GlassTabBar`. | M2 | DONE |
+| 4 | M4: Final Verification, Adversarial Testing & Forensic Audit | Валідація `npx tsc --noEmit`, `npx expo lint`, `scripts/check-i18n-parity.ts`, перевірка Reviewer, Challenger, Forensic Auditor. | M3 | DONE |
 
 ## Interface Contracts
-### Theme Tokens & Types (`src/theme/tokens.ts`)
+
+### i18n Core Types (`src/i18n/types.ts`)
 ```ts
-export type ThemeMode = 'system' | 'light' | 'dark';
-export type ResolvedTheme = 'light' | 'dark';
-export interface ThemeColors {
-  background: string;
-  surface: string;
-  surfaceMuted: string;
-  textPrimary: string;
-  textSecondary: string;
-  textOnBrand: string;
-  textOnMedia: string;
-  brand: string;
-  brandPressed: string;
-  brandSubtle: string;
-  energyText: string;
-  energySurface: string;
-  border: string;
-  cardBorderSubtle: string;
-  danger: string;
-  success: string;
-  pass: string;
-  premiumDeep: string;
-  premiumGold: string;
-  textOnPremiumMuted: string;
-  premiumTrack: string;
-  premiumInk: string;
-  energyPlusCardBg: string;
-  energyPlusCardBorder: string;
-  energyPlusCardText: string;
-  energyPlusBadgeBg: string;
-  energyPlusBadgeText: string;
-  energyTrackBg: string;
-  glass: string;
-  glassBorder: string;
-  glassEdge: string;
-  glassLens: string;
-  tabBarInactive: string;
-  overlay: string;
-  mediaScrim: string;
-  transparent: string;
-  fadeTransparent: string;
+export const SUPPORTED_LANGUAGES = ['en', 'uk', 'es', 'fr', 'de', 'zh', 'hi', 'ar', 'pt', 'ja'] as const;
+export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+
+export interface LanguageInfo {
+  code: SupportedLanguage;
+  name: string;      // English name (e.g., "Ukrainian")
+  nativeName: string;// Native endonym (e.g., "Українська")
+  flag: string;      // Country/region flag or badge
+  isRTL: boolean;
 }
-export const lightColors: ThemeColors;
-export const darkColors: ThemeColors;
-export const colors: ThemeColors; // alias for lightColors (backward compatibility)
+
+export const LANGUAGE_REGISTRY: Record<SupportedLanguage, LanguageInfo>;
+export const isRtlLanguage = (code: string): boolean;
 ```
 
-### Theme Store & Hooks (`src/store/theme-store.ts` & `src/theme/use-theme.ts`)
+### Language Store (`src/store/language-store.ts`)
 ```ts
-export interface ThemeState {
-  mode: ThemeMode;
-  setMode: (mode: ThemeMode) => void;
+export type LanguageMode = 'system' | SupportedLanguage;
+
+export interface LanguageState {
+  mode: LanguageMode;
+  resolvedLanguage: SupportedLanguage;
+  isRTL: boolean;
+  setLanguage: (mode: LanguageMode) => Promise<void> | void;
 }
-export function useTheme(): {
-  mode: ThemeMode;
-  theme: ResolvedTheme;
-  isDark: boolean;
-  colors: ThemeColors;
-  setMode: (mode: ThemeMode) => void;
-};
-export function useThemeColor(token: keyof ThemeColors): string;
-export function useThemedStyles<T>(factory: (colors: ThemeColors, isDark: boolean) => T): T;
+
+export const useLanguageStore: UseBoundStore<StoreApi<LanguageState>>;
+```
+
+### Language Selection Modal Contract
+```tsx
+export interface LanguageSelectionSheetProps {
+  isVisible: boolean;
+  onClose: () => void;
+  currentLanguage: SupportedLanguage;
+  currentMode: LanguageMode;
+  onSelectLanguage: (mode: LanguageMode) => void;
+}
 ```
 
 ## Code Layout
-- `src/theme/tokens.ts` — дизайн-токени (палітри світла/темна)
-- `src/theme/use-theme.ts` — хуки використання теми
-- `src/store/theme-store.ts` — Zustand сховище теми
-- `src/components/ui/` — базові дизайн-системи компоненти
-- `src/components/layout/` — макет та навігаційні елементи (Glass Tab Bar)
-- `src/components/energy/` — компоненти балансу та покупок енергії
-- `src/components/chat/` — компоненти чату
-- `src/app/` — роути та екрани додатку
+- `src/i18n/` — конфігурація i18next, типи, ресурси, файли перекладів (`translations/*.json`)
+- `src/store/language-store.ts` — Zustand сховище поточної мови та RTL прапорця
+- `src/lib/storage.ts` — константи ключів сховища (`STORAGE_KEYS.language`)
+- `scripts/check-i18n-parity.mjs` — утиліта автоматичного аудиту паритету словників
+- `src/app/` — роути та екрани додатку (інтеграція `useTranslation()`)
+- `src/components/` — UI-компоненти, модальні вікна та селектор мов

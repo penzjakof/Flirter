@@ -35,6 +35,7 @@ export function OptionGroup<TValue extends string>({ label, options, value, onCh
               accessibilityRole="radio"
               accessibilityLabel={option.label}
               accessibilityState={{ selected: isSelected, checked: isSelected }}
+              aria-checked={isSelected}
               style={({ pressed }) => [
                 styles.option,
                 {

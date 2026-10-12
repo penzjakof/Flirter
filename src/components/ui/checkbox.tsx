@@ -25,6 +25,7 @@ export function Checkbox({ checked, onChange, accessibilityLabel, children, test
       accessibilityRole="checkbox"
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ checked }}
+      aria-checked={checked}
       style={({ pressed }) => [styles.row, pressed && styles.pressed]}>
       <View
         style={[

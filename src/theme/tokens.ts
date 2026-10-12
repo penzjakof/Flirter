@@ -17,9 +17,12 @@ export interface ThemeColors {
   textOnBrand: string;
   textOnMedia: string;
   brand: string;
+  /** Accent foreground is brighter in dark mode; filled controls keep white text readable. */
+  brandText: string;
   brandPressed: string;
   brandSubtle: string;
   energyText: string;
+  energyIcon: string;
   energySurface: string;
   border: string;
   cardBorderSubtle: string;
@@ -57,9 +60,11 @@ export const lightColors: ThemeColors = {
   textOnBrand: '#FFFFFF',
   textOnMedia: '#FFFFFF',
   brand: '#B6245A',
+  brandText: '#B6245A',
   brandPressed: '#9A1D4B',
   brandSubtle: '#F9E7EE',
   energyText: '#765000',
+  energyIcon: '#F6C445',
   energySurface: '#FFF1D1',
   border: '#E7E0E5',
   cardBorderSubtle: 'rgba(33, 28, 36, 0.06)',
@@ -88,7 +93,7 @@ export const lightColors: ThemeColors = {
   glassLens: 'rgba(255, 255, 255, 0.96)',
   /** Контрастний графітовий колір неактивних іконок/лейблів на білій скляній пігулці. */
   tabBarInactive: '#403644',
-  overlay: 'rgba(33, 28, 36, 0.55)',
+  overlay: 'rgba(33, 28, 36, 0.36)',
   mediaScrim: 'rgba(0, 0, 0, 0.62)',
   transparent: 'transparent',
   fadeTransparent: 'rgba(250, 248, 247, 0)',
@@ -102,10 +107,12 @@ export const darkColors: ThemeColors = {
   textSecondary: '#A59BAA',
   textOnBrand: '#FFFFFF',
   textOnMedia: '#FFFFFF',
-  brand: '#DC3B78',
+  brand: '#CF336D',
+  brandText: '#F0649B',
   brandPressed: '#BA2B61',
   brandSubtle: 'rgba(220, 59, 120, 0.16)',
   energyText: '#FFD666',
+  energyIcon: '#FFD666',
   energySurface: '#3A2E10',
   border: '#332C38',
   cardBorderSubtle: 'rgba(255, 255, 255, 0.08)',
@@ -131,7 +138,7 @@ export const darkColors: ThemeColors = {
   glassEdge: 'rgba(0, 0, 0, 0.3)',
   glassLens: 'rgba(255, 255, 255, 0.05)',
   tabBarInactive: '#FFFFFF',
-  overlay: 'rgba(0, 0, 0, 0.75)',
+  overlay: 'rgba(0, 0, 0, 0.48)',
   mediaScrim: 'rgba(0, 0, 0, 0.65)',
   transparent: 'transparent',
   fadeTransparent: 'rgba(18, 16, 19, 0)',

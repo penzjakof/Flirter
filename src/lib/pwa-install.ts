@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { Platform } from 'react-native';
 
 /** Подія Chromium `beforeinstallprompt` (не стандартизована, тому типізуємо самі). */
@@ -12,10 +12,22 @@ export type InstallPlatform = 'ios' | 'android' | 'desktop' | 'in-app-browser' |
 type Listener = () => void;
 
 let deferredPrompt: BeforeInstallPromptEvent | null = null;
+let initialized = false;
 const listeners = new Set<Listener>();
 
 function notify() {
   listeners.forEach((listener) => listener());
+}
+
+function subscribe(listener: Listener) {
+  listeners.add(listener);
+  const displayMode = Platform.OS === 'web' && typeof window !== 'undefined'
+    ? window.matchMedia('(display-mode: standalone)') : null;
+  displayMode?.addEventListener('change', listener);
+  return () => {
+    listeners.delete(listener);
+    displayMode?.removeEventListener('change', listener);
+  };
 }
 
 /**
@@ -24,6 +36,8 @@ function notify() {
  */
 export function initPwaInstallListener() {
   if (Platform.OS !== 'web' || typeof window === 'undefined') return;
+  if (initialized) return;
+  initialized = true;
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
     deferredPrompt = event as BeforeInstallPromptEvent;
@@ -61,27 +75,23 @@ export interface PwaInstallState {
 
 /** Стан встановлення PWA. Не малюємо фальшивий системний діалог (06 §2). */
 export function usePwaInstall(): PwaInstallState {
-  const [, forceRender] = useState(0);
-  const [isStandalone] = useState(detectStandalone);
-  const [platform] = useState(detectPlatform);
-
-  useEffect(() => {
-    const listener = () => forceRender((value) => value + 1);
-    listeners.add(listener);
-    return () => {
-      listeners.delete(listener);
-    };
-  }, []);
+  const isStandalone = useSyncExternalStore(subscribe, detectStandalone, () => Platform.OS !== 'web');
+  const canPromptNatively = useSyncExternalStore(subscribe, () => deferredPrompt !== null, () => false);
+  const platform = detectPlatform();
 
   const promptInstall = async () => {
     if (!deferredPrompt) return 'unavailable' as const;
     const promptEvent = deferredPrompt;
     deferredPrompt = null;
-    await promptEvent.prompt();
-    const { outcome } = await promptEvent.userChoice;
     notify();
-    return outcome;
+    try {
+      await promptEvent.prompt();
+      const { outcome } = await promptEvent.userChoice;
+      return outcome;
+    } catch {
+      return 'unavailable' as const;
+    }
   };
 
-  return { isStandalone, platform, canPromptNatively: deferredPrompt !== null, promptInstall };
+  return { isStandalone, platform, canPromptNatively, promptInstall };
 }

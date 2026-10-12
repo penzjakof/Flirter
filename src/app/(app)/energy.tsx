@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -8,33 +8,28 @@ import { EnergyPackagesList } from '@/components/energy/energy-packages-list';
 import { EnergyPlusCard } from '@/components/energy/energy-plus-card';
 import { WaitingCharacters } from '@/components/energy/waiting-characters';
 import { AppText } from '@/components/ui/app-text';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
-import { Button } from '@/components/ui/button';
 import { IconButton } from '@/components/ui/icon-button';
-import type { EnergyPackage } from '@/data/energy-packages';
 import { useEnergy } from '@/hooks/use-energy';
 import { colors, sizes, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 /**
  * S19. Енергія — окремий екран стеку (відкривається з energy chip у header).
- * Порядок: баланс і його цінність → на кого витратити → пакети (тап = покупка) → VIP.
- * Оплата не підключена — чесно повідомляємо в bottom sheet.
+ * Balance → conversations → upcoming subscription/packages. Purchases are disabled until payment integration.
  */
 export default function EnergyScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const { total, isFull, msUntilNext } = useEnergy();
-  const [pendingPackage, setPendingPackage] = useState<EnergyPackage | null>(null);
 
   const handleBack = () => (router.canGoBack() ? router.back() : router.replace('/'));
-  const closePaymentSheet = () => setPendingPackage(null);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'bottom']}>
       <View style={styles.header}>
-        <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel="Назад" testID="energy-back" />
+        <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel={t('common.back')} testID="energy-back" />
         <AppText variant="title" accessibilityRole="header">
-          Енергія
+          {t('energy.title')}
         </AppText>
       </View>
 
@@ -44,26 +39,19 @@ export default function EnergyScreen() {
         <WaitingCharacters />
 
         <View style={styles.section}>
-          <AppText variant="title" style={styles.sectionTitle}>Більше енергії з підпискою</AppText>
-          <EnergyPlusCard onSubscribe={() => setPendingPackage({ id: 'large', amount: 999, price: 149 })} />
+          <AppText variant="title" style={styles.sectionTitle}>
+            {t('energy.subscription')}
+          </AppText>
+          <EnergyPlusCard />
         </View>
 
         <View style={styles.section}>
-          <AppText variant="title" style={styles.sectionTitle}>Разове поповнення</AppText>
-          <EnergyPackagesList onPurchase={setPendingPackage} />
+          <AppText variant="title" style={styles.sectionTitle}>
+            {t('energy.one_time')}
+          </AppText>
+          <EnergyPackagesList />
         </View>
       </ScrollView>
-
-      <BottomSheet
-        visible={pendingPackage !== null}
-        onClose={closePaymentSheet}
-        title={pendingPackage ? `${pendingPackage.amount} ⚡ — оплата незабаром` : 'Оплата незабаром'}>
-        <AppText variant="body" color="textSecondary">
-          Оплату ще не підключено — це прототип. Ціни з’являться після інтеграції платіжного провайдера, і ти побачиш їх до
-          підтвердження покупки.
-        </AppText>
-        <Button label="Зрозуміло" onPress={closePaymentSheet} testID="energy-payment-close" />
-      </BottomSheet>
     </SafeAreaView>
   );
 }

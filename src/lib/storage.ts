@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
 import { createJSONStorage, type StateStorage } from 'zustand/middleware';
 
+import { getNativeStorage } from '@/lib/native-storage';
+
 /**
  * Безпечне сховище для zustand persist.
  *
@@ -36,13 +38,15 @@ function resolveWebStorage(): StateStorage {
 }
 
 export const persistStorage = createJSONStorage(() =>
-  Platform.OS === 'web' ? resolveWebStorage() : memoryStorage,
+  Platform.OS === 'web' ? resolveWebStorage() : getNativeStorage(),
 );
 
 export const STORAGE_KEYS = {
   session: 'flirter.session.v1',
   energy: 'flirter.energy.v1',
   chats: 'flirter.chats.v1',
+  drafts: 'flirter.drafts.v1',
   filters: 'flirter.filters.v1',
   theme: 'flirter.theme.v1',
+  language: 'flirter.language.v1',
 } as const;

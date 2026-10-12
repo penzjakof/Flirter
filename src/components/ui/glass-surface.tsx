@@ -1,12 +1,13 @@
-import { GlassView, isLiquidGlassAvailable } from 'expo-glass-effect';
+import { GlassView, isGlassEffectAPIAvailable, isLiquidGlassAvailable } from 'expo-glass-effect';
 import type { ReactNode } from 'react';
 import { Platform, StyleSheet, View, type ColorValue, type StyleProp, type ViewStyle } from 'react-native';
 
 import { shadows } from '@/theme/tokens';
+import { useMotionPreferences } from '@/hooks/use-motion-preferences';
 import { useTheme } from '@/theme/use-theme';
 
 /** Нативне «рідке скло» доступне лише на iOS 26+; деінде — світла напівпрозора поверхня з backdrop blur. */
-const HAS_NATIVE_LIQUID_GLASS = Platform.OS === 'ios' && isLiquidGlassAvailable();
+const HAS_NATIVE_LIQUID_GLASS = Platform.OS === 'ios' && isLiquidGlassAvailable() && isGlassEffectAPIAvailable();
 
 /**
  * CSS backdrop-filter (web/PWA): сильне розмиття + підсилена насиченість і яскравість —
@@ -35,12 +36,13 @@ export function GlassSurface({
   colorScheme,
 }: GlassSurfaceProps) {
   const { colors, isDark } = useTheme();
+  const { reduceTransparency } = useMotionPreferences();
   
   const defaultColorScheme = isDark ? 'dark' : 'light';
   // Нативний Liquid Glass iOS в dark mode використовує свої вбудовані матеріали (без tint).
   const defaultTintColor = isDark ? undefined : 'rgba(255, 255, 255, 0.40)';
 
-  if (HAS_NATIVE_LIQUID_GLASS) {
+  if (HAS_NATIVE_LIQUID_GLASS && !reduceTransparency) {
     return (
       <GlassView
         glassEffectStyle="regular"
@@ -60,10 +62,10 @@ export function GlassSurface({
         styles.base,
         styles.fallback,
         {
-          backgroundColor: tintColor ?? colors.glass,
+          backgroundColor: reduceTransparency ? colors.surface : tintColor ?? colors.glass,
           borderColor: colors.glassBorder,
         },
-        WEB_BACKDROP,
+        !reduceTransparency && WEB_BACKDROP,
         style,
       ]}
       testID={testID}>

@@ -1,27 +1,36 @@
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlatList, KeyboardAvoidingView, Platform, Pressable, StyleSheet, View, type LayoutChangeEvent } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { Composer } from '@/components/chat/composer';
 import { MessageBubble } from '@/components/chat/message-bubble';
+import { QuickReply } from '@/components/chat/quick-reply';
 import { TypingIndicator } from '@/components/chat/typing-indicator';
 import { EnergyChip } from '@/components/energy/energy-chip';
 import { InsufficientEnergySheet } from '@/components/energy/insufficient-energy-sheet';
 import { AppText } from '@/components/ui/app-text';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
-import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import { IconButton } from '@/components/ui/icon-button';
-import { getCharacterById } from '@/data/characters';
+import { CHARACTERS, getCharacterById } from '@/data/characters';
+import { useKeyboardVisible } from '@/hooks/use-web-viewport';
+import { useScrollKeyboardDismiss } from '@/hooks/use-scroll-keyboard-dismiss';
+import { useWebChatScroll } from '@/hooks/use-web-chat-scroll';
+import { useMotionPreferences } from '@/hooks/use-motion-preferences';
 import type { ChatMessage } from '@/models/types';
 import { useChatsStore } from '@/store/chats-store';
+import { useDraftsStore } from '@/store/drafts-store';
 import { ENERGY_CONFIG } from '@/store/energy-store';
-import { colors, radius, sizes, spacing } from '@/theme/tokens';
+import { sizes, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 const EMPTY_MESSAGES: ChatMessage[] = [];
+
+export function generateStaticParams() {
+  return CHARACTERS.map(({ id }) => ({ id }));
+}
 
 // Хелпер для додавання прозорості до HEX кольорів
 function getGradientColors(hexColor: string): readonly [string, string, string] {
@@ -51,8 +60,12 @@ const WEB_BOTTOM_BLUR = Platform.select<any>({
 
 /** S13. Чат — центральний екран продукту. Tab bar прихований для місця під клавіатуру. */
 export default function ChatScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+  const keyboardVisible = useKeyboardVisible();
+  const { reduceMotion } = useMotionPreferences();
+  const scrollKeyboardDismiss = useScrollKeyboardDismiss();
   const { id } = useLocalSearchParams<{ id: string }>();
   const characterId = id ?? '';
   const character = getCharacterById(characterId);
@@ -62,11 +75,15 @@ export default function ChatScreen() {
   const sendMessage = useChatsStore((state) => state.sendMessage);
   const markRead = useChatsStore((state) => state.markRead);
 
-  const [draft, setDraft] = useState('');
+  const draft = useDraftsStore((state) => state.drafts[characterId] ?? '');
+  const updateDraft = useDraftsStore((state) => state.setDraft);
+  const setDraft = (text: string) => updateDraft(characterId, text);
   const [isEnergySheetVisible, setIsEnergySheetVisible] = useState(false);
-  const [isComingSoonVisible, setIsComingSoonVisible] = useState(false);
   const [overlayHeight, setOverlayHeight] = useState(120);
+  const [sentMessageId, setSentMessageId] = useState<string>();
   const listRef = useRef<FlatList<ChatMessage>>(null);
+  const nearBottom = useRef(true);
+  useWebChatScroll(listRef, nearBottom, conversation ? characterId : '', spacing.md);
 
   const handleOverlayLayout = (event: LayoutChangeEvent) => setOverlayHeight(event.nativeEvent.layout.height);
 
@@ -80,20 +97,25 @@ export default function ChatScreen() {
 
   // Прокручуємо список, якщо висота оверлею (наприклад, підказки з'явились/зникли) змінилася
   useEffect(() => {
-    if (messages.length > 0) {
-      setTimeout(() => listRef.current?.scrollToEnd({ animated: true }), 100);
+    if (Platform.OS !== 'web' && messages.length > 0 && nearBottom.current) {
+      const timeout = setTimeout(() => listRef.current?.scrollToEnd({ animated: false }), 100);
+      return () => clearTimeout(timeout);
     }
   }, [overlayHeight, messages.length]);
 
   if (!character || !conversation) return <Redirect href="/chats" />;
 
   const lastMessage = messages[messages.length - 1];
-  const showSuggestions = !isTyping && lastMessage?.author === 'character' && draft.length === 0;
+  const showSuggestions = (Platform.OS === 'web' || !keyboardVisible) && !isTyping && lastMessage?.author === 'character' && draft.length === 0;
 
-  const handleSend = () => {
-    const result = sendMessage(characterId, draft);
+  const handleSend = (text = draft) => {
+    const result = sendMessage(characterId, text);
     if (result === 'sent') {
+      const sentMessages = useChatsStore.getState().conversations[characterId]?.messages;
+      setSentMessageId(sentMessages?.[sentMessages.length - 1]?.id);
       setDraft('');
+      nearBottom.current = true;
+      if (Platform.OS !== 'web') listRef.current?.scrollToEnd({ animated: false });
       return;
     }
     // Чернетка не втрачається при нестачі енергії (S13 → S20).
@@ -106,27 +128,41 @@ export default function ChatScreen() {
   const gradientColors = getGradientColors(colors.background);
 
   return (
-    <View style={[styles.safeArea, { backgroundColor: colors.background }]}>
-      <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <View testID="chat-shell" style={[styles.safeArea, { backgroundColor: colors.background }]}>
+      <KeyboardAvoidingView style={styles.flex} enabled={Platform.OS !== 'web'} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        {/* Keep the absolute composer inside the area reduced by native KAV padding. */}
+        <View style={styles.flex}>
         <FlatList
+          testID="chat-messages"
+          {...scrollKeyboardDismiss}
           ref={listRef}
           data={messages}
           keyExtractor={(message) => message.id}
-          renderItem={({ item }) => <MessageBubble message={item} />}
+          extraData={sentMessageId}
+          renderItem={({ item }) => <MessageBubble message={item} animateEntry={item.id === sentMessageId && !reduceMotion} />}
           contentContainerStyle={styles.messages}
-          onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: false })}
+          onContentSizeChange={() => {
+            if (Platform.OS !== 'web' && nearBottom.current) listRef.current?.scrollToEnd({ animated: false });
+          }}
+          onScroll={(event) => {
+            if (Platform.OS === 'web') return;
+            const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+            nearBottom.current = contentSize.height - layoutMeasurement.height - contentOffset.y < 80;
+          }}
+          scrollEventThrottle={32}
           keyboardShouldPersistTaps="handled"
+          keyboardDismissMode={Platform.OS === 'web' ? 'none' : 'on-drag'}
           ListHeaderComponent={<View style={{ height: insets.top + sizes.headerHeight + spacing.md }} />}
           ListFooterComponent={
             <View>
               {isTyping && <TypingIndicator />}
-              <View style={{ height: overlayHeight + spacing.md }} />
+              {Platform.OS !== 'web' && <View style={{ height: overlayHeight + spacing.md }} />}
             </View>
           }
         />
 
         {/* Плаваючий оверлей: стрічка проглядає крізь скляні елементи composer’а. */}
-        <View style={styles.overlay} onLayout={handleOverlayLayout}>
+        <View testID="chat-overlay" style={styles.overlay} onLayout={Platform.OS === 'web' ? undefined : handleOverlayLayout}>
           <View style={[StyleSheet.absoluteFill, WEB_BOTTOM_BLUR]} pointerEvents="none" />
           <LinearGradient
             colors={gradientColors}
@@ -135,35 +171,34 @@ export default function ChatScreen() {
             pointerEvents="none"
           />
           {showSuggestions && (
+            <View testID="chat-suggestions" aria-hidden={keyboardVisible} style={Platform.OS === 'web' ? { display: 'grid' } as object : undefined}>
+            <View>
             <View style={styles.suggestions}>
               {character.suggestedReplies.map((reply) => (
-                <Pressable
+                <QuickReply
                   key={reply}
-                  // Підказка лише вставляє текст — надсилання окремою дією (без витрат).
-                  onPress={() => setDraft(reply)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Вставити підказку: ${reply}`}
-                  style={({ pressed }) => [styles.suggestion, { backgroundColor: colors.surface, borderColor: colors.brand }, pressed && { backgroundColor: colors.brandSubtle }]}>
-                  <AppText variant="secondary" color="brand" style={styles.suggestionText}>
-                    {reply}
-                  </AppText>
-                </Pressable>
+                  reply={reply}
+                  disabled={Platform.OS === 'web' && keyboardVisible}
+                  reduceMotion={reduceMotion}
+                  onSend={handleSend}
+                />
               ))}
+            </View>
+            </View>
             </View>
           )}
 
           <Composer
             value={draft}
             onChangeText={setDraft}
-            onSend={handleSend}
-            onAttachPhoto={() => setIsComingSoonVisible(true)}
-            onRecordVoice={() => setIsComingSoonVisible(true)}
+            onSend={() => handleSend()}
             isBusy={isTyping}
           />
         </View>
+        </View>
       </KeyboardAvoidingView>
 
-      <View style={[styles.headerWrapper, { paddingTop: insets.top }]} pointerEvents="box-none">
+      <View testID="chat-header" style={[styles.headerWrapper, { paddingTop: insets.top }]} pointerEvents="box-none">
         <View style={[StyleSheet.absoluteFill, WEB_TOP_BLUR]} pointerEvents="none" />
         <LinearGradient
           colors={[gradientColors[2], gradientColors[1], gradientColors[0]]}
@@ -172,12 +207,12 @@ export default function ChatScreen() {
           pointerEvents="none"
         />
         <View style={styles.header}>
-          <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel="Назад до чатів" />
+          <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel={t('chat.back_accessibility')} />
           <Pressable
             onPress={openProfile}
             style={styles.headerIdentity}
             accessibilityRole="button"
-            accessibilityLabel={`Профіль: ${character.name}`}>
+            accessibilityLabel={t('chat.profile_accessibility', { name: character.name })}>
             <Avatar source={character.photos[0]} size={sizes.avatarSm} />
             <View style={styles.headerText}>
               <AppText variant="bodyStrong" numberOfLines={1}>
@@ -185,7 +220,7 @@ export default function ChatScreen() {
               </AppText>
               {isTyping && (
                 <AppText variant="caption" color="brand">
-                  друкує…
+                  {t('chat.typing')}
                 </AppText>
               )}
             </View>
@@ -197,17 +232,10 @@ export default function ChatScreen() {
       <InsufficientEnergySheet
         visible={isEnergySheetVisible}
         requiredAmount={ENERGY_CONFIG.costs.textMessage}
-        actionLabel="Надіслати повідомлення"
+        actionLabel={t('chat.insufficient_energy_action')}
         onClose={() => setIsEnergySheetVisible(false)}
       />
 
-      {/* Фото й голосові потребують бекенду та модерації — у прототипі чесно повідомляємо. */}
-      <BottomSheet visible={isComingSoonVisible} onClose={() => setIsComingSoonVisible(false)} title="Уже незабаром">
-        <AppText variant="body" color="textSecondary">
-          Надсилання фото й голосових повідомлень з’явиться в наступних версіях.
-        </AppText>
-        <Button label="Добре" onPress={() => setIsComingSoonVisible(false)} testID="coming-soon-close" />
-      </BottomSheet>
     </View>
   );
 }
@@ -264,22 +292,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingBottom: spacing.sm,
     gap: spacing.sm,
-  },
-  suggestion: {
-    maxWidth: '100%',
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs + 2,
-    minHeight: 36,
-    justifyContent: 'center',
-    borderRadius: radius.pill,
-    borderWidth: 1,
-    borderColor: colors.brand,
-    backgroundColor: colors.surface,
-  },
-  suggestionPressed: {
-    backgroundColor: colors.brandSubtle,
-  },
-  suggestionText: {
-    fontWeight: '500',
   },
 });

@@ -9,7 +9,10 @@
     "userInterfaceStyle": "automatic",
     "backgroundColor": "#FAF8F7",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -39,7 +42,40 @@
           "imageWidth": 76
         }
       ],
-      "expo-image"
+      "expo-image",
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": [
+              "en",
+              "uk",
+              "es",
+              "fr",
+              "de",
+              "zh",
+              "hi",
+              "ar",
+              "pt",
+              "ja"
+            ],
+            "android": [
+              "en",
+              "uk",
+              "es",
+              "fr",
+              "de",
+              "zh",
+              "hi",
+              "ar",
+              "pt",
+              "ja"
+            ]
+          },
+          "supportsRTL": true
+        }
+      ],
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true,

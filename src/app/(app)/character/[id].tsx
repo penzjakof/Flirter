@@ -1,20 +1,38 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { Platform, StyleSheet, View, type ViewStyle } from 'react-native';
+import Animated, { useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { PhotoGallery } from '@/components/character/photo-gallery';
+import { GlassSurface } from '@/components/ui/glass-surface';
+import { useMotionPreferences } from '@/hooks/use-motion-preferences';
 import { AppText } from '@/components/ui/app-text';
 import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
 import { IconButton } from '@/components/ui/icon-button';
-import { getCharacterById } from '@/data/characters';
+import { CHARACTERS, getCharacterById } from '@/data/characters';
 import { useChatsStore } from '@/store/chats-store';
-import { colors, radius, spacing } from '@/theme/tokens';
+import { colors, radius, sizes, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 const PHOTO_ASPECT_RATIO = 3 / 4;
+const WEB_BOTTOM_BLUR = Platform.select<ViewStyle>({
+  web: {
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+    maskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
+    WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
+  } as ViewStyle,
+  default: {},
+});
+
+// Static hosting must serve a direct Home Screen launch/reload of every catalogue profile.
+export function generateStaticParams() {
+  return CHARACTERS.map(({ id }) => ({ id }));
+}
 
 function Section({ title, items }: { title: string; items: readonly string[] }) {
   if (items.length === 0) return null;
@@ -34,10 +52,23 @@ function Section({ title, items }: { title: string; items: readonly string[] }) 
 
 /** S10. Профіль персонажа: галерея, біографія, sticky CTA. */
 export default function CharacterProfileScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const character = getCharacterById(id ?? '');
   const insets = useSafeAreaInsets();
+  const { reduceMotion, reduceTransparency } = useMotionPreferences();
+  const scrollY = useSharedValue(0);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [ctaHeight, setCtaHeight] = useState(sizes.buttonHeight + spacing.sm * 2);
+  const bottomOffset = Math.max(insets.bottom, sizes.floatingTabBarGap);
+  const onScroll = useAnimatedScrollHandler((event) => {
+    scrollY.set(Math.max(0, event.contentOffset.y));
+  });
+  const photoStyle = useAnimatedStyle(() => ({
+    // The sheet scrolls at full speed while the photo recedes more slowly.
+    transform: [{ translateY: reduceMotion ? 0 : scrollY.get() * 0.65 }],
+  }));
   const hasConversation = useChatsStore((state) => Boolean(character && state.conversations[character.id]));
   const createMatch = useChatsStore((state) => state.createMatch);
 
@@ -47,9 +78,9 @@ export default function CharacterProfileScreen() {
     return (
       <SafeAreaView style={[styles.missing, { backgroundColor: colors.background }]}>
         <AppText variant="heading" align="center">
-          Персонаж більше недоступний
+          {t('character.missing_title')}
         </AppText>
-        <Button label="Повернутися до знайомств" onPress={() => router.replace('/')} />
+        <Button label={t('character.back_to_dating')} onPress={() => router.replace('/')} />
       </SafeAreaView>
     );
   }
@@ -61,51 +92,57 @@ export default function CharacterProfileScreen() {
   };
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 + insets.bottom }} bounces={false}>
-        <View style={[styles.photoWrapper, { backgroundColor: colors.surfaceMuted }]}>
-          <Image source={character.photos[0]} style={styles.photo} contentFit="cover" contentPosition="top" priority="high" />
+    <View style={[styles.root, { backgroundColor: colors.background }]} onLayout={({ nativeEvent }) => setViewportHeight(nativeEvent.layout.height)}>
+      <Animated.ScrollView
+        testID="character-profile-scroll"
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ paddingBottom: ctaHeight + bottomOffset + spacing.xl }}
+        showsVerticalScrollIndicator={false}
+        removeClippedSubviews={false}
+        bounces={false}>
+        <Animated.View testID="character-photo-layer" style={[styles.photoWrapper, { backgroundColor: colors.surfaceMuted }, photoStyle]}>
+          <PhotoGallery key={character.id} photos={character.photos} name={character.name} />
           <LinearGradient colors={['rgba(0,0,0,0.35)', 'rgba(0,0,0,0)']} style={styles.topScrim} pointerEvents="none" />
-          <View style={[styles.closeButton, { top: insets.top + spacing.sm }]}>
-            <IconButton icon="chevron-down" color={colors.textOnMedia} onPress={handleClose} accessibilityLabel="Закрити профіль" />
-          </View>
-        </View>
+        </Animated.View>
 
-        <View style={[styles.body, { backgroundColor: colors.background }]}>
+        <View testID="character-biography" style={[styles.body, {
+          backgroundColor: colors.background,
+          minHeight: Math.max(0, viewportHeight - insets.top - ctaHeight - bottomOffset - spacing.xl),
+        }]}>
           <View style={styles.titleRow}>
             <AppText variant="hero" accessibilityRole="header">
               {character.name}, <AppText variant="hero" style={styles.ageText}>{character.age}</AppText>
             </AppText>
           </View>
-          <View style={styles.metaRow}>
-            <Ionicons name="book-outline" size={16} color={colors.textSecondary} />
-            <AppText variant="secondary" color="textSecondary">
-              У сюжеті: {character.storyCity}
-            </AppText>
-          </View>
-
           <AppText variant="body">{character.bio}</AppText>
 
-          <Section title="Інтереси" items={character.interests} />
-          <Section title="Характер" items={character.traits} />
-          <Section title="Стиль життя" items={character.lifestyle} />
-
-          <View style={[styles.aboutAi, { backgroundColor: colors.brandSubtle }]}>
-            <Ionicons name="sparkles-outline" size={20} color={colors.brand} />
-            <AppText variant="secondary" style={styles.aboutAiText}>
-              {character.name} — вигаданий AI-персонаж. Фото, біографія та відповіді створені штучним інтелектом.
-            </AppText>
-          </View>
+          <Section title={t('character.section_interests')} items={character.interests} />
+          <Section title={t('character.section_traits')} items={character.traits} />
+          <Section title={t('character.section_lifestyle')} items={character.lifestyle} />
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
 
-      <View style={[styles.stickyCta, { paddingBottom: insets.bottom + spacing.lg, backgroundColor: colors.background, borderTopColor: colors.border }]}>
+      <View pointerEvents="none" style={[styles.bottomOverlay, { height: ctaHeight + bottomOffset + spacing.xl }]}>
+        {!reduceTransparency && <View style={[StyleSheet.absoluteFill, WEB_BOTTOM_BLUR]} />}
+        <LinearGradient
+          colors={[`${colors.background}00`, `${colors.background}66`, `${colors.background}B3`]}
+          locations={[0, 0.4, 1]}
+          style={StyleSheet.absoluteFill}
+        />
+      </View>
+      <View style={[styles.stickyCta, { bottom: bottomOffset }]} onLayout={({ nativeEvent }) => setCtaHeight(nativeEvent.layout.height)}>
+        <GlassSurface testID="character-cta-glass" style={[StyleSheet.absoluteFill, { borderRadius: radius.pill }]} />
         <Button
-          label={hasConversation ? 'Продовжити розмову' : 'Почати чат'}
+          label={hasConversation ? t('character.continue_chat') : t('character.start_chat')}
           icon="chatbubble"
           onPress={handleStartChat}
           testID="profile-start-chat"
+          style={styles.ctaButton}
         />
+      </View>
+      <View style={[styles.closeButton, { top: insets.top + spacing.sm, backgroundColor: colors.mediaScrim }]}>
+        <IconButton icon="chevron-down" color={colors.textOnMedia} onPress={handleClose} accessibilityLabel={t('character.close_accessibility')} />
       </View>
     </View>
   );
@@ -114,6 +151,7 @@ export default function CharacterProfileScreen() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    overflow: 'hidden',
     backgroundColor: colors.background,
   },
   missing: {
@@ -129,10 +167,6 @@ const styles = StyleSheet.create({
     maxHeight: 640,
     backgroundColor: colors.surfaceMuted,
   },
-  photo: {
-    width: '100%',
-    height: '100%',
-  },
   topScrim: {
     position: 'absolute',
     top: 0,
@@ -147,6 +181,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.mediaScrim,
   },
   body: {
+    zIndex: 1,
     marginTop: -spacing.xl,
     borderTopLeftRadius: radius.card,
     borderTopRightRadius: radius.card,
@@ -161,12 +196,6 @@ const styles = StyleSheet.create({
   ageText: {
     fontWeight: '400',
   },
-  metaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    marginTop: -spacing.sm,
-  },
   section: {
     gap: spacing.sm,
   },
@@ -175,26 +204,19 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: spacing.sm,
   },
-  aboutAi: {
-    flexDirection: 'row',
-    gap: spacing.md,
-    padding: spacing.lg,
-    borderRadius: radius.lg,
-    backgroundColor: colors.brandSubtle,
-    alignItems: 'center',
-  },
-  aboutAiText: {
-    flex: 1,
-  },
-  stickyCta: {
+  bottomOverlay: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-    paddingHorizontal: spacing.xl,
-    paddingTop: spacing.md,
-    backgroundColor: colors.background,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
+  },
+  stickyCta: {
+    position: 'absolute',
+    left: spacing.lg,
+    right: spacing.lg,
+    padding: spacing.sm,
+  },
+  ctaButton: {
+    borderRadius: radius.pill,
   },
 });

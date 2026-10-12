@@ -11,6 +11,7 @@ interface AppTextProps extends TextProps {
 
 export function AppText({ variant = 'body', color = 'textPrimary', align, style, ...rest }: AppTextProps) {
   const { colors } = useTheme();
-  return <Text style={[typography[variant], { color: colors[color] }, align && { textAlign: align }, style]} {...rest} />;
+  const textColor = color === 'brand' ? colors.brandText : colors[color];
+  return <Text style={[typography[variant], { color: textColor }, align && { textAlign: align }, style]} {...rest} />;
 }
 

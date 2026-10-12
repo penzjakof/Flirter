@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Keyboard, StyleSheet, View } from 'react-native';
 
 import { OnboardingGate } from '@/components/onboarding/onboarding-gate';
 import { OnboardingLayout } from '@/components/onboarding/onboarding-layout';
@@ -27,6 +28,7 @@ async function verifyEmailCode(code: string): Promise<boolean> {
 
 /** S04. Підтвердження email: autofill, resend з реальним cooldown. */
 function VerifyScreenContent() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const email = useSessionStore((state) => state.email);
   const confirmEmailVerified = useSessionStore((state) => state.confirmEmailVerified);
@@ -42,19 +44,25 @@ function VerifyScreenContent() {
     return () => clearTimeout(timeoutId);
   }, [cooldown]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (codeToVerify = code) => {
+    if (isSubmitting || codeToVerify.length !== OTP_LENGTH) return;
     setIsSubmitting(true);
     setError(null);
     try {
-      const isValid = await verifyEmailCode(code);
+      const isValid = await verifyEmailCode(codeToVerify);
       if (!isValid) {
-        setError('Код неправильний або прострочений. Спробуй ще раз або надішли новий.');
+        setError(t('onboarding.verify.errors.invalid_code'));
         return;
       }
       confirmEmailVerified();
+      // iOS autofill can submit while the keyboard is still animating away.
+      // Let that animation settle before mounting the next onboarding screen,
+      // otherwise its first layout pass may use the reduced keyboard viewport.
+      Keyboard.dismiss();
+      await new Promise((resolve) => setTimeout(resolve, 180));
       router.replace(getNextOnboardingRoute(useSessionStore.getState()) ?? '/');
     } catch {
-      setError('Немає з’єднання. Код збережено — спробуй ще раз.');
+      setError(t('onboarding.verify.errors.network_error'));
     } finally {
       setIsSubmitting(false);
     }
@@ -63,19 +71,26 @@ function VerifyScreenContent() {
   return (
     <OnboardingLayout
       stepNumber={3}
-      title="Введи код із листа"
-      subtitle={`Ми надіслали ${OTP_LENGTH}-значний код на ${email ?? 'твою пошту'}.`}
+      title={t('onboarding.verify.title')}
+      subtitle={t('onboarding.verify.subtitle', {
+        count: OTP_LENGTH,
+        email: email ?? t('onboarding.verify.fallback_email'),
+      })}
       footer={
         <>
           <Button
-            label="Підтвердити"
+            label={t('onboarding.verify.confirm_button')}
             onPress={handleSubmit}
             loading={isSubmitting}
             disabled={code.length !== OTP_LENGTH}
             testID="verify-submit"
           />
           <Button
-            label={cooldown > 0 ? `Надіслати знову через ${cooldown} с` : 'Надіслати код знову'}
+            label={
+              cooldown > 0
+                ? t('onboarding.verify.resend_code_cooldown', { seconds: cooldown })
+                : t('onboarding.verify.resend_code')
+            }
             variant="ghost"
             disabled={cooldown > 0}
             onPress={() => {
@@ -87,13 +102,15 @@ function VerifyScreenContent() {
       }>
       <TextField
         testID="verify-code"
-        label="Код підтвердження"
+        label={t('onboarding.verify.code_label')}
         placeholder={'•'.repeat(OTP_LENGTH)}
         value={code}
         center
         onChangeText={(value) => {
-          setCode(sanitizeDigits(value, OTP_LENGTH));
+          const nextCode = sanitizeDigits(value, OTP_LENGTH);
+          setCode(nextCode);
           setError(null);
+          if (nextCode.length === OTP_LENGTH) void handleSubmit(nextCode);
         }}
         error={error}
         keyboardType="number-pad"
@@ -104,12 +121,17 @@ function VerifyScreenContent() {
         autoFocus
       />
 
-      <Button label="Змінити email" variant="secondary" icon="create-outline" onPress={() => router.back()} />
+      <Button
+        label={t('onboarding.verify.change_email')}
+        variant="secondary"
+        icon="create-outline"
+        onPress={() => router.back()}
+      />
 
       {IS_MOCK_AUTH && (
         <View style={[styles.demoNote, { backgroundColor: colors.brandSubtle }]}>
           <AppText variant="secondary" color="textSecondary">
-            Демо-режим: підійде будь-який {OTP_LENGTH}-значний код.
+            {t('onboarding.verify.demo_note', { count: OTP_LENGTH })}
           </AppText>
         </View>
       )}

@@ -1,5 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { AppText } from '@/components/ui/app-text';
 import { formatMessageTime } from '@/lib/format';
@@ -9,24 +11,35 @@ import { useTheme } from '@/theme/use-theme';
 
 interface MessageBubbleProps {
   message: ChatMessage;
+  animateEntry?: boolean;
 }
 
 const LIKE_STICKER_SIZE = 72;
 const LIKE_ICON_SIZE = 36;
+const MESSAGE_ENTRY = FadeInDown.duration(220).withInitialValues({ opacity: 0, transform: [{ translateY: 12 }] });
 
 /** Бульбашка повідомлення. Стабільна макс. ширина — рядки не надто довгі. */
-export function MessageBubble({ message }: MessageBubbleProps) {
+export function MessageBubble({ message, animateEntry = false }: MessageBubbleProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const kind = message.kind ?? 'text';
 
-  if (kind === 'disclaimer') return <DisclaimerMessage text={message.text} />;
-  if (kind === 'like') return <LikeSticker message={message} />;
+  if (kind === 'disclaimer') {
+    return <DisclaimerMessage text={t('chats.system_messages.ai_disclaimer')} />;
+  }
+  if (kind === 'like') {
+    return <LikeSticker message={message} text={t('chats.system_messages.liked_profile')} />;
+  }
 
   if (message.author === 'system') {
+    const systemText =
+      message.text === 'Відповідь не вдалося підготувати. Енергію повернуто.'
+        ? t('chats.system_messages.reply_error_refunded')
+        : message.text;
     return (
       <View style={styles.systemWrapper} accessibilityRole="text">
         <AppText variant="secondary" color="textSecondary" align="center">
-          {message.text}
+          {systemText}
         </AppText>
       </View>
     );
@@ -35,7 +48,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
   const isOutgoing = message.author === 'user';
 
   return (
-    <View style={[styles.row, isOutgoing ? styles.rowOutgoing : styles.rowIncoming]}>
+    <Animated.View entering={animateEntry ? MESSAGE_ENTRY : undefined} testID="chat-message" style={[styles.row, isOutgoing ? styles.rowOutgoing : styles.rowIncoming]}>
       <View
         style={[
           styles.bubble,
@@ -49,11 +62,11 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         <AppText
           variant="caption"
           color={isOutgoing ? 'textOnBrand' : 'textSecondary'}
-          style={[styles.time, isOutgoing && styles.timeOutgoing]}>
+          style={styles.time}>
           {formatMessageTime(message.createdAt)}
         </AppText>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -69,17 +82,17 @@ function DisclaimerMessage({ text }: { text: string }) {
 }
 
 /** Стікер симпатії від користувача — праворуч, як вихідне повідомлення. */
-function LikeSticker({ message }: { message: ChatMessage }) {
+function LikeSticker({ message, text }: { message: ChatMessage; text: string }) {
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.row, styles.rowOutgoing]} accessibilityRole="text" accessibilityLabel={message.text} testID="chat-like-sticker">
+    <View style={[styles.row, styles.rowOutgoing]} accessibilityRole="text" accessibilityLabel={text} testID="chat-like-sticker">
       <View style={styles.sticker}>
         <View style={[styles.stickerCircle, { backgroundColor: colors.brand }]}>
           <Ionicons name="heart" size={LIKE_ICON_SIZE} color={colors.textOnBrand} />
         </View>
         <AppText variant="caption" color="textSecondary">
-          {message.text} · {formatMessageTime(message.createdAt)}
+          {text} · {formatMessageTime(message.createdAt)}
         </AppText>
       </View>
     </View>
@@ -119,9 +132,6 @@ const styles = StyleSheet.create({
   time: {
     alignSelf: 'flex-end',
     fontSize: 11,
-  },
-  timeOutgoing: {
-    opacity: 0.8,
   },
   systemWrapper: {
     paddingHorizontal: spacing.xxl,

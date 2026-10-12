@@ -1,4 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,42 +11,90 @@ import { useTheme } from '@/theme/use-theme';
 
 type LegalDocId = 'terms' | 'privacy' | 'ai';
 
-interface LegalDocument {
-  title: string;
-  version: string;
-  sections: { heading: string; body: string }[];
+export function generateStaticParams() {
+  return ['terms', 'privacy', 'ai'].map((doc) => ({ doc }));
 }
 
-/**
- * S40. Legal reader. Доступний без входу й балансу.
- * Тексти — ЧЕРНЕТКА-заглушка; фінальні документи готує юрист.
- */
-const DOCUMENTS: Record<LegalDocId, LegalDocument> = {
+interface LegalDocConfig {
+  titleKey: 'legal.documents.terms.title' | 'legal.documents.privacy.title' | 'legal.documents.ai.title';
+  version: string;
+  sections: {
+    headingKey:
+      | 'legal.documents.terms.sections.draft.heading'
+      | 'legal.documents.terms.sections.nature.heading'
+      | 'legal.documents.terms.sections.age.heading'
+      | 'legal.documents.privacy.sections.draft.heading'
+      | 'legal.documents.privacy.sections.data.heading'
+      | 'legal.documents.privacy.sections.rights.heading'
+      | 'legal.documents.ai.sections.real_people.heading'
+      | 'legal.documents.ai.sections.offline_meet.heading'
+      | 'legal.documents.ai.sections.ai_mistakes.heading';
+    bodyKey:
+      | 'legal.documents.terms.sections.draft.body'
+      | 'legal.documents.terms.sections.nature.body'
+      | 'legal.documents.terms.sections.age.body'
+      | 'legal.documents.privacy.sections.draft.body'
+      | 'legal.documents.privacy.sections.data.body'
+      | 'legal.documents.privacy.sections.rights.body'
+      | 'legal.documents.ai.sections.real_people.body'
+      | 'legal.documents.ai.sections.offline_meet.body'
+      | 'legal.documents.ai.sections.ai_mistakes.body';
+  }[];
+}
+
+const LEGAL_DOCS: Record<LegalDocId, LegalDocConfig> = {
   terms: {
-    title: 'Умови використання',
+    titleKey: 'legal.documents.terms.title',
     version: LEGAL_VERSIONS.terms,
     sections: [
-      { heading: 'Чернетка', body: 'Фінальний текст Умов буде надано після юридичного узгодження. Цей екран — місце для документа.' },
-      { heading: 'Природа сервісу', body: 'Flirter — розважальний симулятор знайомств. Усі профілі є вигаданими AI-персонажами.' },
-      { heading: 'Вік', body: 'Сервіс доступний лише особам, яким виповнилося 18 років.' },
+      {
+        headingKey: 'legal.documents.terms.sections.draft.heading',
+        bodyKey: 'legal.documents.terms.sections.draft.body',
+      },
+      {
+        headingKey: 'legal.documents.terms.sections.nature.heading',
+        bodyKey: 'legal.documents.terms.sections.nature.body',
+      },
+      {
+        headingKey: 'legal.documents.terms.sections.age.heading',
+        bodyKey: 'legal.documents.terms.sections.age.body',
+      },
     ],
   },
   privacy: {
-    title: 'Політика приватності',
+    titleKey: 'legal.documents.privacy.title',
     version: LEGAL_VERSIONS.privacy,
     sections: [
-      { heading: 'Чернетка', body: 'Фінальний текст Політики буде надано після юридичного узгодження.' },
-      { heading: 'Які дані', body: 'Email, дата народження, нікнейм, необов’язкові вподобання, історія розмов і покупок.' },
-      { heading: 'Ваші права', body: 'Ви можете запросити копію даних, видалити історію або акаунт у налаштуваннях.' },
+      {
+        headingKey: 'legal.documents.privacy.sections.draft.heading',
+        bodyKey: 'legal.documents.privacy.sections.draft.body',
+      },
+      {
+        headingKey: 'legal.documents.privacy.sections.data.heading',
+        bodyKey: 'legal.documents.privacy.sections.data.body',
+      },
+      {
+        headingKey: 'legal.documents.privacy.sections.rights.heading',
+        bodyKey: 'legal.documents.privacy.sections.rights.body',
+      },
     ],
   },
   ai: {
-    title: 'Про AI-персонажів',
+    titleKey: 'legal.documents.ai.title',
     version: LEGAL_VERSIONS.aiDisclosure,
     sections: [
-      { heading: 'Чи це реальні люди?', body: 'Ні. Усі персонажі вигадані, а їхні фото, біографії та відповіді створені AI або сценаріями.' },
-      { heading: 'Чи можна зустрітися?', body: 'Ні. Персонажі не існують у реальному світі, офлайн-зустрічі неможливі.' },
-      { heading: 'Чи може AI помилятися?', body: 'Так. Відповіді можуть бути неточними. Не сприймайте їх як професійну пораду.' },
+      {
+        headingKey: 'legal.documents.ai.sections.real_people.heading',
+        bodyKey: 'legal.documents.ai.sections.real_people.body',
+      },
+      {
+        headingKey: 'legal.documents.ai.sections.offline_meet.heading',
+        bodyKey: 'legal.documents.ai.sections.offline_meet.body',
+      },
+      {
+        headingKey: 'legal.documents.ai.sections.ai_mistakes.heading',
+        bodyKey: 'legal.documents.ai.sections.ai_mistakes.body',
+      },
     ],
   },
 };
@@ -55,27 +104,38 @@ function isLegalDocId(value: unknown): value is LegalDocId {
 }
 
 export default function LegalScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const { doc } = useLocalSearchParams<{ doc: string }>();
-  const document = isLegalDocId(doc) ? DOCUMENTS[doc] : null;
 
+  const isDocValid = isLegalDocId(doc);
   const handleBack = () => (router.canGoBack() ? router.back() : router.replace('/'));
+
+  const config = isDocValid ? LEGAL_DOCS[doc] : null;
+  const title = config ? t(config.titleKey) : null;
+  const version = config ? config.version : null;
+  const sections = config
+    ? config.sections.map((section) => ({
+        heading: t(section.headingKey),
+        body: t(section.bodyKey),
+      }))
+    : [];
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'bottom']}>
       <View style={styles.topBar}>
-        <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel="Назад" />
+        <IconButton icon="chevron-back" onPress={handleBack} accessibilityLabel={t('legal.back_accessibility')} />
       </View>
       <ScrollView contentContainerStyle={styles.content}>
-        {document ? (
+        {isDocValid ? (
           <>
             <AppText variant="title" accessibilityRole="header">
-              {document.title}
+              {title}
             </AppText>
             <AppText variant="secondary" color="textSecondary">
-              Версія від {document.version}
+              {t('legal.version_label', { version })}
             </AppText>
-            {document.sections.map((section) => (
+            {sections.map((section) => (
               <View key={section.heading} style={styles.section}>
                 <AppText variant="heading" accessibilityRole="header">
                   {section.heading}
@@ -85,7 +145,7 @@ export default function LegalScreen() {
             ))}
           </>
         ) : (
-          <AppText variant="body">Документ не знайдено.</AppText>
+          <AppText variant="body">{t('legal.not_found')}</AppText>
         )}
       </ScrollView>
     </SafeAreaView>

@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "back": "Atrás",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "save": "Guardar",
+    "confirm": "Confirmar",
+    "done": "Listo",
+    "understood": "Entendido",
+    "ok": "Aceptar",
+    "start": "Empezar",
+    "login": "Iniciar sesión",
+    "install": "Instalar",
+    "not_now": "Ahora no",
+    "reset": "Restablecer",
+    "retry": "Reintentar",
+    "back_to_home": "Ir al inicio",
+    "back_to_dating": "Volver a citas",
+    "age_badge": "18+",
+    "coming_soon": "Próximamente",
+    "yesterday": "Ayer",
+    "session_restoring": "Restaurando sesión",
+    "terms": "Términos",
+    "terms_full": "Términos de servicio",
+    "privacy": "Privacidad",
+    "privacy_full": "Política de privacidad",
+    "about_ai": "Sobre la IA",
+    "about_ai_full": "Sobre los personajes de IA",
+    "seconds_short": "{{count}}s",
+    "minutes_short": "{{count}}min",
+    "hours_short": "{{count}}h",
+    "demo_notice": "Modo demo: el acceso y las respuestas funcionan localmente. No se envían correos; los pagos, fotos y voz aún no están disponibles."
+  },
+  "tabs": {
+    "dating": "Citas",
+    "discover": "Explorar",
+    "chats": "Chats",
+    "profile": "Perfil",
+    "unread_badge_accessibility": "{{label}}, {{count}} nuevos"
+  },
+  "not_found": {
+    "title": "Página no encontrada",
+    "description": "Este enlace puede haber caducado o ya no existir.",
+    "button": "Ir al inicio"
+  },
+  "html_meta": {
+    "description": "Flirter — simulador de citas con personajes ficticios de IA. 18+.",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "Paso {{step}} de {{total}}"
+    },
+    "welcome": {
+      "hero_title": "Tu historia empieza con una conversación",
+      "hero_subtitle": "Conoce personajes ficticios de IA. Chatea a tu propio ritmo.",
+      "start_button": "Empezar",
+      "login_button": "Iniciar sesión"
+    },
+    "age": {
+      "title": "Servicio solo para adultos",
+      "subtitle": "Introduce tu fecha de nacimiento. Nunca será visible para los personajes ni para otras personas.",
+      "day_label": "Día",
+      "day_placeholder": "DD",
+      "month_label": "Mes",
+      "month_placeholder": "MM",
+      "year_label": "Año",
+      "year_placeholder": "AAAA",
+      "accessibility_label": "Fecha de nacimiento",
+      "privacy_note_prefix": "Necesitamos tu fecha de nacimiento para confirmar que eres mayor de 18 años. Más detalles en nuestra ",
+      "privacy_policy_link": "Política de privacidad",
+      "privacy_note_suffix": ".",
+      "errors": {
+        "incomplete": "Introduce una fecha completa: día, mes y año.",
+        "invalid": "Esta fecha no existe. Comprueba el día y el mes.",
+        "future": "La fecha no puede estar en el futuro.",
+        "unrealistic": "Comprueba el año de nacimiento."
+      },
+      "underage": {
+        "title": "Servicio no disponible",
+        "subtitle": "Flirter solo está disponible para mayores de 18 años. Gracias por tu comprensión.",
+        "terms_button": "Términos de servicio"
+      }
+    },
+    "sign_in": {
+      "signup_title": "Crear una cuenta",
+      "login_title": "¡De vuelta!",
+      "signup_subtitle": "Una cuenta guarda tus chats y energía entre dispositivos. Sin contraseña: te enviaremos un código.",
+      "login_subtitle": "Introduce el correo con el que te registraste. Te enviaremos un código de un solo uso.",
+      "get_code_button": "Obtener código",
+      "email_label": "Correo electrónico",
+      "email_placeholder": "tu@ejemplo.com",
+      "legal_prefix": "Al continuar, revisas los ",
+      "terms_link": "Términos",
+      "and": " y la ",
+      "privacy_link": "Política de privacidad",
+      "legal_suffix": ". Deberás aceptarlos explícitamente a continuación.",
+      "errors": {
+        "invalid_email": "Comprueba el correo: parece incorrecto.",
+        "network_error": "Error al enviar el código. Revisa tu conexión e inténtalo de nuevo."
+      }
+    },
+    "verify": {
+      "title": "Introduce el código del correo",
+      "subtitle": "Hemos enviado un código de {{count}} dígitos a {{email}}.",
+      "fallback_email": "tu correo",
+      "confirm_button": "Confirmar",
+      "resend_code": "Reenviar código",
+      "resend_code_cooldown": "Reenviar en {{seconds}}s",
+      "code_label": "Código de verificación",
+      "change_email": "Cambiar correo",
+      "demo_note": "Modo de demostración: cualquier código de {{count}} dígitos funcionará.",
+      "errors": {
+        "invalid_code": "Código incorrecto o caducado. Inténtalo de nuevo o pide uno nuevo.",
+        "network_error": "Sin conexión. Código guardado: inténtalo de nuevo."
+      }
+    },
+    "profile_setup": {
+      "title": "¿Cómo te llamamos?",
+      "subtitle": "Los personajes te llamarán por este nombre. Tu nombre real no es necesario.",
+      "continue_button": "Continuar",
+      "skip_button": "Omitir opcionales",
+      "nickname_label": "Apodo",
+      "nickname_helper": "Puedes cambiarlo en cualquier momento en tu perfil.",
+      "nickname_error": "Entre {{min}} y {{max}} caracteres.",
+      "gender_label": "Tu género (opcional)",
+      "preference_label": "A quién mostrar (opcional)",
+      "genders": {
+        "male": "Hombre",
+        "female": "Mujer",
+        "other": "Otro"
+      },
+      "preferences": {
+        "women": "Mujeres",
+        "men": "Hombres",
+        "everyone": "Todos"
+      }
+    },
+    "disclosure": {
+      "title": "Este es un simulador de citas con IA",
+      "submit_button": "Ir a citas",
+      "facts": {
+        "profiles": "Todos los perfiles son personajes ficticios.",
+        "ai_content": "Fotos, biografías y respuestas creadas por IA o guiones.",
+        "no_real_people": "Aquí no hay personas reales para citas.",
+        "no_offline": "No es posible quedar en persona."
+      },
+      "consents": {
+        "ai_label": "Entiendo que chateo con personajes ficticios de IA",
+        "ai_text": "Entiendo que chateo con personajes ficticios de IA, no con personas reales.",
+        "terms_label": "Acepto los Términos de servicio y he leído la Política de privacidad",
+        "terms_prefix": "Acepto los ",
+        "terms_link": "Términos de servicio",
+        "and": " y he leído la ",
+        "privacy_link": "Política de privacidad",
+        "terms_suffix": "."
+      },
+      "error_save": "No se pudieron guardar las selecciones. Inténtalo de nuevo."
+    }
+  },
+  "discover": {
+    "filter_accessibility": "Filtros",
+    "filter_active_accessibility": "Filtros, {{count}} activos",
+    "empty_title": "No hay personajes con estos filtros",
+    "empty_subtitle": "Prueba a quitar algunos filtros: pronto aparecerán nuevos personajes.",
+    "reset_filters": "Restablecer filtros",
+    "card_accessibility": "{{name}}, {{age}}. {{tagline}}. Abrir perfil",
+    "action_open_chat": "Abrir chat con {{name}}",
+    "action_like": "Dar me gusta a {{name}}",
+    "sheet": {
+      "title": "Filtros",
+      "who_to_show": "A quién mostrar",
+      "age": "Edad",
+      "ethnicity": "Etnia",
+      "interests": "Intereses",
+      "communication_style": "Estilo de comunicación",
+      "only_new_title": "Solo nuevos",
+      "only_new_subtitle": "Ocultar personajes con los que ya tienes un chat",
+      "reset": "Restablecer",
+      "no_matches": "Sin coincidencias",
+      "show_results_one": "Mostrar {{count}} personaje",
+      "show_results_few": "Mostrar {{count}} personajes",
+      "show_results_many": "Mostrar {{count}} personajes",
+      "show_results_other": "Mostrar {{count}} personajes"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "Todos",
+        "women": "Mujeres",
+        "men": "Hombres",
+        "nonbinary": "No binarios"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "Deportes",
+        "travel": "Viajes",
+        "music": "Música",
+        "art": "Arte",
+        "food": "Comida y café",
+        "books": "Libros y cine",
+        "nature": "Naturaleza"
+      },
+      "styles": {
+        "romantic": "Romántico",
+        "playful": "Juguetón",
+        "intellectual": "Intelectual",
+        "caring": "Atento"
+      },
+      "ethnicities": {
+        "european": "Europea",
+        "asian": "Asiática",
+        "african": "Africana",
+        "latin": "Latinoamericana",
+        "middle_eastern": "Medio Oriente",
+        "mixed": "Mixta"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "Chats",
+    "typing": "escribiendo…",
+    "you_prefix": "Tú: ",
+    "row_accessibility": "{{name}}. {{preview}}",
+    "unread_suffix": ". No leídos: {{count}}",
+    "dismiss_request_accessibility": "Descartar solicitud de {{name}}",
+    "section_requests": "Solicitudes de conversación",
+    "show_all_requests": "Mostrar todas",
+    "show_less_requests": "Mostrar menos",
+    "section_dialogs": "Mensajes",
+    "empty_title": "Todo tranquilo por aquí",
+    "empty_subtitle": "Elige un personaje para tu primera conversación.",
+    "to_dating_button": "Explorar citas",
+    "system_messages": {
+      "ai_disclaimer": "Esta es una conversación con un personaje ficticio de IA. Las respuestas pueden contener errores.",
+      "liked_profile": "Te ha gustado el perfil",
+      "reply_error_refunded": "No se pudo generar la respuesta. Energía reembolsada."
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1 chat esperando respuesta",
+      "other": "{{count}} chats esperando respuesta",
+      "row_accessibility": "{{label}}. Abrir chats"
+    },
+    "back_accessibility": "Volver a los chats",
+    "profile_accessibility": "Perfil: {{name}}",
+    "typing": "escribiendo…",
+    "send_suggestion_accessibility": "Enviar respuesta: {{reply}}",
+    "insufficient_energy_action": "Enviar mensaje",
+    "coming_soon_modal": {
+      "title": "Próximamente",
+      "description": "El envío de fotos y mensajes de voz estará disponible en las próximas versiones.",
+      "button": "Aceptar"
+    },
+    "composer": {
+      "attach_photo_accessibility": "Adjuntar foto",
+      "placeholder": "Mensaje",
+      "input_accessibility": "Texto del mensaje",
+      "send_accessibility": "Enviar",
+      "record_voice_accessibility": "Grabar mensaje de voz"
+    },
+    "typing_indicator_accessibility": "El personaje está escribiendo"
+  },
+  "character": {
+    "missing_title": "El personaje ya no está disponible",
+    "back_to_dating": "Volver a citas",
+    "close_accessibility": "Cerrar perfil",
+    "in_story": "En la historia: {{city}}",
+    "section_interests": "Intereses",
+    "section_traits": "Personalidad",
+    "section_lifestyle": "Estilo de vida",
+    "about_ai_notice": "{{name}} es un personaje ficticio de IA. Fotos, biografías y respuestas generadas por inteligencia artificial.",
+    "continue_chat": "Continuar conversación",
+    "start_chat": "Empezar chat"
+  },
+  "energy": {
+    "title": "Energía",
+    "chip_accessibility": "Energía: {{total}}. Abrir tienda de energía",
+    "subscription": "Más energía con suscripción",
+    "one_time": "Recarga única",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "Mejor valor",
+      "price": "149 ₴",
+      "period": " / semana",
+      "feature_limit": "Límite 60 en lugar de {{cap}}",
+      "feature_speed": "Regeneración doblemente rápida · 1 cada 6 min",
+      "subscribe_button": "Suscribirse",
+      "footnote": "Renovación automática · cancela cuando quieras"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} de energía",
+      "badge_recommended": "Recomendado",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "o {{photos}} fotos",
+      "buy": "Comprar",
+      "buy_accessibility": "Comprar {{amount}} de energía. {{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "Sin energía",
+      "close_accessibility": "Cerrar",
+      "subtitle": "Recarga tu energía para seguir chateando",
+      "regen_countdown": "+1 en {{time}}",
+      "balance_status": "{{current}} de {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "Mejor valor",
+      "sub_price": "149 ₴",
+      "sub_period": " / semana",
+      "sub_feature_limit": "Límite de 60 de energía",
+      "sub_feature_speed": "Regeneración el doble de rápida",
+      "sub_button": "Suscribirse",
+      "divider_or": "o recarga única",
+      "word_energy": "energía",
+      "badge_recommended": "Recomendado",
+      "not_now": "Ahora no"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "Pronto",
+      "benefit_cap": "Capacidad 60 ⚡ en lugar de {{cap}}",
+      "benefit_speed": "Regeneración doblemente rápida: 1 ⚡ cada 6 min",
+      "benefit_prices": "Mensajes y fotos al mismo coste de energía",
+      "footnote": "El precio, período y condiciones de cancelación se mostrarán antes del pago."
+    },
+    "hero_card": {
+      "your_balance": "Tu saldo",
+      "messages_equivalent_one": "≈ {{count}} mensaje",
+      "messages_equivalent_few": "≈ {{count}} mensajes",
+      "messages_equivalent_many": "≈ {{count}} mensajes",
+      "messages_equivalent_other": "≈ {{count}} mensajes",
+      "full_reserve": "Reserva gratis llena · {{cap}} ⚡",
+      "free_plus_one": "Gratis +1 ⚡",
+      "in_time": "en {{time}}",
+      "progress_accessibility": "Progreso hacia la siguiente unidad de energía"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — pago próximamente",
+      "title": "Pago próximamente",
+      "description": "Los pagos aún no están habilitados: esto es un prototipo. Los precios aparecerán al integrar el proveedor de pago y los verás antes de confirmar la compra.",
+      "button": "Entendido"
+    }
+  },
+  "profile": {
+    "header_title": "Perfil",
+    "privacy_note": "Estos son ajustes privados. Tu perfil no es visible para personas reales.",
+    "groups": {
+      "theme": "Tema visual",
+      "app": "Aplicación",
+      "energy_and_purchases": "Energía y compras",
+      "help_and_rules": "Ayuda y reglas",
+      "general": "General"
+    },
+    "theme_options": {
+      "system": "Del sistema",
+      "light": "Claro",
+      "dark": "Oscuro"
+    },
+    "rows": {
+      "install_pwa": "Añadir a la pantalla de inicio",
+      "balance_and_topup": "Saldo y recargas",
+      "about_ai": "Sobre los personajes de IA",
+      "terms": "Términos de servicio",
+      "privacy_policy": "Política de privacidad",
+      "language": "Idioma"
+    },
+    "buttons": {
+      "logout": "Cerrar sesión",
+      "reset_demo": "Restablecer datos demo"
+    },
+    "logout_modal": {
+      "title": "¿Cerrar sesión?",
+      "description": "Esta es una demo local. Al cerrar sesión se borran las conversaciones y se reinicia el saldo en este dispositivo.",
+      "confirm": "Cerrar sesión",
+      "cancel": "Cancelar"
+    },
+    "language_modal": {
+      "title": "Seleccionar idioma",
+      "restart_notice": "La aplicación requiere un reinicio rápido para cambiar la dirección de la interfaz.",
+      "restart_button": "Reiniciar ahora",
+      "cancel_button": "Más tarde"
+    }
+  },
+  "pwa_install": {
+    "title": "Añadir a la pantalla de inicio",
+    "benefits": {
+      "quick_launch": "Acceso rápido desde la pantalla de inicio",
+      "standalone": "Ventana independiente sin barras de navegador",
+      "notifications": "Notificaciones en dispositivos compatibles"
+    },
+    "install_button": "Instalar",
+    "not_now_button": "Ahora no",
+    "ios_steps": {
+      "step_1": "Toca «Compartir» en el menú de Safari.",
+      "step_2": "Selecciona «Añadir a la pantalla de inicio».",
+      "step_3": "Mantén activado «Abrir como aplicación web» y pulsa «Añadir»."
+    },
+    "in_app_steps": {
+      "step_1": "Abre el menú de esta app (⋯).",
+      "step_2": "Elige «Abrir en el navegador» — Safari o Chrome.",
+      "step_3": "Allí, añade Flirter a tu pantalla de inicio."
+    },
+    "default_steps": {
+      "step_1": "Abre el menú del navegador (⋮).",
+      "step_2": "Selecciona «Instalar aplicación» o «Añadir a la pantalla de inicio»."
+    }
+  },
+  "legal": {
+    "back_accessibility": "Atrás",
+    "version_label": "Versión a partir de {{version}}",
+    "not_found": "Documento no encontrado.",
+    "documents": {
+      "terms": {
+        "title": "Términos de servicio",
+        "sections": {
+          "draft": {
+            "heading": "Borrador",
+            "body": "El texto final de los Términos se proporcionará tras la revisión legal. Esta pantalla actúa como marcador de posición para el documento."
+          },
+          "nature": {
+            "heading": "Naturaleza del servicio",
+            "body": "Flirter es un simulador de citas de entretenimiento. Todos los perfiles son personajes ficticios de IA."
+          },
+          "age": {
+            "heading": "Requisito de edad",
+            "body": "El servicio está estrictamente disponible solo para personas mayores de 18 años."
+          }
+        }
+      },
+      "privacy": {
+        "title": "Política de privacidad",
+        "sections": {
+          "draft": {
+            "heading": "Borrador",
+            "body": "El texto definitivo de la Política de privacidad se proporcionará tras la revisión legal."
+          },
+          "data": {
+            "heading": "Datos recopilados",
+            "body": "Correo, fecha de nacimiento, apodo, preferencias opcionales, historial de conversaciones y compras."
+          },
+          "rights": {
+            "heading": "Tus derechos",
+            "body": "Puedes solicitar una copia de tus datos, eliminar el historial de chats o borrar tu cuenta en los ajustes."
+          }
+        }
+      },
+      "ai": {
+        "title": "Sobre los personajes de IA",
+        "sections": {
+          "real_people": {
+            "heading": "¿Son personas reales?",
+            "body": "No. Todos los personajes son ficticios, y sus fotos, biografías y mensajes son generados por IA o guiones."
+          },
+          "offline_meet": {
+            "heading": "¿Podemos vernos en persona?",
+            "body": "No. Los personajes no existen en el mundo real; las citas presenciales son imposibles."
+          },
+          "ai_mistakes": {
+            "heading": "¿Puede equivocarse la IA?",
+            "body": "Sí. Las respuestas pueden no ser precisas. No las consideres asesoramiento profesional."
+          }
+        }
+      }
+    }
+  }
+}

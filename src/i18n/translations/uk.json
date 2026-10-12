@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "Завантаження...",
+    "error": "Сталася помилка",
+    "back": "Назад",
+    "close": "Закрити",
+    "cancel": "Скасувати",
+    "continue": "Продовжити",
+    "save": "Зберегти",
+    "confirm": "Підтвердити",
+    "done": "Готово",
+    "understood": "Зрозуміло",
+    "ok": "Добре",
+    "start": "Почати",
+    "login": "Увійти",
+    "install": "Встановити",
+    "not_now": "Не зараз",
+    "reset": "Скинути",
+    "retry": "Спробувати ще раз",
+    "back_to_home": "На головну",
+    "back_to_dating": "До знайомств",
+    "age_badge": "18+",
+    "coming_soon": "Незабаром",
+    "yesterday": "Вчора",
+    "session_restoring": "Відновлюємо сесію",
+    "terms": "Умови",
+    "terms_full": "Умови використання",
+    "privacy": "Приватність",
+    "privacy_full": "Політика приватності",
+    "about_ai": "Про AI",
+    "about_ai_full": "Про AI-персонажів",
+    "seconds_short": "{{count}} с",
+    "minutes_short": "{{count}} хв",
+    "hours_short": "{{count}} год",
+    "demo_notice": "Демо-режим: вхід і відповіді працюють локально. Листи не надсилаються; оплата, фото й голос ще недоступні."
+  },
+  "tabs": {
+    "dating": "Знайомства",
+    "discover": "Знайомства",
+    "chats": "Чати",
+    "profile": "Профіль",
+    "unread_badge_accessibility": "{{label}}, нових: {{count}}"
+  },
+  "not_found": {
+    "title": "Сторінку не знайдено",
+    "description": "Можливо, посилання застаріло.",
+    "button": "На головну"
+  },
+  "html_meta": {
+    "description": "Flirter — симулятор знайомств із вигаданими AI-персонажами. 18+.",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "Крок {{step}} з {{total}}"
+    },
+    "welcome": {
+      "hero_title": "Твоя історія починається з розмови",
+      "hero_subtitle": "Знайомся з вигаданими AI-персонажами. Спілкуйся у своєму темпі.",
+      "start_button": "Почати",
+      "login_button": "Увійти"
+    },
+    "age": {
+      "title": "Сервіс для повнолітніх",
+      "subtitle": "Вкажи дату народження. Її не буде видно персонажам чи іншим людям.",
+      "day_label": "День",
+      "day_placeholder": "ДД",
+      "month_label": "Місяць",
+      "month_placeholder": "ММ",
+      "year_label": "Рік",
+      "year_placeholder": "РРРР",
+      "accessibility_label": "Дата народження",
+      "privacy_note_prefix": "Дата потрібна, щоб підтвердити, що тобі вже є 18. Деталі — у ",
+      "privacy_policy_link": "Політиці приватності",
+      "privacy_note_suffix": ".",
+      "errors": {
+        "incomplete": "Введи повну дату: день, місяць і рік.",
+        "invalid": "Такої дати не існує. Перевір день і місяць.",
+        "future": "Дата не може бути в майбутньому.",
+        "unrealistic": "Перевір рік народження."
+      },
+      "underage": {
+        "title": "Сервіс недоступний",
+        "subtitle": "Flirter доступний лише для повнолітніх користувачів. Дякуємо за розуміння.",
+        "terms_button": "Умови використання"
+      }
+    },
+    "sign_in": {
+      "signup_title": "Створи акаунт",
+      "login_title": "З поверненням!",
+      "signup_subtitle": "Акаунт зберігає розмови та енергію між пристроями. Пароль не потрібен — надішлемо код.",
+      "login_subtitle": "Введи email, з яким реєструвався. Надішлемо одноразовий код.",
+      "get_code_button": "Отримати код",
+      "email_label": "Email",
+      "email_placeholder": "you@example.com",
+      "legal_prefix": "Продовжуючи, ти переходиш до ",
+      "terms_link": "Умов",
+      "and": " та ",
+      "privacy_link": "Політики приватності",
+      "legal_suffix": ". Погодитися з ними потрібно буде окремо.",
+      "errors": {
+        "invalid_email": "Перевір адресу — схоже, в ній помилка.",
+        "network_error": "Не вдалося надіслати код. Перевір з’єднання й спробуй ще раз."
+      }
+    },
+    "verify": {
+      "title": "Введи код із листа",
+      "subtitle": "Ми надіслали {{count}}-значний код на {{email}}.",
+      "fallback_email": "твою пошту",
+      "confirm_button": "Підтвердити",
+      "resend_code": "Надіслати код знову",
+      "resend_code_cooldown": "Надіслати знову через {{seconds}} с",
+      "code_label": "Код підтвердження",
+      "change_email": "Змінити email",
+      "demo_note": "Демо-режим: підійде будь-який {{count}}-значний код.",
+      "errors": {
+        "invalid_code": "Код неправильний або прострочений. Спробуй ще раз або надішли новий.",
+        "network_error": "Немає з’єднання. Код збережено — спробуй ще раз."
+      }
+    },
+    "profile_setup": {
+      "title": "Як до тебе звертатися?",
+      "subtitle": "Персонажі називатимуть тебе так. Справжнє ім’я не обов’язкове.",
+      "continue_button": "Продовжити",
+      "skip_button": "Пропустити необов’язкове",
+      "nickname_label": "Нікнейм",
+      "nickname_helper": "Можна змінити будь-коли в профілі.",
+      "nickname_error": "Від {{min}} до {{max}} символів.",
+      "gender_label": "Твій гендер (необов’язково)",
+      "preference_label": "Яких персонажів показувати (необов’язково)",
+      "genders": {
+        "male": "Чоловік",
+        "female": "Жінка",
+        "other": "Інше"
+      },
+      "preferences": {
+        "women": "Жінок",
+        "men": "Чоловіків",
+        "everyone": "Усіх"
+      }
+    },
+    "disclosure": {
+      "title": "Це симулятор знайомств із AI",
+      "submit_button": "Перейти до знайомств",
+      "facts": {
+        "profiles": "Усі профілі — вигадані персонажі.",
+        "ai_content": "Фото, біографії та відповіді створені AI або сценаріями.",
+        "no_real_people": "Тут немає реальних людей для знайомств.",
+        "no_offline": "Зустрітися офлайн неможливо."
+      },
+      "consents": {
+        "ai_label": "Розумію, що спілкуюся з вигаданими AI-персонажами",
+        "ai_text": "Розумію, що спілкуюся з вигаданими AI-персонажами, а не з реальними людьми.",
+        "terms_label": "Приймаю Умови використання та ознайомився з Політикою приватності",
+        "terms_prefix": "Приймаю ",
+        "terms_link": "Умови використання",
+        "and": " та ознайомився з ",
+        "privacy_link": "Політикою приватності",
+        "terms_suffix": "."
+      },
+      "error_save": "Не вдалося зберегти вибір. Відмітки збережено — спробуй ще раз."
+    }
+  },
+  "discover": {
+    "filter_accessibility": "Фільтри",
+    "filter_active_accessibility": "Фільтри, активних: {{count}}",
+    "empty_title": "Немає персонажів за цими фільтрами",
+    "empty_subtitle": "Спробуй прибрати частину фільтрів — нові персонажі також з’являтимуться згодом.",
+    "reset_filters": "Скинути фільтри",
+    "card_accessibility": "{{name}}, {{age}}. {{tagline}}. Відкрити профіль",
+    "action_open_chat": "Відкрити чат з {{name}}",
+    "action_like": "Вподобати {{name}}",
+    "sheet": {
+      "title": "Фільтри",
+      "who_to_show": "Кого показувати",
+      "age": "Вік",
+      "ethnicity": "Раса",
+      "interests": "Інтереси",
+      "communication_style": "Стиль спілкування",
+      "only_new_title": "Лише нові",
+      "only_new_subtitle": "Сховати персонажів, з якими вже є розмова",
+      "reset": "Скинути",
+      "no_matches": "Немає збігів",
+      "show_results_one": "Показати {{count}} персонаж",
+      "show_results_few": "Показати {{count}} персонажі",
+      "show_results_many": "Показати {{count}} персонажів",
+      "show_results_other": "Показати {{count}} персонажів"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "Усі",
+        "women": "Жінки",
+        "men": "Чоловіки",
+        "nonbinary": "Небінарні"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "Спорт",
+        "travel": "Подорожі",
+        "music": "Музика",
+        "art": "Мистецтво",
+        "food": "Їжа й кава",
+        "books": "Книжки й кіно",
+        "nature": "Природа"
+      },
+      "styles": {
+        "romantic": "Романтичний",
+        "playful": "Грайливий",
+        "intellectual": "Інтелектуальний",
+        "caring": "Турботливий"
+      },
+      "ethnicities": {
+        "european": "Європейська",
+        "asian": "Азійська",
+        "african": "Африканська",
+        "latin": "Латиноамериканська",
+        "middle_eastern": "Близькосхідна",
+        "mixed": "Змішана"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "Чати",
+    "typing": "друкує…",
+    "you_prefix": "Ти: ",
+    "row_accessibility": "{{name}}. {{preview}}",
+    "unread_suffix": ". Непрочитаних: {{count}}",
+    "dismiss_request_accessibility": "Прибрати запит від {{name}}",
+    "section_requests": "Запити на діалог",
+    "show_all_requests": "Показати всі",
+    "show_less_requests": "Згорнути",
+    "section_dialogs": "Повідомлення",
+    "empty_title": "Поки що тут тихо",
+    "empty_subtitle": "Обери персонажа для першої розмови.",
+    "to_dating_button": "До знайомств",
+    "system_messages": {
+      "ai_disclaimer": "Це розмова з вигаданим AI-персонажем. Відповіді можуть містити помилки.",
+      "liked_profile": "Ви вподобали профіль",
+      "reply_error_refunded": "Відповідь не вдалося підготувати. Енергію повернуто."
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1 чат чекає на відповідь",
+      "other": "{{count}} чатів чекають на відповідь",
+      "row_accessibility": "{{label}}. Відкрити чати"
+    },
+    "back_accessibility": "Назад до чатів",
+    "profile_accessibility": "Профіль: {{name}}",
+    "typing": "друкує…",
+    "send_suggestion_accessibility": "Надіслати відповідь: {{reply}}",
+    "insufficient_energy_action": "Надіслати повідомлення",
+    "coming_soon_modal": {
+      "title": "Уже незабаром",
+      "description": "Надсилання фото й голосових повідомлень з’явиться в наступних версіях.",
+      "button": "Добре"
+    },
+    "composer": {
+      "attach_photo_accessibility": "Прикріпити фото",
+      "placeholder": "Повідомлення",
+      "input_accessibility": "Текст повідомлення",
+      "send_accessibility": "Надіслати",
+      "record_voice_accessibility": "Записати голосове повідомлення"
+    },
+    "typing_indicator_accessibility": "Персонаж друкує"
+  },
+  "character": {
+    "missing_title": "Персонаж більше недоступний",
+    "back_to_dating": "Повернутися до знайомств",
+    "close_accessibility": "Закрити профіль",
+    "in_story": "У сюжеті: {{city}}",
+    "section_interests": "Інтереси",
+    "section_traits": "Характер",
+    "section_lifestyle": "Стиль життя",
+    "about_ai_notice": "{{name}} — вигаданий AI-персонаж. Фото, біографія та відповіді створені штучним інтелектом.",
+    "continue_chat": "Продовжити розмову",
+    "start_chat": "Почати чат"
+  },
+  "energy": {
+    "title": "Енергія",
+    "chip_accessibility": "Енергія: {{total}}. Відкрити магазин енергії",
+    "subscription": "Більше енергії з підпискою",
+    "one_time": "Разове поповнення",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "Найвигідніше",
+      "price": "149 ₴",
+      "period": " / тиждень",
+      "feature_limit": "Ліміт 60 замість {{cap}}",
+      "feature_speed": "Відновлення вдвічі швидше · 1 кожні 6 хв",
+      "subscribe_button": "Оформити підписку",
+      "footnote": "Автоподовження · скасувати можна будь-коли"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} енергії",
+      "badge_recommended": "Рекомендовано",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "або {{photos}} фото",
+      "buy": "Купити",
+      "buy_accessibility": "Купити {{amount}} енергії. {{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "Енергія закінчилась",
+      "close_accessibility": "Закрити",
+      "subtitle": "Поповни енергію, щоб продовжити розмову",
+      "regen_countdown": "+1 через {{time}}",
+      "balance_status": "{{current}} із {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "Найвигідніше",
+      "sub_price": "149 ₴",
+      "sub_period": " / тиждень",
+      "sub_feature_limit": "Ліміт 60 енергії",
+      "sub_feature_speed": "Відновлення вдвічі швидше",
+      "sub_button": "Оформити підписку",
+      "divider_or": "або разово",
+      "word_energy": "енергії",
+      "badge_recommended": "Рекомендовано",
+      "not_now": "Не зараз"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "Незабаром",
+      "benefit_cap": "Запас 60 ⚡ замість {{cap}}",
+      "benefit_speed": "Відновлення вдвічі швидше: 1 ⚡ кожні 6 хв",
+      "benefit_prices": "Повідомлення й фото — за тими ж цінами в енергії",
+      "footnote": "Ціну, період і умови скасування буде показано до оплати."
+    },
+    "hero_card": {
+      "your_balance": "Твій баланс",
+      "messages_equivalent_one": "≈ {{count}} повідомлення",
+      "messages_equivalent_few": "≈ {{count}} повідомлення",
+      "messages_equivalent_many": "≈ {{count}} повідомлень",
+      "messages_equivalent_other": "≈ {{count}} повідомлень",
+      "full_reserve": "Безкоштовний запас повний · {{cap}} ⚡",
+      "free_plus_one": "Безкоштовно +1 ⚡",
+      "in_time": "через {{time}}",
+      "progress_accessibility": "Прогрес до наступної одиниці енергії"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — оплата незабаром",
+      "title": "Оплата незабаром",
+      "description": "Оплату ще не підключено — це прототип. Ціни з’являться після інтеграції платіжного провайдера, і ти побачиш їх до підтвердження покупки.",
+      "button": "Зрозуміло"
+    }
+  },
+  "profile": {
+    "header_title": "Профіль",
+    "privacy_note": "Це приватні налаштування. Твій профіль не показується реальним людям.",
+    "groups": {
+      "theme": "Тема оформлення",
+      "app": "Застосунок",
+      "energy_and_purchases": "Енергія та покупки",
+      "help_and_rules": "Допомога та правила",
+      "general": "Загальне"
+    },
+    "theme_options": {
+      "system": "Як у системі",
+      "light": "Світла",
+      "dark": "Темна"
+    },
+    "rows": {
+      "install_pwa": "Додати на головний екран",
+      "balance_and_topup": "Баланс і поповнення",
+      "about_ai": "Про AI-персонажів",
+      "terms": "Умови використання",
+      "privacy_policy": "Політика приватності",
+      "language": "Мова"
+    },
+    "buttons": {
+      "logout": "Вийти",
+      "reset_demo": "Скинути демо-дані"
+    },
+    "logout_modal": {
+      "title": "Вийти з акаунту?",
+      "description": "Це локальне демо. Після виходу розмови та баланс на цьому пристрої буде скинуто.",
+      "confirm": "Вийти",
+      "cancel": "Скасувати"
+    },
+    "language_modal": {
+      "title": "Оберіть мову",
+      "restart_notice": "Для зміни напрямку інтерфейсу застосунок потребує перезавантаження.",
+      "restart_button": "Перезавантажити",
+      "cancel_button": "Пізніше"
+    }
+  },
+  "pwa_install": {
+    "title": "Додати на головний екран",
+    "benefits": {
+      "quick_launch": "Швидкий запуск з головного екрана",
+      "standalone": "Окреме вікно без панелі браузера",
+      "notifications": "Сповіщення на підтримуваних пристроях"
+    },
+    "install_button": "Встановити",
+    "not_now_button": "Не зараз",
+    "ios_steps": {
+      "step_1": "Натисни «Поділитися» в меню Safari.",
+      "step_2": "Обери «На початковий екран».",
+      "step_3": "Залиш увімкненим «Відкривати як вебпрограму» і натисни «Додати»."
+    },
+    "in_app_steps": {
+      "step_1": "Відкрий меню цього застосунку (⋯).",
+      "step_2": "Обери «Відкрити в браузері» — Safari або Chrome.",
+      "step_3": "Там додай Flirter на головний екран."
+    },
+    "default_steps": {
+      "step_1": "Відкрий меню браузера (⋮).",
+      "step_2": "Обери «Встановити застосунок» або «Додати на головний екран»."
+    }
+  },
+  "legal": {
+    "back_accessibility": "Назад",
+    "version_label": "Версія від {{version}}",
+    "not_found": "Документ не знайдено.",
+    "documents": {
+      "terms": {
+        "title": "Умови використання",
+        "sections": {
+          "draft": {
+            "heading": "Чернетка",
+            "body": "Фінальний текст Умов буде надано після юридичного узгодження. Цей екран — місце для документа."
+          },
+          "nature": {
+            "heading": "Природа сервісу",
+            "body": "Flirter — розважальний симулятор знайомств. Усі профілі є вигаданими AI-персонажами."
+          },
+          "age": {
+            "heading": "Вік",
+            "body": "Сервіс доступний лише особам, яким виповнилося 18 років."
+          }
+        }
+      },
+      "privacy": {
+        "title": "Політика приватності",
+        "sections": {
+          "draft": {
+            "heading": "Чернетка",
+            "body": "Фінальний текст Політики буде надано після юридичного узгодження."
+          },
+          "data": {
+            "heading": "Які дані",
+            "body": "Email, дата народження, нікнейм, необов’язкові вподобання, історія розмов і покупок."
+          },
+          "rights": {
+            "heading": "Ваші права",
+            "body": "Ви можете запросити копію даних, видалити історію або акаунт у налаштуваннях."
+          }
+        }
+      },
+      "ai": {
+        "title": "Про AI-персонажів",
+        "sections": {
+          "real_people": {
+            "heading": "Чи це реальні люди?",
+            "body": "Ні. Усі персонажі вигадані, а їхні фото, біографії та відповіді створені AI або сценаріями."
+          },
+          "offline_meet": {
+            "heading": "Чи можна зустрітися?",
+            "body": "Ні. Персонажі не існують у реальному світі, офлайн-зустрічі неможливі."
+          },
+          "ai_mistakes": {
+            "heading": "Чи може AI помилятися?",
+            "body": "Так. Відповіді можуть бути неточними. Не сприймайте їх як професійну пораду."
+          }
+        }
+      }
+    }
+  }
+}

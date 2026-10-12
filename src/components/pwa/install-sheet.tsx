@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import type { ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
@@ -16,10 +17,14 @@ interface InstallSheetProps {
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
-const BENEFITS: readonly { icon: IconName; text: string }[] = [
-  { icon: 'flash-outline', text: 'Швидкий запуск з головного екрана' },
-  { icon: 'browsers-outline', text: 'Окреме вікно без панелі браузера' },
-  { icon: 'notifications-outline', text: 'Сповіщення на підтримуваних пристроях' },
+interface BenefitItem {
+  icon: IconName;
+  key: 'quick_launch' | 'standalone' | 'notifications';
+}
+
+const BENEFIT_ITEMS: readonly BenefitItem[] = [
+  { icon: 'flash-outline', key: 'quick_launch' },
+  { icon: 'browsers-outline', key: 'standalone' },
 ];
 
 function Step({ index, children }: { index: number; children: string }) {
@@ -41,6 +46,7 @@ function Step({ index, children }: { index: number; children: string }) {
 
 /** S23. Додати на головний екран: інструкції залежать від середовища. */
 export function InstallSheet({ visible, onClose }: InstallSheetProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const { platform, canPromptNatively, promptInstall } = usePwaInstall();
 
@@ -50,38 +56,38 @@ export function InstallSheet({ visible, onClose }: InstallSheetProps) {
   };
 
   return (
-    <BottomSheet visible={visible} onClose={onClose} title="Додати на головний екран">
+    <BottomSheet visible={visible} onClose={onClose} title={t('pwa_install.title')}>
       <View style={styles.benefits}>
-        {BENEFITS.map((benefit) => (
-          <View key={benefit.text} style={styles.benefit}>
+        {BENEFIT_ITEMS.map((benefit) => (
+          <View key={benefit.key} style={styles.benefit}>
             <Ionicons name={benefit.icon} size={20} color={colors.brand} />
-            <AppText variant="body">{benefit.text}</AppText>
+            <AppText variant="body">{t(`pwa_install.benefits.${benefit.key}`)}</AppText>
           </View>
         ))}
       </View>
 
       {canPromptNatively ? (
-        <Button label="Встановити" icon="download-outline" onPress={handleNativeInstall} />
+        <Button label={t('pwa_install.install_button')} icon="download-outline" onPress={handleNativeInstall} />
       ) : platform === 'ios' ? (
         <View style={[styles.steps, { backgroundColor: colors.surfaceMuted }]}>
-          <Step index={1}>Натисни «Поділитися» в меню Safari.</Step>
-          <Step index={2}>Обери «На початковий екран».</Step>
-          <Step index={3}>Залиш увімкненим «Відкривати як вебпрограму» і натисни «Додати».</Step>
+          <Step index={1}>{t('pwa_install.ios_steps.step_1')}</Step>
+          <Step index={2}>{t('pwa_install.ios_steps.step_2')}</Step>
+          <Step index={3}>{t('pwa_install.ios_steps.step_3')}</Step>
         </View>
       ) : platform === 'in-app-browser' ? (
         <View style={[styles.steps, { backgroundColor: colors.surfaceMuted }]}>
-          <Step index={1}>Відкрий меню цього застосунку (⋯).</Step>
-          <Step index={2}>Обери «Відкрити в браузері» — Safari або Chrome.</Step>
-          <Step index={3}>Там додай Flirter на головний екран.</Step>
+          <Step index={1}>{t('pwa_install.in_app_steps.step_1')}</Step>
+          <Step index={2}>{t('pwa_install.in_app_steps.step_2')}</Step>
+          <Step index={3}>{t('pwa_install.in_app_steps.step_3')}</Step>
         </View>
       ) : (
         <View style={[styles.steps, { backgroundColor: colors.surfaceMuted }]}>
-          <Step index={1}>Відкрий меню браузера (⋮).</Step>
-          <Step index={2}>Обери «Встановити застосунок» або «Додати на головний екран».</Step>
+          <Step index={1}>{t('pwa_install.default_steps.step_1')}</Step>
+          <Step index={2}>{t('pwa_install.default_steps.step_2')}</Step>
         </View>
       )}
 
-      <Button label="Не зараз" variant="secondary" onPress={onClose} />
+      <Button label={t('pwa_install.not_now_button')} variant="secondary" onPress={onClose} />
     </BottomSheet>
   );
 }

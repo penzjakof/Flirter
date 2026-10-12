@@ -17,6 +17,9 @@ export type { ConversationOrigin };
 export const AI_DISCLAIMER_TEXT = 'Це розмова з вигаданим AI-персонажем. Відповіді можуть містити помилки.';
 export const LIKE_MESSAGE_TEXT = 'Ви вподобали профіль';
 
+// Discard asynchronous demo replies after logout/reset, including replies for a newly created chat with the same character.
+let sessionGeneration = 0;
+
 interface ChatsState {
   conversations: Record<string, Conversation>;
   /** Персонажі, що «готують відповідь» — не персиститься. */
@@ -79,17 +82,20 @@ export const useChatsStore = create<ChatsState>()(
         });
 
       const deliverReply = async (characterId: string, userText: string) => {
+        const generation = sessionGeneration;
         const character = getCharacterById(characterId);
         if (!character) return;
         setTyping(characterId, true);
         try {
           const replyText = await requestCharacterReply(character, userText);
+          if (generation !== sessionGeneration) return;
           updateConversation(characterId, (conversation) => ({
             ...conversation,
             messages: [...conversation.messages, buildMessage('character', replyText)],
             unreadCount: conversation.unreadCount + 1,
           }));
         } catch {
+          if (generation !== sessionGeneration) return;
           // Технічна помилка до відповіді — повертаємо резерв (F04, крок 5).
           useEnergyStore.getState().refund(ENERGY_CONFIG.costs.textMessage);
           updateConversation(characterId, (conversation) => ({
@@ -100,7 +106,7 @@ export const useChatsStore = create<ChatsState>()(
             ],
           }));
         } finally {
-          setTyping(characterId, false);
+          if (generation === sessionGeneration) setTyping(characterId, false);
         }
       };
 
@@ -153,7 +159,10 @@ export const useChatsStore = create<ChatsState>()(
             conversation.unreadCount === 0 ? conversation : { ...conversation, unreadCount: 0 },
           ),
 
-        resetForDemo: () => set({ conversations: {}, typingCharacterIds: {} }),
+        resetForDemo: () => {
+          sessionGeneration += 1;
+          set({ conversations: {}, typingCharacterIds: {} });
+        },
       };
     },
     {

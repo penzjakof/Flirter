@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "back": "返回",
+    "close": "关闭",
+    "cancel": "取消",
+    "continue": "继续",
+    "save": "保存",
+    "confirm": "确认",
+    "done": "完成",
+    "understood": "知道了",
+    "ok": "确定",
+    "start": "开始探索",
+    "login": "登录",
+    "install": "安装",
+    "not_now": "暂不",
+    "reset": "重置",
+    "retry": "重试",
+    "back_to_home": "返回首页",
+    "back_to_dating": "返回心动速配",
+    "age_badge": "18+",
+    "coming_soon": "敬请期待",
+    "yesterday": "昨天",
+    "session_restoring": "正在恢复会话",
+    "terms": "条款",
+    "terms_full": "服务条款",
+    "privacy": "隐私",
+    "privacy_full": "隐私政策",
+    "about_ai": "关于 AI",
+    "about_ai_full": "关于 AI 角色",
+    "seconds_short": "{{count}}秒",
+    "minutes_short": "{{count}}分",
+    "hours_short": "{{count}}小时",
+    "demo_notice": "演示模式：登录和回复在本地运行，不会发送邮件。付款、照片和语音暂不可用。"
+  },
+  "tabs": {
+    "dating": "速配",
+    "discover": "探索",
+    "chats": "消息",
+    "profile": "我的",
+    "unread_badge_accessibility": "{{label}}，{{count}} 条新消息"
+  },
+  "not_found": {
+    "title": "页面未找到",
+    "description": "链接可能已失效或不存在。",
+    "button": "返回首页"
+  },
+  "html_meta": {
+    "description": "Flirter — 虚拟 AI 角色恋爱交友模拟器。18+。",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "第 {{step}} 步，共 {{total}} 步"
+    },
+    "welcome": {
+      "hero_title": "你的故事，从一次心动交谈开始",
+      "hero_subtitle": "遇见虚拟 AI 角色，按你自己的节奏畅聊。",
+      "start_button": "开始探索",
+      "login_button": "登录"
+    },
+    "age": {
+      "title": "仅限成年用户服务",
+      "subtitle": "请输入你的出生日期。该信息绝不会展示给角色或其他人。",
+      "day_label": "日",
+      "day_placeholder": "日",
+      "month_label": "月",
+      "month_placeholder": "月",
+      "year_label": "年",
+      "year_placeholder": "年",
+      "accessibility_label": "出生日期",
+      "privacy_note_prefix": "我们需要确认你已年满 18 周岁。详情参见我们的",
+      "privacy_policy_link": "隐私政策",
+      "privacy_note_suffix": "。",
+      "errors": {
+        "incomplete": "请输入完整日期：年、月、日。",
+        "invalid": "该日期不存在，请检查月日。",
+        "future": "日期不能是未来时间。",
+        "unrealistic": "请检查出生年份。"
+      },
+      "underage": {
+        "title": "服务暂不可用",
+        "subtitle": "Flirter 仅供 18 岁及以上成年用户使用，感谢你的理解。",
+        "terms_button": "服务条款"
+      }
+    },
+    "sign_in": {
+      "signup_title": "创建账号",
+      "login_title": "欢迎回来！",
+      "signup_subtitle": "账号可在各设备间保存你的聊天记录与能量。无需密码 — 我们将发送验证码。",
+      "login_subtitle": "输入你注册时使用的邮箱，我们将向其发送一次性验证码。",
+      "get_code_button": "获取验证码",
+      "email_label": "邮箱",
+      "email_placeholder": "you@example.com",
+      "legal_prefix": "继续操作即表示你查阅",
+      "terms_link": "服务条款",
+      "and": "与",
+      "privacy_link": "隐私政策",
+      "legal_suffix": "。下一步需进行明确同意。",
+      "errors": {
+        "invalid_email": "请检查邮箱地址 — 格式似乎不正确。",
+        "network_error": "发送验证码失败，请检查网络连接后重试。"
+      }
+    },
+    "verify": {
+      "title": "输入邮件中的验证码",
+      "subtitle": "我们已向 {{email}} 发送了 {{count}} 位数验证码。",
+      "fallback_email": "你的邮箱",
+      "confirm_button": "确认",
+      "resend_code": "重新发送验证码",
+      "resend_code_cooldown": "{{seconds}} 秒后可重发",
+      "code_label": "验证码",
+      "change_email": "更换邮箱",
+      "demo_note": "演示模式：输入任意 {{count}} 位数验证码即可通过。",
+      "errors": {
+        "invalid_code": "验证码错误或已过期，请重试或重新获取。",
+        "network_error": "无法连接网络。已保存验证码 — 请重试。"
+      }
+    },
+    "profile_setup": {
+      "title": "我们该如何称呼你？",
+      "subtitle": "角色会使用这个昵称称呼你，无需使用真实姓名。",
+      "continue_button": "继续",
+      "skip_button": "跳过选填项",
+      "nickname_label": "昵称",
+      "nickname_helper": "随时可在个人资料中修改。",
+      "nickname_error": "长度须在 {{min}} 至 {{max}} 个字符之间。",
+      "gender_label": "你的性别（选填）",
+      "preference_label": "希望展示的角色（选填）",
+      "genders": {
+        "male": "男士",
+        "female": "女士",
+        "other": "其他"
+      },
+      "preferences": {
+        "women": "女性角色",
+        "men": "男性角色",
+        "everyone": "全部角色"
+      }
+    },
+    "disclosure": {
+      "title": "这是一个 AI 恋爱交友模拟器",
+      "submit_button": "开始心动交友",
+      "facts": {
+        "profiles": "所有资料均为虚构角色。",
+        "ai_content": "头像照片、生平故事与回复内容均由 AI 或预设剧情生成。",
+        "no_real_people": "这里没有真实的人类用户可供约会。",
+        "no_offline": "无法进行任何线下见面。"
+      },
+      "consents": {
+        "ai_label": "我理解我正在与虚构的 AI 角色交流",
+        "ai_text": "我充分理解我正在与虚构的 AI 角色交流，而非真实人类。",
+        "terms_label": "我接受服务条款并已阅读隐私政策",
+        "terms_prefix": "我接受",
+        "terms_link": "服务条款",
+        "and": "并已阅读",
+        "privacy_link": "隐私政策",
+        "terms_suffix": "。"
+      },
+      "error_save": "保存选项失败。已记录你的勾选 — 请重试。"
+    }
+  },
+  "discover": {
+    "filter_accessibility": "筛选",
+    "filter_active_accessibility": "筛选，已生效 {{count}} 项",
+    "empty_title": "没有符合这些筛选条件的角色",
+    "empty_subtitle": "尝试减少一些筛选条件 — 新角色很快就会上线。",
+    "reset_filters": "重置筛选",
+    "card_accessibility": "{{name}}，{{age}}岁。{{tagline}}。查看资料",
+    "action_open_chat": "打开与 {{name}} 的对话",
+    "action_like": "喜欢 {{name}}",
+    "sheet": {
+      "title": "筛选条件",
+      "who_to_show": "展示谁",
+      "age": "年龄",
+      "ethnicity": "族裔",
+      "interests": "兴趣",
+      "communication_style": "沟通风格",
+      "only_new_title": "仅看新角色",
+      "only_new_subtitle": "隐藏已建立对话的角色",
+      "reset": "重置",
+      "no_matches": "暂无匹配",
+      "show_results_one": "查看 {{count}} 个角色",
+      "show_results_few": "查看 {{count}} 个角色",
+      "show_results_many": "查看 {{count}} 个角色",
+      "show_results_other": "查看 {{count}} 个角色"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "全部",
+        "women": "女性",
+        "men": "男性",
+        "nonbinary": "非二元性别"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "运动健身",
+        "travel": "旅行探索",
+        "music": "音乐旋律",
+        "art": "艺术审美",
+        "food": "美食咖啡",
+        "books": "书籍电影",
+        "nature": "自然户外"
+      },
+      "styles": {
+        "romantic": "浪漫温情",
+        "playful": "俏皮幽默",
+        "intellectual": "睿智知性",
+        "caring": "细腻体贴"
+      },
+      "ethnicities": {
+        "european": "欧式",
+        "asian": "亚裔",
+        "african": "非裔",
+        "latin": "拉美",
+        "middle_eastern": "中东",
+        "mixed": "混血"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "消息",
+    "typing": "正在输入…",
+    "you_prefix": "你: ",
+    "row_accessibility": "{{name}}。{{preview}}",
+    "unread_suffix": "。未读：{{count}}",
+    "dismiss_request_accessibility": "忽略来自 {{name}} 的请求",
+    "section_requests": "对话请求",
+    "show_all_requests": "显示全部",
+    "show_less_requests": "收起",
+    "section_dialogs": "私信列表",
+    "empty_title": "暂时还没有消息",
+    "empty_subtitle": "挑选一个心动的角色开启第一段对话吧。",
+    "to_dating_button": "去发现角色",
+    "system_messages": {
+      "ai_disclaimer": "这是一段与虚构 AI 角色的对话。回复可能包含错误或不实信息。",
+      "liked_profile": "你喜欢了这个角色的资料",
+      "reply_error_refunded": "未能生成回复，能量已全额退还。"
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "1 个对话等待回复",
+      "other": "{{count}} 个对话等待回复",
+      "row_accessibility": "{{label}}。打开对话"
+    },
+    "back_accessibility": "返回聊天列表",
+    "profile_accessibility": "资料：{{name}}",
+    "typing": "正在输入…",
+    "send_suggestion_accessibility": "发送回复：{{reply}}",
+    "insufficient_energy_action": "发送消息",
+    "coming_soon_modal": {
+      "title": "即将推出",
+      "description": "发送照片与语音消息功能将在后续版本中开放支持。",
+      "button": "好的"
+    },
+    "composer": {
+      "attach_photo_accessibility": "添加照片",
+      "placeholder": "输入消息...",
+      "input_accessibility": "消息输入框",
+      "send_accessibility": "发送",
+      "record_voice_accessibility": "录制语音消息"
+    },
+    "typing_indicator_accessibility": "角色正在输入"
+  },
+  "character": {
+    "missing_title": "该角色已下线或不存在",
+    "back_to_dating": "返回速配列表",
+    "close_accessibility": "关闭资料",
+    "in_story": "剧情背景：{{city}}",
+    "section_interests": "兴趣爱好",
+    "section_traits": "性格特质",
+    "section_lifestyle": "生活方式",
+    "about_ai_notice": "{{name}} 是一个虚构的 AI 角色。照片、生平与回复均由人工智能生成。",
+    "continue_chat": "继续聊聊",
+    "start_chat": "开启聊天"
+  },
+  "energy": {
+    "title": "能量",
+    "chip_accessibility": "能量：{{total}}。打开能量商城",
+    "subscription": "开通会员获取更多能量",
+    "one_time": "单次充值",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "最超值",
+      "price": "149 ₴",
+      "period": " / 周",
+      "feature_limit": "上限提升至 60（原为 {{cap}}）",
+      "feature_speed": "恢复速度翻倍 · 每 6 分钟恢复 1 点",
+      "subscribe_button": "立即订阅",
+      "footnote": "自动续订 · 可随时取消"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} 点能量",
+      "badge_recommended": "店长推荐",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "或 {{photos}} 张照片",
+      "buy": "购买",
+      "buy_accessibility": "购买 {{amount}} 点能量。{{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "能量已耗尽",
+      "close_accessibility": "关闭",
+      "subtitle": "补充能量，继续畅快畅聊",
+      "regen_countdown": "{{time}} 后 +1",
+      "balance_status": "{{current}} / {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "最超值",
+      "sub_price": "149 ₴",
+      "sub_period": " / 周",
+      "sub_feature_limit": "60 点能量上限",
+      "sub_feature_speed": "恢复速度加快一倍",
+      "sub_button": "立即订阅",
+      "divider_or": "或单次充值",
+      "word_energy": "能量",
+      "badge_recommended": "店长推荐",
+      "not_now": "暂不充值"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "敬请期待",
+      "benefit_cap": "常备容量 60 ⚡（替代默认 {{cap}}）",
+      "benefit_speed": "恢复速度翻倍：每 6 分钟恢复 1 ⚡",
+      "benefit_prices": "消息与照片消耗同样能量",
+      "footnote": "价格、周期及取消条款将在付款前展示确认。"
+    },
+    "hero_card": {
+      "your_balance": "当前能量余额",
+      "messages_equivalent_one": "≈ {{count}} 条消息",
+      "messages_equivalent_few": "≈ {{count}} 条消息",
+      "messages_equivalent_many": "≈ {{count}} 条消息",
+      "messages_equivalent_other": "≈ {{count}} 条消息",
+      "full_reserve": "免费能量已满 · {{cap}} ⚡",
+      "free_plus_one": "免费恢复 +1 ⚡",
+      "in_time": "{{time}} 后",
+      "progress_accessibility": "下一阶段能量恢复进度"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — 支付即将上线",
+      "title": "支付系统即将上线",
+      "description": "目前尚未接入真实支付 — 此为功能原型。接入支付提供商后将展示实际价格，并在购买确认前展示给您。",
+      "button": "知道了"
+    }
+  },
+  "profile": {
+    "header_title": "个人中心",
+    "privacy_note": "此为私密设置，真实用户无法查看你的主页资料。",
+    "groups": {
+      "theme": "外观主题",
+      "app": "应用设置",
+      "energy_and_purchases": "能量与购买",
+      "help_and_rules": "帮助与规则",
+      "general": "通用设置"
+    },
+    "theme_options": {
+      "system": "跟随系统",
+      "light": "浅色模式",
+      "dark": "深色模式"
+    },
+    "rows": {
+      "install_pwa": "添加到主屏幕",
+      "balance_and_topup": "能量余额与充值",
+      "about_ai": "关于 AI 角色",
+      "terms": "服务条款",
+      "privacy_policy": "隐私政策",
+      "language": "语言"
+    },
+    "buttons": {
+      "logout": "退出登录",
+      "reset_demo": "重置演示数据"
+    },
+    "logout_modal": {
+      "title": "确定退出登录吗？",
+      "description": "这是本地演示。退出后将清除本设备上的对话并重置余额。",
+      "confirm": "退出登录",
+      "cancel": "取消"
+    },
+    "language_modal": {
+      "title": "选择语言",
+      "restart_notice": "更改界面阅读方向需要快速重新加载应用。",
+      "restart_button": "立即重载",
+      "cancel_button": "稍后"
+    }
+  },
+  "pwa_install": {
+    "title": "添加到主屏幕",
+    "benefits": {
+      "quick_launch": "从主屏幕一触即达",
+      "standalone": "独立窗口体验，无浏览器工具栏干扰",
+      "notifications": "在受支持的设备上接收消息通知"
+    },
+    "install_button": "立即安装",
+    "not_now_button": "暂不安装",
+    "ios_steps": {
+      "step_1": "轻点 Safari 底部菜单中的「分享」按钮。",
+      "step_2": "在列表中选择「添加到主屏幕」。",
+      "step_3": "保持勾选「作为 Web App 打开」并轻点「添加」。"
+    },
+    "in_app_steps": {
+      "step_1": "打开当前应用菜单 (⋯)。",
+      "step_2": "选择「在浏览器中打开」— Safari 或 Chrome。",
+      "step_3": "在浏览器中将 Flirter 添加到主屏幕。"
+    },
+    "default_steps": {
+      "step_1": "打开浏览器右上角菜单 (⋮)。",
+      "step_2": "选择「安装应用」或「添加到主屏幕」。"
+    }
+  },
+  "legal": {
+    "back_accessibility": "返回",
+    "version_label": "版本生效日：{{version}}",
+    "not_found": "未找到相关文档。",
+    "documents": {
+      "terms": {
+        "title": "服务条款",
+        "sections": {
+          "draft": {
+            "heading": "条款草案",
+            "body": "条款正式文本将在法务最终审核后正式发布。当前页面用于展示布局。"
+          },
+          "nature": {
+            "heading": "服务性质",
+            "body": "Flirter 属于娱乐性质的虚拟交友模拟器。所有角色均为虚构的 AI 形象。"
+          },
+          "age": {
+            "heading": "年龄要求",
+            "body": "本服务严格且仅面向年满 18 周岁及以上的用户开放。"
+          }
+        }
+      },
+      "privacy": {
+        "title": "隐私政策",
+        "sections": {
+          "draft": {
+            "heading": "政策草案",
+            "body": "隐私政策的最终版本将在法务审查完毕后生效更新。"
+          },
+          "data": {
+            "heading": "收集的数据",
+            "body": "电子邮箱、出生日期、昵称、非必选的偏好设置、对话记录及购买记录。"
+          },
+          "rights": {
+            "heading": "你的权利",
+            "body": "你可在设置中随时申请数据副本、删除聊天历史记录或注销账号。"
+          }
+        }
+      },
+      "ai": {
+        "title": "关于 AI 角色",
+        "sections": {
+          "real_people": {
+            "heading": "这些是真人吗？",
+            "body": "不是。所有角色均为虚构形象，照片、介绍和聊天消息均由 AI 或预设剧本生成。"
+          },
+          "offline_meet": {
+            "heading": "可以线下见面吗？",
+            "body": "不可以。角色不存在于现实物理世界，绝不可能进行任何线下会面。"
+          },
+          "ai_mistakes": {
+            "heading": "AI 会出错吗？",
+            "body": "会的。AI 的回复可能存在不准确或失实之处，切勿将其视为专业建议。"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,473 @@
+{
+  "common": {
+    "app_name": "Flirter",
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ ما",
+    "back": "رجوع",
+    "close": "إغلاق",
+    "cancel": "إلغاء",
+    "continue": "متابعة",
+    "save": "حفظ",
+    "confirm": "تأكيد",
+    "done": "تم",
+    "understood": "فهمت",
+    "ok": "حسناً",
+    "start": "ابدأ الآن",
+    "login": "تسجيل الدخول",
+    "install": "تثبيت",
+    "not_now": "ليس الآن",
+    "reset": "إعادة ضبط",
+    "retry": "إعادة المحاولة",
+    "back_to_home": "العودة للرئيسية",
+    "back_to_dating": "العودة للتعارف",
+    "age_badge": "18+",
+    "coming_soon": "قريباً",
+    "yesterday": "أمس",
+    "session_restoring": "جارٍ استعادة الجلسة",
+    "terms": "الشروط",
+    "terms_full": "شروط الخدمة",
+    "privacy": "الخصوصية",
+    "privacy_full": "سياسة الخصوصية",
+    "about_ai": "عن الذكاء الاصطناعي",
+    "about_ai_full": "عن شخصيات الذكاء الاصطناعي",
+    "seconds_short": "{{count}} ث",
+    "minutes_short": "{{count}} د",
+    "hours_short": "{{count}} س",
+    "demo_notice": "الوضع التجريبي: تسجيل الدخول والردود يعملان محلياً. لا تُرسل رسائل بريد؛ الدفع والصور والصوت غير متاحة بعد."
+  },
+  "tabs": {
+    "dating": "تعارف",
+    "discover": "استكشاف",
+    "chats": "المحادثات",
+    "profile": "الملف الشخصي",
+    "unread_badge_accessibility": "{{label}}، {{count}} جديدة"
+  },
+  "not_found": {
+    "title": "الصفحة غير موجودة",
+    "description": "قد يكون هذا الرابط قديماً أو لم يعد متوفراً.",
+    "button": "العودة إلى الصفحة الرئيسية"
+  },
+  "html_meta": {
+    "description": "Flirter — محاكي تعارف مع شخصيات خيالية بالذكاء الاصطناعي. 18+.",
+    "title": "Flirter"
+  },
+  "onboarding": {
+    "layout": {
+      "step_progress": "الخطوة {{step}} من {{total}}"
+    },
+    "welcome": {
+      "hero_title": "قصتك تبدأ بمحادثة",
+      "hero_subtitle": "تعرف على شخصيات خيالية بالذكاء الاصطناعي وتحدث بالوتيرة التي تناسبك.",
+      "start_button": "ابدأ الآن",
+      "login_button": "تسجيل الدخول"
+    },
+    "age": {
+      "title": "خدمة للبالغين فقط",
+      "subtitle": "أدخل تاريخ ميلادك. لن يظهر هذا التاريخ للشخصيات أو لأي شخص آخر.",
+      "day_label": "اليوم",
+      "day_placeholder": "يوم",
+      "month_label": "الشهر",
+      "month_placeholder": "شهر",
+      "year_label": "السنة",
+      "year_placeholder": "سنة",
+      "accessibility_label": "تاريخ الميلاد",
+      "privacy_note_prefix": "نحتاج إلى تاريخ ميلادك لتأكيد أن عمرك 18 عاماً فأكثر. التفاصيل في ",
+      "privacy_policy_link": "سياسة الخصوصية",
+      "privacy_note_suffix": ".",
+      "errors": {
+        "incomplete": "يرجى إدخال تاريخ كامل: اليوم والشهر والسنة.",
+        "invalid": "هذا التاريخ غير موجود. تحقق من اليوم والشهر.",
+        "future": "لا يمكن أن يكون التاريخ في المستقبل.",
+        "unrealistic": "يرجى التحقق من سنة الميلاد."
+      },
+      "underage": {
+        "title": "الخدمة غير متوفرة",
+        "subtitle": "تطبيق Flirter متاح فقط للمستخدمين البالغين من عمر 18 عاماً فأكثر. شكراً لتفهمك.",
+        "terms_button": "شروط الخدمة"
+      }
+    },
+    "sign_in": {
+      "signup_title": "إنشاء حساب",
+      "login_title": "أهلاً بك مجدداً!",
+      "signup_subtitle": "يحفظ الحساب محادثاتك وطاقتك عبر جميع أجهزتك. لا حاجة لكلمة مرور — سنرسل رمزاً.",
+      "login_subtitle": "أدخل البريد الإلكتروني الذي سجلت به. سنرسل رمزاً لمرة واحدة.",
+      "get_code_button": "الحصول على الرمز",
+      "email_label": "البريد الإلكتروني",
+      "email_placeholder": "you@example.com",
+      "legal_prefix": "بالمتابعة، أنت تطلع على ",
+      "terms_link": "الشروط",
+      "and": " و ",
+      "privacy_link": "سياسة الخصوصية",
+      "legal_suffix": ". سيتعين عليك الموافقة الصريحة عليها لاحقاً.",
+      "errors": {
+        "invalid_email": "تحقق من البريد الإلكتروني — يبدو غير صحيح.",
+        "network_error": "فشل إرسال الرمز. تحقق من اتصالك وحاول مرة أخرى."
+      }
+    },
+    "verify": {
+      "title": "أدخل الرمز المرسل إلى بريدك",
+      "subtitle": "أرسلنا رمزاً مكوناً من {{count}} أرقام إلى {{email}}.",
+      "fallback_email": "بريدك الإلكتروني",
+      "confirm_button": "تأكيد",
+      "resend_code": "إعادة إرسال الرمز",
+      "resend_code_cooldown": "إعادة الإرسال بعد {{seconds}} ث",
+      "code_label": "رمز التحقق",
+      "change_email": "تغيير البريد الإلكتروني",
+      "demo_note": "وضع العرض التجريبي: أي رمز مكون من {{count}} أرقام سيعمل.",
+      "errors": {
+        "invalid_code": "رمز غير صالح أو منتهي الصلاحية. حاول ثانية أو اطلب رمزاً جديداً.",
+        "network_error": "لا يوجد اتصال بالإنترنت. تم حفظ الرمز — يرجى المحاولة مرة أخرى."
+      }
+    },
+    "profile_setup": {
+      "title": "كيف تحب أن نناديك؟",
+      "subtitle": "ستناديك الشخصيات بهذا الاسم. لا داعي لاستخدام اسمك الحقيقي.",
+      "continue_button": "متابعة",
+      "skip_button": "تخطي الاختياري",
+      "nickname_label": "الاسم المستعار",
+      "nickname_helper": "يمكنك تغييره في أي وقت من ملفك الشخصي.",
+      "nickname_error": "بين {{min}} و {{max}} أحرف.",
+      "gender_label": "جنسك (اختياري)",
+      "preference_label": "من تفضل أن يظهر لك (اختياري)",
+      "genders": {
+        "male": "رجل",
+        "female": "امرأة",
+        "other": "آخر"
+      },
+      "preferences": {
+        "women": "نساء",
+        "men": "رجال",
+        "everyone": "الجميع"
+      }
+    },
+    "disclosure": {
+      "title": "هذا محاكي تعارف بالذكاء الاصطناعي",
+      "submit_button": "الانتقال إلى التعارف",
+      "facts": {
+        "profiles": "جميع الملفات الشخصية لشخصيات خيالية.",
+        "ai_content": "الصور والسير الذاتية والردود تم إنشاؤها بالذكاء الاصطناعي أو سيناريوهات محددة.",
+        "no_real_people": "لا يوجد أشخاص حقيقيون للتعارف هنا.",
+        "no_offline": "اللقاء في الواقع غير ممكن نهائياً."
+      },
+      "consents": {
+        "ai_label": "أفهم أنني أتحدث مع شخصيات خيالية بالذكاء الاصطناعي",
+        "ai_text": "أدرك تماماً أنني أتواصل مع شخصيات خيالية بالذكاء الاصطناعي وليس أشخاصاً حقيقيين.",
+        "terms_label": "أوافق على شروط الخدمة واطلعت على سياسة الخصوصية",
+        "terms_prefix": "أوافق على ",
+        "terms_link": "شروط الخدمة",
+        "and": " واطلعت على ",
+        "privacy_link": "سياسة الخصوصية",
+        "terms_suffix": "."
+      },
+      "error_save": "فشل حفظ الاختيارات. تم حفظ التحديدات — حاول مجدداً."
+    }
+  },
+  "discover": {
+    "filter_accessibility": "الفلاتر",
+    "filter_active_accessibility": "الفلاتر، {{count}} مفعّلة",
+    "empty_title": "لا توجد شخصيات تطابق هذه الفلاتر",
+    "empty_subtitle": "جرب إزالة بعض الفلاتر — ستتوفر شخصيات جديدة قريباً.",
+    "reset_filters": "إعادة ضبط الفلاتر",
+    "card_accessibility": "{{name}}، {{age}} سنة. {{tagline}}. فتح الملف الشخصي",
+    "action_open_chat": "فتح محادثة مع {{name}}",
+    "action_like": "إعجاب بـ {{name}}",
+    "sheet": {
+      "title": "الفلاتر",
+      "who_to_show": "من تود رؤيته",
+      "age": "العمر",
+      "ethnicity": "الأصل والعرق",
+      "interests": "الاهتمامات",
+      "communication_style": "أسلوب التواصل",
+      "only_new_title": "الجدد فقط",
+      "only_new_subtitle": "إخفاء الشخصيات التي بدأت محادثة معها بالفعل",
+      "reset": "إعادة ضبط",
+      "no_matches": "لا توجد نتائج",
+      "show_results_one": "عرض {{count}} شخصية",
+      "show_results_few": "عرض {{count}} شخصيات",
+      "show_results_many": "عرض {{count}} شخصية",
+      "show_results_other": "عرض {{count}} شخصية"
+    },
+    "filter_options": {
+      "gender": {
+        "everyone": "الجميع",
+        "women": "نساء",
+        "men": "رجال",
+        "nonbinary": "غير ثنائي"
+      },
+      "age_ranges": {
+        "18_24": "18–24",
+        "25_29": "25–29",
+        "30_plus": "30+"
+      },
+      "interests": {
+        "active": "رياضة",
+        "travel": "سفر",
+        "music": "موسيقى",
+        "art": "فن",
+        "food": "طعام وقهوة",
+        "books": "كتب وسينما",
+        "nature": "طبيعة"
+      },
+      "styles": {
+        "romantic": "رومانسي",
+        "playful": "مرح",
+        "intellectual": "فكري",
+        "caring": "حنون"
+      },
+      "ethnicities": {
+        "european": "أوروبي",
+        "asian": "آسيوي",
+        "african": "أفريقي",
+        "latin": "لاتيني",
+        "middle_eastern": "شرق أوسطي",
+        "mixed": "مختلط"
+      }
+    }
+  },
+  "chats": {
+    "header_title": "المحادثات",
+    "typing": "يكتب الآن…",
+    "you_prefix": "أنت: ",
+    "row_accessibility": "{{name}}. {{preview}}",
+    "unread_suffix": ". غير مقروءة: {{count}}",
+    "dismiss_request_accessibility": "إلغاء الطلب من {{name}}",
+    "section_requests": "طلبات المحادثة",
+    "show_all_requests": "عرض الكل",
+    "show_less_requests": "عرض أقل",
+    "section_dialogs": "الرسائل",
+    "empty_title": "المكان هادئ هنا حالياً",
+    "empty_subtitle": "اختر شخصية لبدء أول محادثة بينكما.",
+    "to_dating_button": "استكشاف الشخصيات",
+    "system_messages": {
+      "ai_disclaimer": "هذه محادثة مع شخصية ذكاء اصطناعي خيالية. قد تحتوي الردود على أخطاء.",
+      "liked_profile": "لقد أُعجبت بهذا الملف الشخصي",
+      "reply_error_refunded": "تعذر تجهيز الرد. تم استرداد الطاقة."
+    }
+  },
+  "chat": {
+    "waiting_chats": {
+      "one": "محادثة واحدة بانتظار الرد",
+      "other": "{{count}} محادثات بانتظار الرد",
+      "row_accessibility": "{{label}}. فتح المحادثات"
+    },
+    "back_accessibility": "الرجوع إلى المحادثات",
+    "profile_accessibility": "الملف الشخصي: {{name}}",
+    "typing": "يكتب الآن…",
+    "send_suggestion_accessibility": "إرسال الرد: {{reply}}",
+    "insufficient_energy_action": "إرسال رسالة",
+    "coming_soon_modal": {
+      "title": "قريباً جداً",
+      "description": "إرسال الصور والرسائل الصوتية سيتوفر في التحديثات القادمة.",
+      "button": "حسناً"
+    },
+    "composer": {
+      "attach_photo_accessibility": "إرفاق صورة",
+      "placeholder": "اكتب رسالة...",
+      "input_accessibility": "نص الرسالة",
+      "send_accessibility": "إرسال",
+      "record_voice_accessibility": "تسجيل رسالة صوتية"
+    },
+    "typing_indicator_accessibility": "الشخصية تكتب الآن"
+  },
+  "character": {
+    "missing_title": "الشخصية لم تعد متوفرة",
+    "back_to_dating": "العودة إلى التعارف",
+    "close_accessibility": "إغلاق الملف الشخصي",
+    "in_story": "في القصة: {{city}}",
+    "section_interests": "الاهتمامات",
+    "section_traits": "الشخصية",
+    "section_lifestyle": "أسلوب الحياة",
+    "about_ai_notice": "{{name}} شخصية خيالية بالذكاء الاصطناعي. تم إنشاء الصور والبيانات والردود بواسطة الذكاء الاصطناعي.",
+    "continue_chat": "متابعة المحادثة",
+    "start_chat": "بدء المحادثة"
+  },
+  "energy": {
+    "title": "الطاقة",
+    "chip_accessibility": "الطاقة: {{total}}. فتح متجر الطاقة",
+    "subscription": "طاقة إضافية مع الاشتراك",
+    "one_time": "شحن لمرة واحدة",
+    "subscription_card": {
+      "title": "Energy+",
+      "badge_best_value": "أفضل قيمة",
+      "price": "149 ₴",
+      "period": " / أسبوع",
+      "feature_limit": "سعة 60 بدلاً من {{cap}}",
+      "feature_speed": "تجديد أسرع بمرتين · 1 كل 6 دقائق",
+      "subscribe_button": "اشترك الآن",
+      "footnote": "تجديد تلقائي · يمكنك الإلغاء في أي وقت"
+    },
+    "packages": {
+      "amount_energy": "{{amount}} طاقة",
+      "badge_recommended": "موصى به",
+      "price_uah": "{{price}} ₴",
+      "or_photos": "أو {{photos}} صور",
+      "buy": "شراء",
+      "buy_accessibility": "شراء {{amount}} طاقة. {{description}}"
+    },
+    "insufficient_sheet": {
+      "title": "نفدت الطاقة",
+      "close_accessibility": "إغلاق",
+      "subtitle": "اشحن طاقتك لمواصلة الحديث",
+      "regen_countdown": "+1 خلال {{time}}",
+      "balance_status": "{{current}} من {{max}}",
+      "sub_title": "Energy+",
+      "sub_badge": "أفضل قيمة",
+      "sub_price": "149 ₴",
+      "sub_period": " / أسبوع",
+      "sub_feature_limit": "سعة 60 طاقة",
+      "sub_feature_speed": "تجديد أسرع بمرتين",
+      "sub_button": "اشترك الآن",
+      "divider_or": "أو شحن لمرة واحدة",
+      "word_energy": "طاقة",
+      "badge_recommended": "موصى به",
+      "not_now": "ليس الآن"
+    },
+    "vip_card": {
+      "title": "Flirter VIP",
+      "soon": "قريباً",
+      "benefit_cap": "احتياطي 60 ⚡ بدلاً من {{cap}}",
+      "benefit_speed": "تجديد أسرع بمرتين: 1 ⚡ كل 6 دقائق",
+      "benefit_prices": "الرسائل والصور بنفس تكلفة الطاقة",
+      "footnote": "سيتم توضيح السعر والمدة وشروط الإلغاء قبل الدفع."
+    },
+    "hero_card": {
+      "your_balance": "رصيدك الحالي",
+      "messages_equivalent_one": "≈ {{count}} رسالة",
+      "messages_equivalent_few": "≈ {{count}} رسائل",
+      "messages_equivalent_many": "≈ {{count}} رسالة",
+      "messages_equivalent_other": "≈ {{count}} رسالة",
+      "full_reserve": "الاحتياطي المجاني ممتلئ · {{cap}} ⚡",
+      "free_plus_one": "مجاناً +1 ⚡",
+      "in_time": "خلال {{time}}",
+      "progress_accessibility": "التقدم نحو نقطة الطاقة التالية"
+    },
+    "payment_prototype_modal": {
+      "title_with_pack": "{{amount}} ⚡ — الدفع قريباً",
+      "title": "الدفع سيتوفر قريباً",
+      "description": "الدفع غير مفعّل بعد — هذا نموذج أولي. ستظهر الأسعار بمجرد ربط مزود الدفع وستراها قبل تأكيد الشراء.",
+      "button": "فهمت"
+    }
+  },
+  "profile": {
+    "header_title": "الملف الشخصي",
+    "privacy_note": "هذه إعدادات خاصة. ملفك الشخصي لا يظهر لأشخاص حقيقيين.",
+    "groups": {
+      "theme": "المظهر",
+      "app": "التطبيق",
+      "energy_and_purchases": "الطاقة والمشتريات",
+      "help_and_rules": "المساعدة والقواعد",
+      "general": "عام"
+    },
+    "theme_options": {
+      "system": "حسب النظام",
+      "light": "فاتح",
+      "dark": "داكن"
+    },
+    "rows": {
+      "install_pwa": "إضافة إلى الشاشة الرئيسية",
+      "balance_and_topup": "الرصيد والشحن",
+      "about_ai": "عن شخصيات الذكاء الاصطناعي",
+      "terms": "شروط الخدمة",
+      "privacy_policy": "سياسة الخصوصية",
+      "language": "اللغة"
+    },
+    "buttons": {
+      "logout": "تسجيل الخروج",
+      "reset_demo": "إعادة ضبط البيانات التجريبية"
+    },
+    "logout_modal": {
+      "title": "تسجيل الخروج من الحساب؟",
+      "description": "هذا عرض تجريبي محلي. يؤدي تسجيل الخروج إلى مسح المحادثات وإعادة ضبط الرصيد على هذا الجهاز.",
+      "confirm": "تسجيل الخروج",
+      "cancel": "إلغاء"
+    },
+    "language_modal": {
+      "title": "اختر اللغة",
+      "restart_notice": "يتطلب التطبيق إعادة تشغيل سريعة لتغيير اتجاه واجهة المستخدم.",
+      "restart_button": "إعادة التشغيل الآن",
+      "cancel_button": "لاحقاً"
+    }
+  },
+  "pwa_install": {
+    "title": "إضافة إلى الشاشة الرئيسية",
+    "benefits": {
+      "quick_launch": "تشغيل سريع من الشاشة الرئيسية",
+      "standalone": "نافذة مستقلة بدون أشرطة المتصفح",
+      "notifications": "إشعارات على الأجهزة المدعومة"
+    },
+    "install_button": "تثبيت",
+    "not_now_button": "ليس الآن",
+    "ios_steps": {
+      "step_1": "اضغط على «مشاركة» في قائمة Safari.",
+      "step_2": "اختر «إضافة إلى الشاشة الرئيسية».",
+      "step_3": "أبقِ خيار «فتح كتطبيق ويب» مفعلاً ثم اضغط «إضافة»."
+    },
+    "in_app_steps": {
+      "step_1": "افتح قائمة هذا التطبيق (⋯).",
+      "step_2": "اختر «فتح في المتصفح» — Safari أو Chrome.",
+      "step_3": "من هناك، أضف Flirter إلى شاشتك الرئيسية."
+    },
+    "default_steps": {
+      "step_1": "افتح قائمة المتصفح (⋮).",
+      "step_2": "اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية»."
+    }
+  },
+  "legal": {
+    "back_accessibility": "رجوع",
+    "version_label": "الإصدار بتاريخ {{version}}",
+    "not_found": "المستند غير موجود.",
+    "documents": {
+      "terms": {
+        "title": "شروط الخدمة",
+        "sections": {
+          "draft": {
+            "heading": "مسودة",
+            "body": "سيتم توفير النص النهائي للشروط بعد المراجعة القانونية. هذه الصفحة مكان مخصص للوثيقة."
+          },
+          "nature": {
+            "heading": "طبيعة الخدمة",
+            "body": "تطبيق Flirter هو محاكي تعارف ترفيهي. جميع الحسابات لشخصيات خيالية بالذكاء الاصطناعي."
+          },
+          "age": {
+            "heading": "شرط العمر",
+            "body": "الخدمة مخصصة حصرياً للأشخاص الذين تبلغ أعمارهم 18 عاماً فأكثر."
+          }
+        }
+      },
+      "privacy": {
+        "title": "سياسة الخصوصية",
+        "sections": {
+          "draft": {
+            "heading": "مسودة",
+            "body": "سيتم تقديم النص النهائي لسياسة الخصوصية بعد الاعتماد القانوني."
+          },
+          "data": {
+            "heading": "البيانات المجمعة",
+            "body": "البريد الإلكتروني، تاريخ الميلاد، الاسم المستعار، التفضيلات الاختيارية، سجل المحادثات والمشتريات."
+          },
+          "rights": {
+            "heading": "حقوقك",
+            "body": "يمكنك طلب نسخة من بياناتك أو حذف سجل المحادثات أو إغلاق حسابك من الإعدادات."
+          }
+        }
+      },
+      "ai": {
+        "title": "عن شخصيات الذكاء الاصطناعي",
+        "sections": {
+          "real_people": {
+            "heading": "هل هؤلاء أشخاص حقيقيون؟",
+            "body": "لا. جميع الشخصيات خيالية، وصورهم وسيرهم ورسائلهم من إنشاء الذكاء الاصطناعي أو نصوص محددة."
+          },
+          "offline_meet": {
+            "heading": "هل يمكن اللقاء على أرض الواقع؟",
+            "body": "لا. الشخصيات غير موجودة في العالم الحقيقي، واللقاءات الواقعية مستحيلة."
+          },
+          "ai_mistakes": {
+            "heading": "هل يخطئ الذكاء الاصطناعي؟",
+            "body": "نعم. قد تكون الردود غير دقيقة. يرجى عدم اعتبارها نصائح مهنية أو متخصصة."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,20 +1,25 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, type Href } from 'expo-router';
 import { useState, type ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useFloatingTabBarInset } from '@/components/layout/glass-tab-bar';
 import { AppHeader } from '@/components/layout/app-header';
+import { LanguageSelectionSheet } from '@/components/profile/language-selection-sheet';
 import { InstallSheet } from '@/components/pwa/install-sheet';
 import { AppText } from '@/components/ui/app-text';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
+import { LANGUAGE_REGISTRY } from '@/i18n/types';
 import { usePwaInstall } from '@/lib/pwa-install';
 import { maskEmail } from '@/lib/validation';
 import { useChatsStore } from '@/store/chats-store';
+import { useDraftsStore } from '@/store/drafts-store';
 import { useFiltersStore } from '@/store/filters-store';
 import { useEnergyStore } from '@/store/energy-store';
+import { useLanguageStore } from '@/store/language-store';
 import { useSessionStore } from '@/store/session-store';
 import { radius, sizes, spacing, type ThemeColors, type ThemeMode } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
@@ -44,7 +49,7 @@ function SettingsRow({ icon, label, onPress, value, testID }: SettingsRowProps) 
         {label}
       </AppText>
       {value && (
-        <AppText variant="secondary" color="textSecondary">
+        <AppText variant="secondary" color="textSecondary" style={styles.rowValue} numberOfLines={2}>
           {value}
         </AppText>
       )}
@@ -70,6 +75,7 @@ function ThemeOptionRow({ icon, label, selected, onPress, colors, testID }: Them
       accessibilityRole="radio"
       accessibilityLabel={label}
       accessibilityState={{ selected, checked: selected }}
+      aria-checked={selected}
       style={({ pressed }) => [styles.row, pressed && { backgroundColor: colors.surfaceMuted }]}>
       <Ionicons name={icon} size={sizes.icon} color={selected ? colors.brand : colors.textPrimary} />
       <AppText
@@ -100,35 +106,45 @@ function SettingsGroup({ title, children }: { title: string; children: React.Rea
 
 /** Повне скидання локального демо-стану (лише для прототипу без бекенду). */
 function resetAllLocalState() {
+  useDraftsStore.getState().reset();
   useChatsStore.getState().resetForDemo();
   useFiltersStore.getState().resetFilters();
   useEnergyStore.getState().resetForDemo();
   useSessionStore.getState().logout();
 }
 
-const THEME_OPTIONS: { mode: ThemeMode; label: string; icon: IconName }[] = [
-  { mode: 'system', label: 'Як у системі', icon: 'phone-portrait-outline' },
-  { mode: 'light', label: 'Світла', icon: 'sunny-outline' },
-  { mode: 'dark', label: 'Темна', icon: 'moon-outline' },
-];
-
 /** S26. Мій профіль / Settings. */
 export default function ProfileScreen() {
+  const { t } = useTranslation();
   const tabBarInset = useFloatingTabBarInset();
   const nickname = useSessionStore((state) => state.nickname) ?? '';
   const email = useSessionStore((state) => state.email) ?? '';
-  const logout = useSessionStore((state) => state.logout);
   const { isStandalone } = usePwaInstall();
   const { mode, setMode, colors } = useTheme();
 
+  const languageMode = useLanguageStore((state) => state.mode);
+  const resolvedLanguage = useLanguageStore((state) => state.resolvedLanguage);
+
   const [isInstallSheetVisible, setIsInstallSheetVisible] = useState(false);
+  const [isLanguageSheetVisible, setIsLanguageSheetVisible] = useState(false);
   const [isLogoutSheetVisible, setIsLogoutSheetVisible] = useState(false);
 
   const openLegal = (href: Href) => router.push(href);
 
+  const currentLanguageName =
+    languageMode === 'system'
+      ? `${t('profile.theme_options.system')} (${LANGUAGE_REGISTRY[resolvedLanguage]?.nativeName ?? ''})`
+      : LANGUAGE_REGISTRY[languageMode]?.nativeName ?? '';
+
+  const themeOptions: { mode: ThemeMode; label: string; icon: IconName }[] = [
+    { mode: 'system', label: t('profile.theme_options.system'), icon: 'phone-portrait-outline' },
+    { mode: 'light', label: t('profile.theme_options.light'), icon: 'sunny-outline' },
+    { mode: 'dark', label: t('profile.theme_options.dark'), icon: 'moon-outline' },
+  ];
+
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top']}>
-      <AppHeader title="Профіль" />
+      <AppHeader title={t('profile.header_title')} />
       <ScrollView contentContainerStyle={[styles.content, { paddingBottom: tabBarInset }]}>
         <View style={[styles.profileCard, { backgroundColor: colors.surface, borderColor: colors.border }]}>
           <View style={[styles.avatar, { backgroundColor: colors.brand }]}>
@@ -149,12 +165,12 @@ export default function ProfileScreen() {
         <View style={styles.privacyNote}>
           <Ionicons name="lock-closed-outline" size={18} color={colors.textSecondary} />
           <AppText variant="secondary" color="textSecondary" style={styles.flex}>
-            Це приватні налаштування. Твій профіль не показується реальним людям.
+            {t('profile.privacy_note')}
           </AppText>
         </View>
 
-        <SettingsGroup title="Тема оформлення">
-          {THEME_OPTIONS.map((opt, index) => (
+        <SettingsGroup title={t('profile.groups.theme')}>
+          {themeOptions.map((opt, index) => (
             <View key={opt.mode}>
               {index > 0 && <View style={[styles.divider, { backgroundColor: colors.border }]} />}
               <ThemeOptionRow
@@ -169,51 +185,84 @@ export default function ProfileScreen() {
           ))}
         </SettingsGroup>
 
-        {!isStandalone && (
-          <SettingsGroup title="Застосунок">
-            <SettingsRow
-              icon="phone-portrait-outline"
-              label="Додати на головний екран"
-              onPress={() => setIsInstallSheetVisible(true)}
-              testID="settings-install"
-            />
-          </SettingsGroup>
-        )}
-
-        <SettingsGroup title="Енергія та покупки">
-          <SettingsRow icon="flash-outline" label="Баланс і поповнення" onPress={() => router.navigate('/energy')} />
+        <SettingsGroup title={t('profile.groups.app')}>
+          <SettingsRow
+            icon="globe-outline"
+            label={t('profile.rows.language')}
+            value={currentLanguageName}
+            onPress={() => setIsLanguageSheetVisible(true)}
+            testID="settings-language"
+          />
+          {!isStandalone && (
+            <>
+              <View style={[styles.divider, { backgroundColor: colors.border }]} />
+              <SettingsRow
+                icon="phone-portrait-outline"
+                label={t('profile.rows.install_pwa')}
+                onPress={() => setIsInstallSheetVisible(true)}
+                testID="settings-install"
+              />
+            </>
+          )}
         </SettingsGroup>
 
-        <SettingsGroup title="Допомога та правила">
-          <SettingsRow icon="sparkles-outline" label="Про AI-персонажів" onPress={() => openLegal('/legal/ai')} />
+        <SettingsGroup title={t('profile.groups.energy_and_purchases')}>
+          <SettingsRow
+            icon="flash-outline"
+            label={t('profile.rows.balance_and_topup')}
+            onPress={() => router.navigate('/energy')}
+          />
+        </SettingsGroup>
+
+        <SettingsGroup title={t('profile.groups.help_and_rules')}>
+          <SettingsRow icon="sparkles-outline" label={t('profile.rows.about_ai')} onPress={() => openLegal('/legal/ai')} />
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
-          <SettingsRow icon="document-text-outline" label="Умови використання" onPress={() => openLegal('/legal/terms')} />
+          <SettingsRow icon="document-text-outline" label={t('profile.rows.terms')} onPress={() => openLegal('/legal/terms')} />
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
-          <SettingsRow icon="shield-checkmark-outline" label="Політика приватності" onPress={() => openLegal('/legal/privacy')} />
+          <SettingsRow icon="shield-checkmark-outline" label={t('profile.rows.privacy_policy')} onPress={() => openLegal('/legal/privacy')} />
         </SettingsGroup>
 
         <View style={styles.footerActions}>
-          <Button label="Вийти" variant="secondary" icon="log-out-outline" onPress={() => setIsLogoutSheetVisible(true)} testID="settings-logout" />
-          <Button label="Скинути демо-дані" variant="danger" onPress={resetAllLocalState} testID="settings-reset" />
+          <Button
+            label={t('profile.buttons.logout')}
+            variant="secondary"
+            icon="log-out-outline"
+            onPress={() => setIsLogoutSheetVisible(true)}
+            testID="settings-logout"
+          />
+          <Button
+            label={t('profile.buttons.reset_demo')}
+            variant="danger"
+            onPress={resetAllLocalState}
+            testID="settings-reset"
+          />
         </View>
       </ScrollView>
 
       <InstallSheet visible={isInstallSheetVisible} onClose={() => setIsInstallSheetVisible(false)} />
 
-      <BottomSheet visible={isLogoutSheetVisible} onClose={() => setIsLogoutSheetVisible(false)} title="Вийти з акаунту?">
+      <LanguageSelectionSheet
+        visible={isLanguageSheetVisible}
+        onClose={() => setIsLanguageSheetVisible(false)}
+      />
+
+      <BottomSheet
+        visible={isLogoutSheetVisible}
+        onClose={() => setIsLogoutSheetVisible(false)}
+        title={t('profile.logout_modal.title')}>
         <AppText variant="body" color="textSecondary">
-          Розмови та енергія збережуться в акаунті. Щоб повернутися, увійди з тим самим email.
+          {t('profile.logout_modal.description')}
         </AppText>
         <Button
-          label="Вийти"
+          label={t('profile.logout_modal.confirm')}
           variant="danger"
           onPress={() => {
             setIsLogoutSheetVisible(false);
-            logout();
+            resetAllLocalState();
           }}
           testID="logout-confirm"
         />
-        <Button label="Скасувати" variant="secondary" onPress={() => setIsLogoutSheetVisible(false)} />
+        <Button label={t('profile.logout_modal.cancel')} variant="secondary" onPress={() => setIsLogoutSheetVisible(false)} />
       </BottomSheet>
     </SafeAreaView>
   );
@@ -276,10 +325,12 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     minHeight: 52,
     paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.sm,
   },
   rowLabel: {
     flex: 1,
   },
+  rowValue: { maxWidth: '42%', flexShrink: 1 },
   selectedRowLabel: {
     fontWeight: '600',
   },

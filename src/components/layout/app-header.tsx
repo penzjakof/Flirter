@@ -3,8 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { EnergyChip } from '@/components/energy/energy-chip';
 import { AppText } from '@/components/ui/app-text';
-import { colors, sizes, spacing } from '@/theme/tokens';
-import { useTheme } from '@/theme/use-theme';
+import { sizes, spacing } from '@/theme/tokens';
 
 interface AppHeaderProps {
   title?: string;

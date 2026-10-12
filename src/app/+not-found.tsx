@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
@@ -8,17 +9,18 @@ import { useTheme } from '@/theme/use-theme';
 
 /** S45 (404): конкретне пояснення та релевантна дія. */
 export default function NotFoundScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <AppText variant="title" align="center">
-        Сторінку не знайдено
+        {t('not_found.title')}
       </AppText>
       <AppText variant="body" color="textSecondary" align="center">
-        Можливо, посилання застаріло.
+        {t('not_found.description')}
       </AppText>
-      <Button label="На головну" onPress={() => router.replace('/')} style={styles.button} />
+      <Button label={t('not_found.button')} onPress={() => router.replace('/')} style={styles.button} />
     </View>
   );
 }

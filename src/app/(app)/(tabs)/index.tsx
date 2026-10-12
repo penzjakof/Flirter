@@ -1,9 +1,28 @@
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlatList, Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
+
+import { BrandMark } from '@/components/brand-mark';
+import { CharacterGridCard } from '@/components/discover/character-grid-card';
+import { FilterSheet } from '@/components/discover/filter-sheet';
+import { InterestChips } from '@/components/discover/interest-chips';
+import { useFloatingTabBarInset } from '@/components/layout/glass-tab-bar';
+import { AppHeader } from '@/components/layout/app-header';
+import { AppText } from '@/components/ui/app-text';
+import { Button } from '@/components/ui/button';
+import { IconButton } from '@/components/ui/icon-button';
+import { CHARACTERS } from '@/data/characters';
+import { countAdvancedFilters, filterCharacters } from '@/lib/character-filters';
+import type { Character } from '@/models/types';
+import { useChatsStore } from '@/store/chats-store';
+import { useCharacterFilters, useFiltersStore } from '@/store/filters-store';
+import { useSessionStore } from '@/store/session-store';
+import { colors, radius, sizes, spacing } from '@/theme/tokens';
+import { useTheme } from '@/theme/use-theme';
 
 // Хелпер для додавання прозорості до HEX кольорів
 function getGradientColors(hexColor: string): readonly [string, string, string] {
@@ -31,24 +50,6 @@ const WEB_BOTTOM_BLUR = Platform.select<any>({
   default: {},
 });
 
-import { BrandMark } from '@/components/brand-mark';
-import { CharacterGridCard } from '@/components/discover/character-grid-card';
-import { FilterSheet } from '@/components/discover/filter-sheet';
-import { InterestChips } from '@/components/discover/interest-chips';
-import { useFloatingTabBarInset } from '@/components/layout/glass-tab-bar';
-import { AppHeader } from '@/components/layout/app-header';
-import { AppText } from '@/components/ui/app-text';
-import { Button } from '@/components/ui/button';
-import { IconButton } from '@/components/ui/icon-button';
-import { CHARACTERS } from '@/data/characters';
-import { countAdvancedFilters, filterCharacters } from '@/lib/character-filters';
-import type { Character } from '@/models/types';
-import { useChatsStore } from '@/store/chats-store';
-import { useCharacterFilters, useFiltersStore } from '@/store/filters-store';
-import { useSessionStore } from '@/store/session-store';
-import { colors, radius, sizes, spacing } from '@/theme/tokens';
-import { useTheme } from '@/theme/use-theme';
-
 const GRID_COLUMNS = 2;
 const GRID_PADDING = spacing.lg;
 const GRID_GAP = spacing.md;
@@ -62,6 +63,7 @@ function useGridCardWidth(): number {
 
 /** S08. Знайомства: сітка персонажів + фільтри на сторінці. */
 export default function DiscoverScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const filters = useCharacterFilters();
@@ -130,7 +132,11 @@ export default function DiscoverScreen() {
               <IconButton
                 icon="options-outline"
                 onPress={() => setFilterSheetOpen(true)}
-                accessibilityLabel={advancedCount > 0 ? `Фільтри, активних: ${advancedCount}` : 'Фільтри'}
+                accessibilityLabel={
+                  advancedCount > 0
+                    ? t('discover.filter_active_accessibility', { count: advancedCount })
+                    : t('discover.filter_accessibility')
+                }
                 badgeCount={advancedCount}
                 testID="filter-open"
                 variant="glass"
@@ -151,21 +157,21 @@ export default function DiscoverScreen() {
         />
       </View>
 
-      {isFilterSheetOpen && (
-        <FilterSheet
+      <FilterSheet
+          visible={isFilterSheetOpen}
           initialFilters={filters}
           defaultGender={preference ?? 'everyone'}
           conversationIds={conversationIds}
           onApply={applyFilters}
           onClose={() => setFilterSheetOpen(false)}
-        />
-      )}
+      />
     </View>
   );
 }
 
 /** Чесний empty state: профілі не вигадуємо, пропонуємо послабити фільтри. */
 function EmptyFilterResult({ onReset }: { onReset: () => void }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
 
   return (
@@ -174,12 +180,18 @@ function EmptyFilterResult({ onReset }: { onReset: () => void }) {
         <Ionicons name="search-outline" size={32} color={colors.brand} />
       </View>
       <AppText variant="heading" align="center">
-        Немає персонажів за цими фільтрами
+        {t('discover.empty_title')}
       </AppText>
       <AppText variant="body" color="textSecondary" align="center">
-        Спробуй прибрати частину фільтрів — нові персонажі також з’являтимуться згодом.
+        {t('discover.empty_subtitle')}
       </AppText>
-      <Button label="Скинути фільтри" variant="secondary" onPress={onReset} style={styles.emptyButton} testID="discover-reset-filters" />
+      <Button
+        label={t('discover.reset_filters')}
+        variant="secondary"
+        onPress={onReset}
+        style={styles.emptyButton}
+        testID="discover-reset-filters"
+      />
     </View>
   );
 }

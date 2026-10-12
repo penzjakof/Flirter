@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
@@ -10,7 +11,7 @@ import { colors, radius, sizes, spacing } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 const CARD_ASPECT_RATIO = 3 / 4;
-const ACTION_SIZE = 40;
+const ACTION_SIZE = sizes.tapTarget;
 const ACTION_HIT_SLOP = (sizes.tapTarget - ACTION_SIZE) / 2;
 const SCRIM_COLORS = ['rgba(0,0,0,0)', 'rgba(0,0,0,0.25)', 'rgba(0,0,0,0.78)'] as const;
 const SCRIM_LOCATIONS = [0.35, 0.6, 1] as const;
@@ -30,8 +31,11 @@ interface CharacterGridCardProps {
  * «button inside button» на web.
  */
 function CharacterGridCardComponent({ character, width, hasConversation, onOpenProfile, onPrimaryAction }: CharacterGridCardProps) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
-  const actionLabel = hasConversation ? `Відкрити чат з ${character.name}` : `Вподобати ${character.name}`;
+  const actionLabel = hasConversation
+    ? t('discover.action_open_chat', { name: character.name })
+    : t('discover.action_like', { name: character.name });
 
   return (
     <View style={[styles.card, { width, backgroundColor: colors.surfaceMuted }]}>
@@ -39,7 +43,11 @@ function CharacterGridCardComponent({ character, width, hasConversation, onOpenP
         testID={`grid-card-${character.id}`}
         onPress={() => onOpenProfile(character.id)}
         accessibilityRole="button"
-        accessibilityLabel={`${character.name}, ${character.age}. ${character.tagline}. Відкрити профіль`}
+        accessibilityLabel={t('discover.card_accessibility', {
+          name: character.name,
+          age: character.age,
+          tagline: character.tagline,
+        })}
         style={({ pressed }) => [StyleSheet.absoluteFill, pressed && styles.pressed]}>
         <Image
           source={character.photos[0]}

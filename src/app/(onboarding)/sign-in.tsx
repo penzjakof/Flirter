@@ -1,5 +1,6 @@
 import { Link, router } from 'expo-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { OnboardingGate } from '@/components/onboarding/onboarding-gate';
@@ -18,6 +19,7 @@ async function requestEmailCode(_email: string): Promise<void> {
 
 /** S03. Створення акаунту / вхід: один email-input, passwordless. */
 function SignInScreenContent() {
+  const { t } = useTranslation();
   const authMode = useSessionStore((state) => state.authMode);
   const storedEmail = useSessionStore((state) => state.email);
   const setPendingEmail = useSessionStore((state) => state.setPendingEmail);
@@ -30,7 +32,7 @@ function SignInScreenContent() {
 
   const handleSubmit = async () => {
     if (!isValidEmail(email)) {
-      setError('Перевір адресу — схоже, в ній помилка.');
+      setError(t('onboarding.sign_in.errors.invalid_email'));
       return;
     }
     setIsSubmitting(true);
@@ -41,7 +43,7 @@ function SignInScreenContent() {
       setPendingEmail(normalizedEmail);
       router.push('/verify');
     } catch {
-      setError('Не вдалося надіслати код. Перевір з’єднання й спробуй ще раз.');
+      setError(t('onboarding.sign_in.errors.network_error'));
     } finally {
       setIsSubmitting(false);
     }
@@ -50,15 +52,15 @@ function SignInScreenContent() {
   return (
     <OnboardingLayout
       stepNumber={2}
-      title={isSignup ? 'Створи акаунт' : 'З поверненням!'}
+      title={isSignup ? t('onboarding.sign_in.signup_title') : t('onboarding.sign_in.login_title')}
       subtitle={
         isSignup
-          ? 'Акаунт зберігає розмови та енергію між пристроями. Пароль не потрібен — надішлемо код.'
-          : 'Введи email, з яким реєструвався. Надішлемо одноразовий код.'
+          ? t('onboarding.sign_in.signup_subtitle')
+          : t('onboarding.sign_in.login_subtitle')
       }
       footer={
         <Button
-          label="Отримати код"
+          label={t('onboarding.sign_in.get_code_button')}
           onPress={handleSubmit}
           loading={isSubmitting}
           disabled={email.trim().length === 0}
@@ -67,8 +69,8 @@ function SignInScreenContent() {
       }>
       <TextField
         testID="signin-email"
-        label="Email"
-        placeholder="you@example.com"
+        label={t('onboarding.sign_in.email_label')}
+        placeholder={t('onboarding.sign_in.email_placeholder')}
         value={email}
         onChangeText={(value) => {
           setEmail(value);
@@ -88,19 +90,19 @@ function SignInScreenContent() {
 
       <View style={styles.legal}>
         <AppText variant="secondary" color="textSecondary">
-          Продовжуючи, ти переходиш до{' '}
+          {t('onboarding.sign_in.legal_prefix')}
           <Link href="/legal/terms">
             <AppText variant="secondary" color="brand">
-              Умов
-            </AppText>
-          </Link>{' '}
-          та{' '}
-          <Link href="/legal/privacy">
-            <AppText variant="secondary" color="brand">
-              Політики приватності
+              {t('onboarding.sign_in.terms_link')}
             </AppText>
           </Link>
-          . Погодитися з ними потрібно буде окремо.
+          {t('onboarding.sign_in.and')}
+          <Link href="/legal/privacy">
+            <AppText variant="secondary" color="brand">
+              {t('onboarding.sign_in.privacy_link')}
+            </AppText>
+          </Link>
+          {t('onboarding.sign_in.legal_suffix')}
         </AppText>
       </View>
     </OnboardingLayout>

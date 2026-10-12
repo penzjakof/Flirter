@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { BrandMark } from '@/components/brand-mark';
@@ -9,10 +10,11 @@ import { useTheme } from '@/theme/use-theme';
  * Також є статичним HTML до гідрації.
  */
 export function BootScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]} accessibilityLabel="Відновлюємо сесію" accessibilityLiveRegion="polite">
+    <View style={[styles.container, { backgroundColor: colors.background }]} accessibilityLabel={t('common.session_restoring')} accessibilityLiveRegion="polite">
       <BrandMark size={56} showWordmark={false} />
       <ActivityIndicator color={colors.brand} style={styles.spinner} />
     </View>

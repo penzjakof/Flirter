@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
@@ -28,26 +29,25 @@ function useWaitingCharacters(): Character[] {
   }, [conversations]);
 }
 
-function buildWaitingLabel(characters: readonly Character[]): string {
-  if (characters.length === 1) return `1 чат чекає на відповідь`;
-  return `${characters.length} чатів чекають на відповідь`;
-}
-
 /** Мотиваційний блок S19: показує, на кого витратити енергію. Прихований, якщо ніхто не чекає. */
 export function WaitingCharacters() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const characters = useWaitingCharacters();
   if (characters.length === 0) return null;
 
   const visible = characters.slice(0, MAX_AVATARS);
-  const label = buildWaitingLabel(characters);
+  const label =
+    characters.length === 1
+      ? t('chat.waiting_chats.one')
+      : t('chat.waiting_chats.other', { count: characters.length });
 
   return (
     <Pressable
       testID="energy-waiting"
       onPress={() => router.navigate('/chats')}
       accessibilityRole="button"
-      accessibilityLabel={`${label}. Відкрити чати`}
+      accessibilityLabel={t('chat.waiting_chats.row_accessibility', { label })}
       style={({ pressed }) => [styles.card, { backgroundColor: pressed ? colors.surfaceMuted : colors.surface, borderColor: colors.cardBorderSubtle }]}>
       <View style={styles.avatars}>
         {visible.map((character, index) => (
@@ -61,7 +61,7 @@ export function WaitingCharacters() {
           {label}
         </AppText>
         <AppText variant="secondary" color="textSecondary">
-          Продовжити розмови
+          {t('character.continue_chat')}
         </AppText>
       </View>
       <Ionicons name="chevron-forward" size={sizes.iconSm} color={colors.textSecondary} />

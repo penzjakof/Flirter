@@ -18,7 +18,7 @@ import { sizes } from '@/theme/tokens';
 import { useTheme } from '@/theme/use-theme';
 
 // Ініціалізація підсистеми локалізації перед монтуванням дерева компонентів
-initI18n();
+initI18n(useLanguageStore.getState().resolvedLanguage);
 
 // beforeinstallprompt може прийти до монтування будь-якого екрана.
 initPwaInstallListener();
